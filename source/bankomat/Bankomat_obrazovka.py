@@ -51,7 +51,7 @@ def spustit_minihru():
     pygame.quit()
     sys.exit()
 
-# Hlavní smyčka
+# Hlavní smyčka7
 running = True
 while running:
     screen.blit(background, (0, 0))
