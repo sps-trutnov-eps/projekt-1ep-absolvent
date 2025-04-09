@@ -24,7 +24,6 @@ while running:
                 if minci.je_kliknuto(pozice_mys[0], pozice_mys[1]):
                     mince.remove(minci)  
                     penize += minci.hodnota
-                    print(penize)
                     break  
     
     #vykreslování pozadí a vody a peněz
