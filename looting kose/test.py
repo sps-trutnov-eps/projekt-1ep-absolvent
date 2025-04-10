@@ -10,6 +10,7 @@ rozliseni_y = rozliseni_x
 okno = pygame.display.set_mode((rozliseni_x, rozliseni_y))
 
 cerna = (0, 0, 0)
+bila = (255, 255, 255)
 
 #grid properties
 velikost_ctverecku = 93 + 1/3
@@ -25,7 +26,7 @@ while True:
             pygame.quit()
             sys.exit()
 
-    okno.fill(cerna)
+    okno.fill(bila)
 
     for row in range(velikost_gridu):
         for col in range(velikost_gridu):
