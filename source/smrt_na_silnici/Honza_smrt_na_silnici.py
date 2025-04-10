@@ -14,6 +14,8 @@ hrac_rychlost = 3
 
 zobrazovacka = pygame.display.set_mode((rozliseni_x, rozliseni_y))
 pygame.display.set_caption("ŽIVOT")#("minihra - Smrt na silnici")
+pygame.font.init()
+font = pygame.font.SysFont("Arial", 30)
 
 silnice_x = rozliseni_x
 silnice_y = 60
@@ -23,15 +25,6 @@ auticko_y = 40
 auticko_rychlost = 5
 #bus = 200
 #vlak = 700
-
-vstup_x = rozliseni_x
-vstup_y = 300
-
-safeplace_x = rozliseni_x/2
-safeplace_y = vstup_y
-
-exidus_x = 300
-exidus_y = vstup_y
 
 prohra = False
 
@@ -84,13 +77,13 @@ while True:
                 pruh["autaci"].append({
                     "rect": pygame.Rect(-auticko_x, pruh["rect"].y+10, auticko_x, auticko_y),
                     "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
-                    "rychlost": random.random() * 4 + 3
+                    "rychlost": random.random() * 10 + 3
                     })
             elif sisedevjet == -1:
                 pruh["autaci"].append({
                     "rect": pygame.Rect(silnice_x, pruh["rect"].y+10, auticko_x, auticko_y),
                     "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
-                    "rychlost": -(random.random() * 4 + 3)
+                    "rychlost": -(random.random() * 10 + 3)
                     })
         for auto in pruh["autaci"]:
             if auto["rect"].colliderect(hrac):
@@ -109,6 +102,10 @@ while True:
                 pruh["autaci"].remove(autako)
             
     pygame.draw.rect(zobrazovacka, hrac_barva,hrac)
+    
+    zivoty_text = font.render(f"Životy: {zivoty}", True, (255, 0, 0))
+    zobrazovacka.blit(zivoty_text, (10, 10))
+    
     if prohra == True:
         zobrazovacka.fill("black")
         pygame.display.set_caption("NO ŽIVOT")
