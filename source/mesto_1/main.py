@@ -1,9 +1,9 @@
 import pygame
 
-from hrac import Hrac
-from mapa.mesto import *
+from mesto_1.hrac import Hrac
+from mesto_1.mapa.mesto import *
 
-def main():
+def main(global_data):
     velikost_okna = (1920, 1080) # velikost okna (x, y)
     okno = pygame.display.set_mode(velikost_okna) # vytvori okno
 
@@ -40,4 +40,6 @@ def main():
         hodiny.tick(fps_limit) # limituje maximalni pocet fps
 
 if __name__ == "__main__":
-    main()
+    main({
+        'otevrena_okna': []
+    })

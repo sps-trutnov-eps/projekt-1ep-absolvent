@@ -1,7 +1,7 @@
 import pygame
 from math import *
-from hrac import Hrac
-from mapa.budova import Budova
+from mesto_1.hrac import Hrac
+from mesto_1.mapa.budova import Budova
 
 def mestoInicializace(okno, velikost_okna):
     velikost_mapy = pygame.Rect(0, 0, velikost_okna[0] * 4, velikost_okna[1] * 4)
