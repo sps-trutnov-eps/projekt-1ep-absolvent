@@ -1,10 +1,9 @@
-import os
-import pygame
+import json
 import multiprocessing
 
 import mesto_1.main
 
-def create_window(global_data, okno):
+def createWindow(global_data, okno):
 
     ######################################################################################################
     if okno == 'mesto_1':
@@ -13,27 +12,82 @@ def create_window(global_data, okno):
     ######################################################################################################
 
 
+def convertFromManager(obj):
+    if isinstance(obj, multiprocessing.managers.ListProxy):
+        return [convertFromManager(item) for item in obj]
+
+    elif isinstance(obj, multiprocessing.managers.DictProxy):
+        return {key: convertFromManager(value) for key, value in obj.items()}
+
+    elif isinstance(obj, dict):
+        return {key: convertFromManager(value) for key, value in obj.items()}
+
+    elif isinstance(obj, list):
+        return [convertFromManager(item) for item in obj]
+
+    else:
+        return obj
+
+
+def convertToManager(obj, manager):
+    if isinstance(obj, dict):
+        proxy_dict = manager.dict()
+        for key, value in obj.items():
+            proxy_dict[key] = convertToManager(value, manager)
+        return proxy_dict
+    elif isinstance(obj, list):
+        proxy_list = manager.list()
+        for item in obj:
+            proxy_list.append(convertToManager(item, manager))
+        return proxy_list
+    else:
+        return obj
+
+
+def cloneManagerList(manager_list, manager):
+    regular_list = list(manager_list).copy()
+    return manager.list(regular_list)
+
+
+def readData(global_data, manager):
+    with open("global_data.json", 'r') as file:
+
+        data = convertToManager(json.load(file), manager)
+        for key, value in data.items():
+            global_data[key] = value
+
+
+def ulozit(global_data):
+    with open("global_data.json", 'w') as file:
+        konec = global_data['konec']
+
+        global_data['konec']  = False
+        global_data['ulozit'] = False
+
+        json.dump(convertFromManager(global_data), file, indent=4)
+
+        global_data['konec'] = konec
+
 
 if __name__ == "__main__":
-
-    ######################################################################################################
-
-    otevrena_okna = ['mesto_1']                 # Ze zacatku otevrena okna
-
-    ######################################################################################################
-
     with multiprocessing.Manager() as manager:
 
         global_data = manager.dict()
-        global_data['otevrena_okna'] = manager.list(otevrena_okna)
-        global_data['konec'] = False
+
+        readData(global_data, manager)
+        global_data['otevrena_okna'] = cloneManagerList(global_data['aktualni_okna'], manager)
+        global_data['aktualni_okna'] = manager.list()
 
         processes = []
         while True:
+            if global_data['ulozit'] == True:
+                ulozit(global_data)
+
             if global_data['otevrena_okna'] != []:
                 for okno in global_data['otevrena_okna']:
-                    process = multiprocessing.Process(target=create_window, args=(global_data, okno,))
+                    process = multiprocessing.Process(target=createWindow, args=(global_data, okno,))
                     processes.append(process)
+                    global_data['aktualni_okna'].append(okno)
                     process.start()
 
                 global_data['otevrena_okna'] = manager.list()
