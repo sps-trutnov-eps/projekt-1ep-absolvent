@@ -50,23 +50,48 @@ def cloneManagerList(manager_list, manager):
 
 
 def readData(global_data, manager):
-    with open("global_data.json", 'r') as file:
+    try:
+        with open("global_data.json", 'r') as file:
 
-        data = convertToManager(json.load(file), manager)
-        for key, value in data.items():
-            global_data[key] = value
+            data = convertToManager(json.load(file), manager)
+            for key, value in data.items():
+                global_data[key] = value
+
+    except:
+        reset(global_data)
+        readData(global_data, manager)
 
 
 def ulozit(global_data):
     with open("global_data.json", 'w') as file:
-        konec = global_data['konec']
+        temp_konec = global_data['konec']
 
         global_data['konec']  = False
+        global_data['reset']  = False
         global_data['ulozit'] = False
 
         json.dump(convertFromManager(global_data), file, indent=4)
 
-        global_data['konec'] = konec
+        global_data['konec'] = temp_konec
+
+
+def reset(global_data):
+    global_data = {
+        "aktualni_okna": [
+            "mesto_1"
+        ],
+        "otevrena_okna": [],
+        "konec": False,
+        "reset": False,
+        "ulozit": False,
+        "penize": 0,
+        "hrac": {
+            "x": 960,
+            "y": 540
+        }
+    }
+
+    ulozit(global_data)
 
 
 if __name__ == "__main__":
@@ -80,7 +105,10 @@ if __name__ == "__main__":
 
         processes = []
         while True:
-            if global_data['ulozit'] == True:
+            if global_data['reset']:
+                reset(global_data)
+
+            if global_data['ulozit']:
                 ulozit(global_data)
 
             if global_data['otevrena_okna'] != []:

@@ -4,10 +4,11 @@
     ],
     "otevrena_okna": [],
     "konec": false,
+    "reset": false,
     "ulozit": false,
     "penize": 0,
     "hrac": {
-        "x": 1828.0,
-        "y": 712.0
+        "x": 960,
+        "y": 540
     }
 }
