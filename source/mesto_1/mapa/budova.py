@@ -8,6 +8,10 @@ class Budova:
         self.barva = barva
 
     def hitbox(self, objekt):
+        '''
+        udela hitboxi s objektem
+        '''
+
         objekt.x += objekt.rychlost_x
 
         zed_ctverec  = pg.Rect(self.obdelnik.x, self.obdelnik.y, self.obdelnik.width, self.obdelnik.height)

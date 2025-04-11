@@ -4,14 +4,14 @@ from hrac import Hrac
 from mapa.mesto import *
 
 def main():
-    velikost_okna = (960, 540) # velikost okna (x, y)
+    velikost_okna = (1920, 1080) # velikost okna (x, y)
     okno = pygame.display.set_mode(velikost_okna) # vytvori okno
 
-    pygame.display.set_caption("Jaroslav NoHouse") # nastavy nazev okna
+    pygame.display.set_caption("Absolvent") # nastavy nazev okna
 
-    rozmery_hrace = (velikost_okna[0] // 36, velikost_okna[1] // 18)
+    rozmery_hrace = (velikost_okna[0] // (128 / 3), velikost_okna[1] // 13.5)
 
-    hrac = Hrac(okno, velikost_okna, velikost_okna[0] // 2, velikost_okna[1] // 2, rozmery_hrace[0], rozmery_hrace[1], velikost_okna[0] // 192, velikost_okna[1] // 108, barva = (255, 0, 0)) #, x = velikost_okna[0] // 2, y = velikost_okna[1] // 2) # vyroby postavu ve stredu obrazovky
+    hrac = Hrac(okno, velikost_okna, velikost_okna[0] // 2, velikost_okna[1] // 2, rozmery_hrace[0], rozmery_hrace[1], velikost_okna[0] // 192, velikost_okna[1] // 108, barva = (255, 0, 0)) # vyroby postavu ve stredu obrazovky
     # pozice hrace je levej horni roh obrazku
 
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps

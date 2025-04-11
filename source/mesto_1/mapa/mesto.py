@@ -67,6 +67,7 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, velikost_mapy: pygame.Rect,
     hrac.x += hrac.rychlost_x
     hrac.y += hrac.rychlost_y
 
+    # kontrola kdyz hrac neni na strane mapy
     if hrac.x - velikost_okna[0] // 2 > velikost_mapy.left and hrac.x + velikost_okna[0] // 2 + hrac.sirka < velikost_mapy.right:
         offset[0] = -hrac.x + velikost_okna[0] // 2
 
@@ -74,6 +75,17 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, velikost_mapy: pygame.Rect,
         offset[1] = -hrac.y + velikost_okna[1] // 2
 
     for budova in budovy:
-        budova.nakresli(okno, offset)
+        budova.nakresli(okno, offset) # nakresli budovy
+
+    # zabrani hraci jit mimo mapu
+    if hrac.x < velikost_mapy.left:
+        hrac.x = velikost_mapy.left
+    elif hrac.x > velikost_mapy.right - 2 * hrac.sirka :
+        hrac.x = velikost_mapy.right - 2 * hrac.sirka
+
+    if hrac.y < velikost_mapy.top:
+        hrac.y = velikost_mapy.top
+    elif hrac.y > velikost_mapy.bottom - 2 * hrac.vyska:
+        hrac.y = velikost_mapy.bottom - 2 * hrac.vyska
 
     hrac.nakresli(offset) # nakresli hrace

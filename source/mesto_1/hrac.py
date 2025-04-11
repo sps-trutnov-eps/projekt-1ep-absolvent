@@ -1,15 +1,15 @@
 import pygame
 
 class Hrac:
-    def __init__(self, okno, velikost_okna, pozice_x, pozice_y, sirka, vyska, chodici_rychlost_x, chodici_rychlost_y, x = 0, y = 0, barva = (255, 255, 255), rychlost_x = 0, rychlost_y = 0, je_nazemi = False):
+    def __init__(self, okno, velikost_okna, pozice_x, pozice_y, sirka, vyska, chodici_rychlost_x, chodici_rychlost_y, barva = (255, 255, 255), rychlost_x = 0, rychlost_y = 0, je_nazemi = False):
         self.okno = okno # okno na ktery se bude kreslit
         self.velikost_okna = velikost_okna # rozliseni okna (sirka, vyska) neboli (x, y)
 
         self.barva = barva # barva hrace pozdeji se vymeni za obrazek
 
         # misto v mape
-        self.x = x
-        self.y = y
+        self.x = pozice_x
+        self.y = pozice_y
 
         # rozmery postavy
         self.sirka = sirka
@@ -27,32 +27,3 @@ class Hrac:
 
     def nakresli(self, offset = [0, 0]):
         pygame.draw.rect(self.okno, self.barva, (self.x + offset[0], self.y + offset[1], self.sirka, self.vyska))
-
-    def pohni(self, jen_xy = 0):
-
-        if jen_xy == 1:
-            self.x += self.rychlost_x
-            self.x += self.rychlost_x
-
-            # zabrani hraci jit mimo obrazovku
-            self.x = max(self.x, 0)
-            self.x = min(self.x, self.velikost_okna[0] - self.sirka)
-
-        elif jen_xy == 2:
-            self.y += self.rychlost_y
-            self.y += self.rychlost_y
-
-            # zabrani hraci jit mimo obrazovku
-            self.y = max(self.y, 0)
-            self.y = min(self.y, self.velikost_okna[1] - self.vyska)
-
-        else:
-            self.x += self.rychlost_x
-            self.y += self.rychlost_y
-
-            # zabrani hraci jit mimo obrazovku
-            self.x = max(self.x, 0)
-            self.x = min(self.x, self.velikost_okna[0] - self.sirka)
-
-            self.y = max(self.y, 0)
-            self.y = min(self.y, self.velikost_okna[1] - self.vyska)
