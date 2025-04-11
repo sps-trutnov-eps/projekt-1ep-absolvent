@@ -23,7 +23,6 @@ class Itemy:
 
         def bobek(self, x, y):
                 self.okno.blit(self.textura_bobku, x, y)
-                self.debuff_smrad = 1
                 self.time_debuffu = 1500
 
         def ohryzek(self, x, y):
