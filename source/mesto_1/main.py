@@ -11,13 +11,13 @@ def main():
 
     rozmery_hrace = (velikost_okna[0] // 36, velikost_okna[1] // 18)
 
-    hrac = Hrac(okno, velikost_okna, velikost_okna[0] // 2, velikost_okna[1] // 2, rozmery_hrace[0], rozmery_hrace[1], velikost_okna[0] // 192, velikost_okna[1] // 108, barva = (255, 0, 0)) # vyroby postavu ve stredu obrazovky
+    hrac = Hrac(okno, velikost_okna, velikost_okna[0] // 2, velikost_okna[1] // 2, rozmery_hrace[0], rozmery_hrace[1], velikost_okna[0] // 192, velikost_okna[1] // 108, barva = (255, 0, 0)) #, x = velikost_okna[0] // 2, y = velikost_okna[1] // 2) # vyroby postavu ve stredu obrazovky
     # pozice hrace je levej horni roh obrazku
 
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps
     fps_limit = 60 # maximalni pocet fps
 
-    budovy, velikost_mapy = mestoInicializace(okno, velikost_okna)
+    budovy, velikost_mapy, offset = mestoInicializace(okno, velikost_okna)
 
     # main smycka
     programova_smycka = True
@@ -33,7 +33,7 @@ def main():
         if klice[pygame.K_ESCAPE]:
             programova_smycka = False
 
-        veMeste(okno, hrac, budovy, velikost_mapy)
+        veMeste(okno, velikost_okna, hrac, budovy, velikost_mapy, offset)
 
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
 

@@ -41,3 +41,6 @@ class Budova:
                 objekt.y = zed_ctverec.bottom
 
         objekt.y -= objekt.rychlost_y
+
+    def nakresli(self, okno, offset = [0, 0]):
+        pg.draw.rect(okno, self.barva, (self.obdelnik.x + offset[0], self.obdelnik.y + offset[1], self.obdelnik.width, self.obdelnik.height))

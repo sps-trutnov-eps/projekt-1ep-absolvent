@@ -4,7 +4,7 @@ from hrac import Hrac
 from mapa.budova import Budova
 
 def mestoInicializace(okno, velikost_okna):
-    velikost_mapy = pygame.Rect(0, 0, velikost_okna[0] * 1.5, velikost_okna[1] * 1.5)
+    velikost_mapy = pygame.Rect(0, 0, velikost_okna[0] * 4, velikost_okna[1] * 4)
 
     velikost_okna = okno.get_size()
 
@@ -20,9 +20,9 @@ def mestoInicializace(okno, velikost_okna):
     budovy.append(Budova(okno, velikost_okna[0] - velikost_okna[0] / 96 - velikost_okna[0] / 4.5, velikost_okna[1] - velikost_okna[1] / 54 - velikost_okna[1] / 5, velikost_okna[0] / 4.5, velikost_okna[1] / 5, (255, 255, 255)))
     budovy.append(Budova(okno, velikost_okna[0] / 96, velikost_okna[1] - velikost_okna[1] / 5, 5 * velikost_okna[0] / 7, velikost_okna[1] / 5 - velikost_okna[1] / 54, (255, 255, 255)))
 
-    return budovy, velikost_mapy
+    return budovy, velikost_mapy, [0, 0]
 
-def veMeste(okno, hrac: Hrac, budovy, velikost_mapy: pygame.Rect):
+def veMeste(okno, velikost_okna, hrac: Hrac, budovy, velikost_mapy: pygame.Rect, offset):
 
     klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 
@@ -62,33 +62,18 @@ def veMeste(okno, hrac: Hrac, budovy, velikost_mapy: pygame.Rect):
     okno.fill((0, 0, 0)) # vybarvy okno aby se resetovalo
 
     for budova in budovy:
-        pygame.draw.rect(okno, budova.barva, budova.obdelnik)
         budova.hitbox(hrac)
 
-    # posune budovy pro symulaci pohybu
-    if hrac.true_y > velikost_mapy.top and hrac.true_y + hrac.vyska < velikost_mapy.bottom:
-        for budova in budovy:
-            budova.obdelnik.y -= hrac.rychlost_y
+    hrac.x += hrac.rychlost_x
+    hrac.y += hrac.rychlost_y
 
-        hrac.true_y += hrac.rychlost_y
-        hrac.rychlost_y = 0
-    
-    else:
-        hrac.pohni(2)
+    if hrac.x - velikost_okna[0] // 2 > velikost_mapy.left and hrac.x + velikost_okna[0] // 2 + hrac.sirka < velikost_mapy.right:
+        offset[0] = -hrac.x + velikost_okna[0] // 2
 
-    if hrac.true_x > velikost_mapy.left and hrac.true_x + hrac.sirka < velikost_mapy.right:
-        for budova in budovy:
-            budova.obdelnik.x -= hrac.rychlost_x
+    if hrac.y - velikost_okna[1] // 2 > velikost_mapy.top and hrac.y + velikost_okna[1] // 2 + hrac.vyska < velikost_mapy.bottom:
+        offset[1] = -hrac.y + velikost_okna[1] // 2
 
-        hrac.true_x += hrac.rychlost_x
-        hrac.rychlost_x = 0
+    for budova in budovy:
+        budova.nakresli(okno, offset)
 
-    else:
-        hrac.pohni(1)
-
-    hrac.nakresli() # nakresli hrace
-
-    print()
-    print(hrac.true_x)
-    print(hrac.true_y)
-    print(velikost_mapy)
+    hrac.nakresli(offset) # nakresli hrace
