@@ -6,6 +6,8 @@
     "konec": false,
     "reset": false,
     "ulozit": false,
+    "focus_nastaveni": false,
+    "focus_inventory": false,
     "penize": 0,
     "hrac": {
         "x": 960,

@@ -3,6 +3,7 @@ import multiprocessing
 
 import mesto_1.main
 import inventory.main
+import nastaveni.main
 
 def createWindow(global_data, okno):
 
@@ -11,7 +12,10 @@ def createWindow(global_data, okno):
         mesto_1.main.main(global_data)          # Spustena Funkce - Minihra nebo jakykoliv program
 
     elif okno == 'inventory':                   # Cemu se rovna okno je jedno
-        inventory.main.main(global_data)        # Argument bude vzdy jen "global_data"
+        inventory.main.main(global_data)
+
+    elif okno == 'settings':
+        nastaveni.main.main(global_data)        # Argument bude vzdy jen "global_data"
     ######################################################################################################
 
 
@@ -87,6 +91,8 @@ def reset(global_data):
         "konec": False,
         "reset": False,
         "ulozit": False,
+        "focus_nastaveni": False,
+        "focus_inventory": False,
         "penize": 0,
         "hrac": {
             "x": 960,
@@ -108,6 +114,7 @@ def reset(global_data):
 
 
 if __name__ == "__main__":
+
     with multiprocessing.Manager() as manager:
 
         global_data = manager.dict()

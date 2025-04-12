@@ -1,4 +1,5 @@
 import pygame
+import ctypes
 
 from mesto_1.hrac import Hrac
 from mesto_1.mapa.mesto import *
@@ -30,14 +31,22 @@ def main(global_data):
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
 
+            if udalost.type == pygame.WINDOWFOCUSGAINED and "settings" in global_data['aktualni_okna']:
+                ctypes.windll.user32.AllowSetForegroundWindow(-1)
+                global_data['focus_nastaveni'] = True
+
+            elif udalost.type == pygame.WINDOWFOCUSGAINED and "inventory" in global_data['aktualni_okna']:
+                ctypes.windll.user32.AllowSetForegroundWindow(-1)
+                global_data['focus_inventory'] = True
+
         if global_data['konec']:
             programova_smycka = False
 
         klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 
         # ukonci hru kdyz se zmackne esc
-        if klice[global_data['nastaveni']['exit']]:
-            programova_smycka = False
+        if klice[global_data['nastaveni']['exit']] and not ('settings' in global_data['aktualni_okna']):
+            global_data['otevrena_okna'].append('settings')
 
         if klice[global_data['nastaveni']['inventory']] and not ('inventory' in global_data['aktualni_okna']):
             global_data['otevrena_okna'].append('inventory')
