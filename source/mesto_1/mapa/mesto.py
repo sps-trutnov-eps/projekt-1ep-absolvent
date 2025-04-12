@@ -7,8 +7,6 @@ from mesto_1.mapa.interakcni_zona import InterakcniZona
 def mestoInicializace(okno, velikost_okna):
     velikost_mapy = pygame.Rect(0, 0, velikost_okna[0] * 4, velikost_okna[1] * 4)
 
-    velikost_okna = okno.get_size()
-
     # vytvori budovy
     interakcni_zony = []
 
@@ -27,7 +25,7 @@ def mestoInicializace(okno, velikost_okna):
 
     return budovy, interakcni_zony, velikost_mapy, [0, 0]
 
-def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset):
+def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, global_data: dict):
 
     klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 
@@ -37,25 +35,25 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
     interaguje = False   # jestli hrac chce s necim interaktovat - "e" je zmacknute
 
     # pohyb postavy
-    if klice[pygame.K_w]:
+    if klice[global_data['nastaveni']['nahoru']]:
         hrac.rychlost_y = -hrac.chodici_rychlost_y
 
-    if klice[pygame.K_a]:
+    if klice[global_data['nastaveni']['doleva']]:
         hrac.rychlost_x = -hrac.chodici_rychlost_x
 
-    if klice[pygame.K_s]:
+    if klice[global_data['nastaveni']['dolu']]:
         hrac.rychlost_y = hrac.chodici_rychlost_y
 
-    if klice[pygame.K_d]:
+    if klice[global_data['nastaveni']['doprava']]:
         hrac.rychlost_x = hrac.chodici_rychlost_x
 
-    if klice[pygame.K_s] and klice[pygame.K_w]:
+    if klice[global_data['nastaveni']['dolu']] and klice[global_data['nastaveni']['nahoru']]:
         hrac.rychlost_y = 0
 
-    if klice[pygame.K_a] and klice[pygame.K_d]:
+    if klice[global_data['nastaveni']['doleva']] and klice[global_data['nastaveni']['doprava']]:
         hrac.rychlost_x = 0
 
-    if klice[pygame.K_e]:
+    if klice[global_data['nastaveni']['interakce']]:
         interaguje = True
 
     # zabrani hraci aby nechodil rychleji sikmo

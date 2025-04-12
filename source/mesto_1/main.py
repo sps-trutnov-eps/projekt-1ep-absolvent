@@ -30,22 +30,28 @@ def main(global_data):
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
 
+        if global_data['konec']:
+            programova_smycka = False
+
         klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 
         # ukonci hru kdyz se zmackne esc
-        if klice[pygame.K_ESCAPE]:
+        if klice[global_data['nastaveni']['exit']]:
             programova_smycka = False
 
-        if klice[pygame.K_g]:
-            global_data['otevrena_okna'].append('mesto_1')
+        if klice[global_data['nastaveni']['inventory']] and not ('inventory' in global_data['aktualni_okna']):
+            global_data['otevrena_okna'].append('inventory')
 
-        if klice[pygame.K_h]:
-            global_data['ulozit'] = True
+        if klice[pygame.K_g]:                                   ####################################### SMAZAT
+            global_data['otevrena_okna'].append('mesto_1')      ####################################### SMAZAT
 
-        if klice[pygame.K_r]:
-            global_data['reset'] = True
+        if klice[pygame.K_h]:                                   ####################################### SMAZAT
+            global_data['ulozit'] = True                        ####################################### SMAZAT
 
-        veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset)
+        if klice[pygame.K_r]:                                   ####################################### SMAZAT
+            global_data['reset'] = True                         ####################################### SMAZAT
+
+        veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset, global_data)
 
         global_data['hrac']['x'] = hrac.x
         global_data['hrac']['y'] = hrac.y
@@ -53,18 +59,5 @@ def main(global_data):
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
 
         hodiny.tick(fps_limit) # limituje maximalni pocet fps
- 
-    global_data['aktualni_okna'].remove('mesto_1')
 
-if __name__ == "__main__":
-    main({
-        "otevrena_okna": ["mesto_1"],
-        "konec": False,
-        "ulozit": False,
-        "penize": 0,
-        "hrac": {
-            "x": 960,
-            "y": 540
-        }
-    }
-)
+    global_data['aktualni_okna'].remove('mesto_1') # Ulozi informaci ze okno je zavreny

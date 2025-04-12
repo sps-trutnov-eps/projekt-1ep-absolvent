@@ -2,6 +2,7 @@ import json
 import multiprocessing
 
 import mesto_1.main
+import inventory.main
 
 def createWindow(global_data, okno):
 
@@ -9,6 +10,8 @@ def createWindow(global_data, okno):
     if okno == 'mesto_1':
         mesto_1.main.main(global_data)          # Spustena Funkce - Minihra nebo jakykoliv program
 
+    elif okno == 'inventory':                   # Cemu se rovna okno je jedno
+        inventory.main.main(global_data)        # Argument bude vzdy jen "global_data"
     ######################################################################################################
 
 
@@ -88,7 +91,17 @@ def reset(global_data):
         "hrac": {
             "x": 960,
             "y": 540
-        }
+        },
+        "nastaveni": {
+            "exit": 27,
+            "inventory": 9,
+            "interakce": 101,
+            "nahoru": 119,
+            "dolu": 115,
+            "doleva": 97,
+            "doprava": 100
+        },
+        "inventory": []
     }
 
     ulozit(global_data)
