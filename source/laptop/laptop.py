@@ -55,9 +55,14 @@ battery_minus = rozliseni_sirka / 170
 posledni_akce = pygame.time.get_ticks()
 clock = pygame.time.Clock()
 
+
+controler_icon = pygame.image.load('ChatGPT Image 13. 4. 2025 18_38_36.png').convert()
+controler_icon = pygame.transform.scale(controler_icon, (80, 80))
+
 # --- HLAVNÍ SMYČKA ---
 while True:
     screen.blit(background_image, (0, 0))
+    screen.blit(controler_icon, (350, 130))
     if jmeno_pole_visible:
         screen.blit(jmeno, (rozliseni_sirka / 5.25, rozliseni_vyska / 4))
 
