@@ -1,5 +1,5 @@
 import pygame as pg
-from mesto_1.hrac import Hrac
+from mesta.mapa.hrac import Hrac
 
 class InterakcniZona:
     def __init__(self, vlevo_x, nahore_y, sirka, vyska, spustena_funkce, argumenty: list = None):

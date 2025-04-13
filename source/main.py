@@ -24,7 +24,7 @@ def focusWindow():
 
 ######################################################################################################
 
-import mesto_1.main
+import mesta.mapa.main
 import inventory.main       # Sem importovat soubory
 import nastaveni.main
 
@@ -41,13 +41,14 @@ def createWindow(global_data, okno):
 
     ######################################################################################################
     jmena_funkce = {
-       "mesto_1": mesto_1.main.main,
+       "mesto_1": mesta.mapa.main.main,
        "settings": nastaveni.main.main,     # Pred pridanim funkce musi se importnout soubor
        "inventory": inventory.main.main     # Tady jsou jmena na spusteni funkce a samotna funkce
     }
 
                                             # Vzdycky vezme jen 1 argument "global data"
     jmena_funkce[okno](global_data)         # Spustena Funkce - Minihra nebo jakykoliv program
+    global_data['aktualni_okna'].remove(okno) # Ulozi informaci ze okno je zavreny
     ######################################################################################################
 
 

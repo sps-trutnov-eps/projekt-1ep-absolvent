@@ -1,9 +1,11 @@
 import pygame
-import ctypes
 
-from mesto_1.hrac import Hrac
-from mesto_1.mapa.mesto import *
+from mesta.mapa.hrac import Hrac
+from mesta.mapa.mesto import *
+from mesta.mapa.mista_inicializace import *
+
 from main import unfocusWindow
+
 
 def main(global_data):
     velikost_okna = (1920, 1080) # velikost okna (x, y)
@@ -22,7 +24,7 @@ def main(global_data):
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps
     fps_limit = 60 # maximalni pocet fps
 
-    budovy, interakcni_zony, velikost_mapy, offset = mestoInicializace(okno, velikost_okna)
+    budovy, interakcni_zony, velikost_mapy, offset = mesto1Init(okno, velikost_okna)
 
     # main smycka
     programova_smycka = True
@@ -69,5 +71,3 @@ def main(global_data):
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
 
         hodiny.tick(fps_limit) # limituje maximalni pocet fps
-
-    global_data['aktualni_okna'].remove('mesto_1') # Ulozi informaci ze okno je zavreny

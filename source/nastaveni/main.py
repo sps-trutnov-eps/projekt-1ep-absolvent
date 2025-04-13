@@ -127,5 +127,3 @@ def main(global_data):
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
 
         hodiny.tick(fps_limit) # limituje maximalni pocet fps
-
-    global_data['aktualni_okna'].remove('settings') # Ulozi informaci ze okno je zavreny
