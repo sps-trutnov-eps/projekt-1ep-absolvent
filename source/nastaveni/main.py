@@ -1,13 +1,7 @@
 import pygame
 from nastaveni.button import Button
-import ctypes
 
-def focus_window():
-    hwnd = pygame.display.get_wm_info()['window']
-    ctypes.windll.user32.ShowWindow(hwnd, 5)
-    ctypes.windll.user32.BringWindowToTop(hwnd)
-    ctypes.windll.user32.SetForegroundWindow(hwnd)
-    ctypes.windll.user32.SetFocus(hwnd)
+from main import focusWindow
 
 
 def numNaNastaveni(i):
@@ -102,7 +96,7 @@ def main(global_data):
 
         if global_data['focus_nastaveni']:
             global_data['focus_nastaveni'] = False
-            focus_window()
+            focusWindow()
 
         if global_data['konec']:
             programova_smycka = False

@@ -3,6 +3,7 @@ import ctypes
 
 from mesto_1.hrac import Hrac
 from mesto_1.mapa.mesto import *
+from main import unfocusWindow
 
 def main(global_data):
     velikost_okna = (1920, 1080) # velikost okna (x, y)
@@ -31,13 +32,13 @@ def main(global_data):
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
 
-            if udalost.type == pygame.WINDOWFOCUSGAINED and "settings" in global_data['aktualni_okna']:
-                ctypes.windll.user32.AllowSetForegroundWindow(-1)
-                global_data['focus_nastaveni'] = True
+        if pygame.display.get_active() and "settings" in global_data['aktualni_okna']:
+            unfocusWindow()
+            global_data['focus_nastaveni'] = True
 
-            elif udalost.type == pygame.WINDOWFOCUSGAINED and "inventory" in global_data['aktualni_okna']:
-                ctypes.windll.user32.AllowSetForegroundWindow(-1)
-                global_data['focus_inventory'] = True
+        if pygame.display.get_active() and "inventory" in global_data['aktualni_okna']:
+            unfocusWindow()
+            global_data['focus_inventory'] = True
 
         if global_data['konec']:
             programova_smycka = False

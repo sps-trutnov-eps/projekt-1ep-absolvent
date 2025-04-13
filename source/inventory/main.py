@@ -1,15 +1,8 @@
 import pygame
-import ctypes
 
 import inventory.item
 
-def focus_window():
-    hwnd = pygame.display.get_wm_info()['window']
-    ctypes.windll.user32.ShowWindow(hwnd, 5)
-    ctypes.windll.user32.BringWindowToTop(hwnd)
-    ctypes.windll.user32.SetForegroundWindow(hwnd)
-    ctypes.windll.user32.SetFocus(hwnd)
-
+from main import focusWindow
 
 def main(global_data):
 
@@ -30,7 +23,7 @@ def main(global_data):
 
         if global_data['focus_inventory']:
             global_data['focus_inventory'] = False
-            focus_window()
+            focusWindow()
 
         klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 

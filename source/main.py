@@ -1,22 +1,60 @@
 import json
+import pygame
 import multiprocessing
+import ctypes
+
+
+def unfocusWindow():
+    ctypes.windll.user32.AllowSetForegroundWindow(-1)
+
+
+def focusWindow():
+    hwnd = pygame.display.get_wm_info()['window']
+    ctypes.windll.user32.ShowWindow(hwnd, 5)
+    ctypes.windll.user32.BringWindowToTop(hwnd)
+    ctypes.windll.user32.SetForegroundWindow(hwnd)
+    ctypes.windll.user32.SetFocus(hwnd)
+
+
+
+
+
+
+
+
+######################################################################################################
 
 import mesto_1.main
-import inventory.main
+import inventory.main       # Sem importovat soubory
 import nastaveni.main
+
+######################################################################################################
+
+
+
+
+
+
+
 
 def createWindow(global_data, okno):
 
     ######################################################################################################
-    if okno == 'mesto_1':
-        mesto_1.main.main(global_data)          # Spustena Funkce - Minihra nebo jakykoliv program
+    jmena_funkce = {
+       "mesto_1": mesto_1.main.main,
+       "settings": nastaveni.main.main,     # Pred pridanim funkce musi se importnout soubor
+       "inventory": inventory.main.main     # Tady jsou jmena na spusteni funkce a samotna funkce
+    }
 
-    elif okno == 'inventory':                   # Cemu se rovna okno je jedno
-        inventory.main.main(global_data)
-
-    elif okno == 'settings':
-        nastaveni.main.main(global_data)        # Argument bude vzdy jen "global_data"
+                                            # Vzdycky vezme jen 1 argument "global data"
+    jmena_funkce[okno](global_data)         # Spustena Funkce - Minihra nebo jakykoliv program
     ######################################################################################################
+
+
+
+
+
+
 
 
 def convertFromManager(obj):
