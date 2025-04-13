@@ -9,7 +9,7 @@ DOLU    = 1
 DOLEVA  = 2
 DOPRAVA = 3
 
-def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, global_data: dict):
+def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, nastaveni: dict):
 
     klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 
@@ -19,29 +19,29 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
     interaguje = False   # jestli hrac chce s necim interaktovat - "e" je zmacknute
 
     # pohyb postavy
-    if klice[global_data['nastaveni']['nahoru']]:
+    if klice[nastaveni['nahoru']]:
         hrac.rychlost_y = -hrac.chodici_rychlost_y
         hrac.smer_otoceni = NAHORU
 
-    if klice[global_data['nastaveni']['doleva']]:
+    if klice[nastaveni['doleva']]:
         hrac.rychlost_x = -hrac.chodici_rychlost_x
         hrac.smer_otoceni = DOLEVA
 
-    if klice[global_data['nastaveni']['dolu']]:
+    if klice[nastaveni['dolu']]:
         hrac.rychlost_y = hrac.chodici_rychlost_y
         hrac.smer_otoceni = DOLU
 
-    if klice[global_data['nastaveni']['doprava']]:
+    if klice[nastaveni['doprava']]:
         hrac.rychlost_x = hrac.chodici_rychlost_x
         hrac.smer_otoceni = DOPRAVA
 
-    if klice[global_data['nastaveni']['dolu']] and klice[global_data['nastaveni']['nahoru']]:
+    if klice[nastaveni['dolu']] and klice[nastaveni['nahoru']]:
         hrac.rychlost_y = 0
 
-    if klice[global_data['nastaveni']['doleva']] and klice[global_data['nastaveni']['doprava']]:
+    if klice[nastaveni['doleva']] and klice[nastaveni['doprava']]:
         hrac.rychlost_x = 0
 
-    if klice[global_data['nastaveni']['interakce']]:
+    if klice[nastaveni['interakce']]:
         interaguje = True
 
     # zabrani hraci aby nechodil rychleji sikmo

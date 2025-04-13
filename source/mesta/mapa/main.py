@@ -8,6 +8,8 @@ from main import unfocusWindow
 
 
 def main(global_data):
+    nastaveni = dict(global_data['nastaveni'])
+
     vlajky = pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF
 
     velikost_okna = (1920, 1080) # velikost okna (x, y)
@@ -31,52 +33,65 @@ def main(global_data):
     # pozice hrace je levej horni roh obrazku
 
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps
-    fps_limit = 60 # maximalni pocet fps
+    fps_limit = 6000 # maximalni pocet fps
 
     budovy, interakcni_zony, velikost_mapy, offset = mesto1Init(okno, velikost_okna)
+
+    ulozit_hru = False
 
     # main smycka
     programova_smycka = True
     while programova_smycka:
         fps = hodiny.get_fps()
+
+        klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
+
         # kontrola udalosti
         for udalost in pygame.event.get():
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
 
-        if pygame.display.get_active() and "settings" in global_data['aktualni_okna']:
-            unfocusWindow()
-            global_data['focus_nastaveni'] = True
+        if "settings" in global_data['aktualni_okna']:
+            nastaveni = dict(global_data['nastaveni'])
 
-        if pygame.display.get_active() and "inventory" in global_data['aktualni_okna']:
-            unfocusWindow()
-            global_data['focus_inventory'] = True
+            if pygame.display.get_active():
+                unfocusWindow()
+                global_data['focus_nastaveni'] = True
+
+        else:
+            # otevre nastaveni
+            if klice[nastaveni['exit']]:
+                global_data['otevrena_okna'].append('settings')
+
+        if 'inventory' in global_data['aktualni_okna']:
+            if pygame.display.get_active():
+                unfocusWindow()
+                global_data['focus_inventory'] = True
+
+        else:
+            if klice[nastaveni['inventory']]:
+                global_data['otevrena_okna'].append('inventory')
 
         if global_data['konec']:
             programova_smycka = False
-
-        klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
-
-        # ukonci hru kdyz se zmackne esc
-        if klice[global_data['nastaveni']['exit']] and not ('settings' in global_data['aktualni_okna']):
-            global_data['otevrena_okna'].append('settings')
-
-        if klice[global_data['nastaveni']['inventory']] and not ('inventory' in global_data['aktualni_okna']):
-            global_data['otevrena_okna'].append('inventory')
 
         if klice[pygame.K_g]:                                   ####################################### SMAZAT
             global_data['otevrena_okna'].append('mesto_1')      ####################################### SMAZAT
 
         if klice[pygame.K_h]:                                   ####################################### SMAZAT
+            ulozit_hru = True                                   ####################################### SMAZAT
+            global_data['hrac']['x'] = hrac.x                   # PREMISTIT NA MISTO UKLADANI
+            global_data['hrac']['y'] = hrac.y                   # PREMISTIT NA MISTO UKLADANI
             global_data['ulozit'] = True                        ####################################### SMAZAT
 
         if klice[pygame.K_r]:                                   ####################################### SMAZAT
             global_data['reset'] = True                         ####################################### SMAZAT
 
-        veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset, global_data)
 
-        global_data['hrac']['x'] = hrac.x
-        global_data['hrac']['y'] = hrac.y
+        veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset, nastaveni)
+        if ulozit_hru:
+            global_data['hrac']['x'] = hrac.x                   # PREMISTIT NA MISTO UKLADANI
+            global_data['hrac']['y'] = hrac.y                   # PREMISTIT NA MISTO UKLADANI
 
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
 
