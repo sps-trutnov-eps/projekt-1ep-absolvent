@@ -1,11 +1,11 @@
 import pygame
 
 class Hrac:
-    def __init__(self, okno, velikost_okna, pozice_x, pozice_y, sirka, vyska, chodici_rychlost_x, chodici_rychlost_y, barva = (255, 255, 255), rychlost_x = 0, rychlost_y = 0, je_nazemi = False):
-        self.okno = okno # okno na ktery se bude kreslit
-        self.velikost_okna = velikost_okna # rozliseni okna (sirka, vyska) neboli (x, y)
+    def __init__(self, pozice_x, pozice_y, sirka, vyska, chodici_rychlost_x, chodici_rychlost_y, textury, barva_hitboxu = (255, 255, 255), rychlost_x = 0, rychlost_y = 0, je_nazemi = False, smer_otoceni = 1):
+        self.barva = barva_hitboxu # barva hitboxu
+        self.textury = textury
 
-        self.barva = barva # barva hrace pozdeji se vymeni za obrazek
+        self.smer_otoceni = smer_otoceni
 
         # misto v mape
         self.x = pozice_x
@@ -25,5 +25,8 @@ class Hrac:
         # kontrola aby postava mohla skakat jen kdyz je na zemi
         self.nazemi = je_nazemi
 
-    def nakresli(self, offset = [0, 0]):
-        pygame.draw.rect(self.okno, self.barva, (self.x + offset[0], self.y + offset[1], self.sirka, self.vyska))
+    def nakresli(self, okno, offset = [0, 0]):
+        okno.blit(self.textury[self.smer_otoceni], (self.x + offset[0], self.y + offset[1]))
+
+    def nakresliHitbox(self, okno, offset = [0, 0]):
+        pygame.draw.rect(okno, self.barva, (self.x + offset[0], self.y + offset[1], self.sirka, self.vyska))

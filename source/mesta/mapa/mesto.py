@@ -4,6 +4,11 @@ from mesta.mapa.hrac import Hrac
 from mesta.mapa.budova import Budova
 from mesta.mapa.interakcni_zona import InterakcniZona
 
+NAHORU  = 0
+DOLU    = 1
+DOLEVA  = 2
+DOPRAVA = 3
+
 def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, global_data: dict):
 
     klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
@@ -16,15 +21,19 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
     # pohyb postavy
     if klice[global_data['nastaveni']['nahoru']]:
         hrac.rychlost_y = -hrac.chodici_rychlost_y
+        hrac.smer_otoceni = NAHORU
 
     if klice[global_data['nastaveni']['doleva']]:
         hrac.rychlost_x = -hrac.chodici_rychlost_x
+        hrac.smer_otoceni = DOLEVA
 
     if klice[global_data['nastaveni']['dolu']]:
         hrac.rychlost_y = hrac.chodici_rychlost_y
+        hrac.smer_otoceni = DOLU
 
     if klice[global_data['nastaveni']['doprava']]:
         hrac.rychlost_x = hrac.chodici_rychlost_x
+        hrac.smer_otoceni = DOPRAVA
 
     if klice[global_data['nastaveni']['dolu']] and klice[global_data['nastaveni']['nahoru']]:
         hrac.rychlost_y = 0
@@ -78,4 +87,4 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
     elif hrac.y > velikost_mapy.bottom - 2 * hrac.vyska:
         hrac.y = velikost_mapy.bottom - 2 * hrac.vyska
 
-    hrac.nakresli(offset) # nakresli hrace
+    hrac.nakresli(okno, offset) # nakresli hrace

@@ -1,11 +1,12 @@
 import pygame as pg
 
 class Budova:
-    def __init__(self, okno, vlevo_x, nahore_y, sirka, vyska, barva):
+    def __init__(self, okno, vlevo_x, nahore_y, sirka, vyska, textura, barva_hitboxu = (0, 0, 255)):
         self.okno = okno
 
         self.obdelnik = pg.Rect(vlevo_x, nahore_y, sirka, vyska)
-        self.barva = barva
+        self.textura = textura
+        self.barva = barva_hitboxu
 
     def hitbox(self, objekt):
         '''
@@ -47,4 +48,7 @@ class Budova:
         objekt.y -= objekt.rychlost_y
 
     def nakresli(self, okno, offset = [0, 0]):
+        okno.blit(self.textura, (self.obdelnik.x + offset[0], self.obdelnik.y + offset[1]))
+
+    def nakresliHitbox(self, okno, offset = [0, 0]):
         pg.draw.rect(okno, self.barva, (self.obdelnik.x + offset[0], self.obdelnik.y + offset[1], self.obdelnik.width, self.obdelnik.height))
