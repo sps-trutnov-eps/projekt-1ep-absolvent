@@ -78,7 +78,23 @@ while True:
                     "rect": pygame.Rect(-auticko_x, pruh["rect"].y+10, auticko_x, auticko_y),
                     "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
                     "rychlost": random.random() * 10 + 3
-                    })
+                })
+                aktualni_rychlost = pruh["autaci"][-1]["rychlost"]
+                print(f"Auto {pruh['autaci'][-1]} na pozici {pruh['autaci'][-1]['rect'].x}")
+                if pruh["autaci"][-1]["rect"].x >= rozliseni_x - auticko_x - 20:
+                    print("neco")
+                    sance = random.choice((-1,1))
+                    print(sance)
+                    if sance == 1:
+                        pruh["autaci"].append({
+                            "rect": pygame.Rect(-auticko_x, pruh["rect"].y+10, auticko_x, auticko_y),
+                            "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
+                            "rychlost": aktualni_rychlost
+                        })
+                    else:
+                        print("nic")
+                        
+                            
             elif sisedevjet == -1:
                 pruh["autaci"].append({
                     "rect": pygame.Rect(silnice_x, pruh["rect"].y+10, auticko_x, auticko_y),
