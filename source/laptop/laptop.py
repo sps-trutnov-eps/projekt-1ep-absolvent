@@ -59,10 +59,19 @@ clock = pygame.time.Clock()
 controler_icon = pygame.image.load('ChatGPT Image 13. 4. 2025 18_38_36.png').convert()
 controler_icon = pygame.transform.scale(controler_icon, (80, 80))
 
+
+
+
+icon_x = 350
+icon_y = 130
+
+controler_rect = controler_icon.get_rect(topleft=(icon_x, icon_y))
+
 # --- HLAVNÍ SMYČKA ---
 while True:
     screen.blit(background_image, (0, 0))
-    screen.blit(controler_icon, (350, 130))
+    screen.blit(controler_icon, (icon_x, icon_y))
+
     if jmeno_pole_visible:
         screen.blit(jmeno, (rozliseni_sirka / 5.25, rozliseni_vyska / 4))
 
@@ -126,7 +135,16 @@ while True:
         battery -= battery_minus
         battery = max(battery, 0)
         posledni_akce = battery_time
+    
+    
+    
 
+    if udalost.type == pygame.MOUSEBUTTONDOWN:
+        if controler_rect.collidepoint(udalost.pos):
+            print("Klikl jsi na herní ovladač!")
+
+    
+    
     # Zobrazení baterie
     pygame.draw.rect(screen, (0, 0, 255), (rozliseni_sirka / 1.12, rozliseni_vyska / 19, rozliseni_sirka / 12, rozliseni_vyska / 1.08), 2)
     pygame.draw.rect(screen, (0, 0, 255), (rozliseni_sirka / 1.12, rozliseni_vyska / 19 + (rozliseni_vyska / 1.08 - battery), rozliseni_sirka / 12, battery))
