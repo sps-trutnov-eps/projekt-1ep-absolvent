@@ -15,13 +15,6 @@ def focusWindow():
     ctypes.windll.user32.SetForegroundWindow(hwnd)
     ctypes.windll.user32.SetFocus(hwnd)
 
-
-
-
-
-
-
-
 ######################################################################################################
 
 import mesta.mapa.main
@@ -29,13 +22,6 @@ import inventory.main       # Sem importovat soubory
 import nastaveni.main
 
 ######################################################################################################
-
-
-
-
-
-
-
 
 def createWindow(global_data, okno):
 
@@ -133,6 +119,7 @@ def reset(global_data):
         "focus_nastaveni": False,
         "focus_inventory": False,
         "penize": 0,
+        "energie": 0,
         "hrac": {
             "x": 960,
             "y": 540

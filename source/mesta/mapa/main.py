@@ -6,6 +6,9 @@ from mesta.mapa.mista_inicializace import *
 
 from main import unfocusWindow
 
+def ulozitData(global_data, not_global_data):
+    global_data['x'] = not_global_data['x']
+    global_data['y'] = not_global_data['y']
 
 def main(global_data):
     nastaveni = dict(global_data['nastaveni'])
@@ -33,7 +36,7 @@ def main(global_data):
     # pozice hrace je levej horni roh obrazku
 
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps
-    fps_limit = 6000 # maximalni pocet fps
+    fps_limit = 60 # maximalni pocet fps
 
     budovy, interakcni_zony, velikost_mapy, offset = mesto1Init(okno, velikost_okna)
 
@@ -80,8 +83,7 @@ def main(global_data):
 
         if klice[pygame.K_h]:                                   ####################################### SMAZAT
             ulozit_hru = True                                   ####################################### SMAZAT
-            global_data['hrac']['x'] = hrac.x                   # PREMISTIT NA MISTO UKLADANI
-            global_data['hrac']['y'] = hrac.y                   # PREMISTIT NA MISTO UKLADANI
+            ulozitData(global_data, {"x": hrac.x, "y": hrac.y}) ####################################### SMAZAT
             global_data['ulozit'] = True                        ####################################### SMAZAT
 
         if klice[pygame.K_r]:                                   ####################################### SMAZAT
