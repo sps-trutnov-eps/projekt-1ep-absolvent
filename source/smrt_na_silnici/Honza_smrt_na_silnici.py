@@ -20,9 +20,8 @@ font = pygame.font.SysFont("Arial", 30)
 silnice_x = rozliseni_x
 silnice_y = 60
 
-auticko_x = 80
+auticko_x = 700
 auticko_y = 40
-auticko_rychlost = 5
 #bus = 200
 #vlak = 700
 
@@ -73,7 +72,7 @@ while True:
     for pruh in pruhy:
         smer = random.choice((-1,1))
         if pruh["autaci"] == []:
-            rychlost = random.random() * 1 + 3
+            rychlost = random.random() * 3 + 3
             for i in range(random.randint(1,3)):
                 
                 if smer == 1:
