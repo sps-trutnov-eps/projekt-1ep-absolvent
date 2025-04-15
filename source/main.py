@@ -2,7 +2,7 @@ import json
 import pygame
 import multiprocessing
 import ctypes
-
+import importlib
 
 def unfocusWindow():
     ctypes.windll.user32.AllowSetForegroundWindow(-1)
@@ -15,26 +15,12 @@ def focusWindow():
     ctypes.windll.user32.SetForegroundWindow(hwnd)
     ctypes.windll.user32.SetFocus(hwnd)
 
-######################################################################################################
-
-import mesta.mapa.main
-import inventory.main       # Sem importovat soubory
-import nastaveni.main
-
-######################################################################################################
 
 def createWindow(global_data, okno):
-
     ######################################################################################################
-    jmena_funkce = {
-       "mesto_1": mesta.mapa.main.main,
-       "settings": nastaveni.main.main,     # Pred pridanim funkce musi se importnout soubor
-       "inventory": inventory.main.main     # Tady jsou jmena na spusteni funkce a samotna funkce
-    }
-
-                                            # Vzdycky vezme jen 1 argument "global data"
-    jmena_funkce[okno](global_data)         # Spustena Funkce - Minihra nebo jakykoliv program
-    global_data['aktualni_okna'].remove(okno) # Ulozi informaci ze okno je zavreny
+                                                # Vzdycky vezme jen 1 argument "global data"
+    convertStrToFunc(okno)(global_data)         # Spustena Funkce - Minihra nebo jakykoliv program
+    global_data["aktualni_okna"].remove(okno)   # Ulozi informaci ze okno je zavreny
     ######################################################################################################
 
 
@@ -107,11 +93,24 @@ def ulozit(global_data):
         global_data['konec'] = temp_konec
 
 
+def convertStrToFunc(string: str):
+
+    if '.' in str(string):
+        module_path, func_name = string.rsplit(".", 1)
+        module = importlib.import_module(module_path)
+        return getattr(module, func_name)
+
+    else:
+        return globals()[string]
+
+
+def convertFuncToStr(func):
+    return f"{func.__module__}.{func.__qualname__}"
+
+
 def reset(global_data):
     global_data = {
-        "aktualni_okna": [
-            "mesto_1"
-        ],
+        "aktualni_okna": [],
         "otevrena_okna": [],
         "konec": False,
         "reset": False,
@@ -139,13 +138,16 @@ def reset(global_data):
     ulozit(global_data)
 
 
-if __name__ == "__main__":
-
+def main(funkce = None):
     with multiprocessing.Manager() as manager:
 
         global_data = manager.dict()
 
         readData(global_data, manager)
+
+        if funkce != None:
+            global_data['aktualni_okna'].append(funkce)
+
         global_data['otevrena_okna'] = cloneManagerList(global_data['aktualni_okna'], manager)
         global_data['aktualni_okna'] = manager.list()
 
@@ -172,3 +174,8 @@ if __name__ == "__main__":
 
         for process in processes:
             process.join()
+
+
+
+if __name__ == "__main__":
+    main()
