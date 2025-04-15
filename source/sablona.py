@@ -1,6 +1,11 @@
-import main as master
-from main import main as masterFunc
-from main import convertFuncToStr as novyProgram
+import sys
+from pathlib import Path
+
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(parent_dir))
+
+from master import main as masterFunc
+from master import convertFuncToStr as novyProgram
 
 # sem piste importy
 

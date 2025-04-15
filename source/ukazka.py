@@ -1,8 +1,14 @@
+import sys
+from pathlib import Path
+
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(parent_dir))
+
+from master import main as masterFunc
+from master import convertFuncToStr as novyProgram
+
+
 import pygame
-
-import inventory.item
-
-from master import focusWindow
 
 def main(global_data):
 
@@ -21,25 +27,18 @@ def main(global_data):
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
 
-        if global_data['focus_inventory']:
-            global_data['focus_inventory'] = False
-            focusWindow()
-
         klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
-
-        if global_data['konec']:
-            programova_smycka = False
 
         if klice[global_data['nastaveni']['exit']] or klice[global_data['nastaveni']['inventory']]:
             programova_smycka = False
 
         okno.fill((0, 0, 0)) # vybarvy okno aby se resetovalo
 
-        ########################################################################### NAKRESLI GRID
-
-        for item in global_data['inventory']:
-            item.nakresli(okno, velikost_okna)
+        pygame.draw.rect(okno, (255, 255, 255), (100, 100, 100, 100))
 
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
 
         hodiny.tick(fps_limit) # limituje maximalni pocet fps
+
+if __name__ == "__main__":
+    masterFunc(novyProgram(main))
