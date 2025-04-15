@@ -12,22 +12,27 @@ rozliseni_x = 300 + 2*okraje
 rozliseni_y = rozliseni_x
 
 okno = pygame.display.set_mode((rozliseni_x, rozliseni_y))
+pygame.display.set_caption("Looting koše")
 
 #class aktivace
 item = Itemy(okno)
 
+pocet_itemu = 9
+pocet_bobku = random.randint(1, 2)
+
 #item choosing system
-itemy = ['bobek', "ohryzek", "kebab", "noviny", "lahev", "krabicak", "hodinky", "tuzemak", "energetak", "derava_cepice", "derave_tricko", "derave_kalhoty", "pizza", "burger"]
-itemy_v_kosi = []
+itemy = ["ohryzek", "kebab", "noviny", "lahev", "krabicak", "hodinky", "tuzemak", "energetak", "derava_cepice", "derave_tricko", "derave_kalhoty", "pizza", "burger"]
+bobek_sloty = random.sample(range(pocet_itemu), pocet_bobku)
+itemy_v_kosi = [None] * pocet_itemu
 
-vybrane_itemy = 0
-while vybrane_itemy < 9:
-    vybrany_item = random.choice(itemy)
+for i in bobek_sloty:
+    itemy_v_kosi[i] = "bobek"
 
-    itemy_v_kosi.append(vybrany_item)
-    itemy.remove(vybrany_item)
-
-    vybrane_itemy += 1
+for i in range(pocet_itemu):
+    if itemy_v_kosi[i] is None:
+        vybrany_item = random.choice(itemy)
+        itemy_v_kosi[i] = vybrany_item
+        itemy.remove(vybrany_item)
 
 print(itemy_v_kosi)
 
@@ -86,6 +91,11 @@ open_slot_7 = False
 open_slot_8 = False
 open_slot_9 = False
 
+color_timer = 0
+
+fps_casovac = pygame.time.Clock()
+fps = 60
+
 while True:
     lmb = False
 
@@ -98,7 +108,20 @@ while True:
         if udalost.type == pygame.MOUSEBUTTONDOWN and udalost.button == 1:
             lmb = True
 
+    fps_casovac.tick(fps)
+
     mys = pygame.mouse.get_pos()
+
+    if color_timer > 0:
+        color_timer -= 1
+
+    if color_timer <= 0:
+        barva_r = random.randint(0, 255)
+        barva_g = random.randint(0, 255)
+        barva_b = random.randint(0, 255)
+
+        random_barva = (barva_r, barva_g, barva_b)
+        color_timer = 15
 
     #print(lmb)
 
@@ -116,17 +139,17 @@ while True:
     slot_8_r = pygame.Rect(row_2, col_3, velikost_ctverecku, velikost_ctverecku)
     slot_9_r = pygame.Rect(row_3, col_3, velikost_ctverecku, velikost_ctverecku)
 
-    slot_1 = pygame.draw.rect(okno, cerna, slot_1_r)
-    slot_2 = pygame.draw.rect(okno, cerna, slot_2_r)
-    slot_3 = pygame.draw.rect(okno, cerna, slot_3_r)
+    slot_1 = pygame.draw.rect(okno, random_barva, slot_1_r)
+    slot_2 = pygame.draw.rect(okno, random_barva, slot_2_r)
+    slot_3 = pygame.draw.rect(okno, random_barva, slot_3_r)
 
-    slot_4 = pygame.draw.rect(okno, cerna, slot_4_r)
-    slot_5 = pygame.draw.rect(okno, cerna, slot_5_r)
-    slot_6 = pygame.draw.rect(okno, cerna, slot_6_r)
+    slot_4 = pygame.draw.rect(okno, random_barva, slot_4_r)
+    slot_5 = pygame.draw.rect(okno, random_barva, slot_5_r)
+    slot_6 = pygame.draw.rect(okno, random_barva, slot_6_r)
 
-    slot_7 = pygame.draw.rect(okno, cerna, slot_7_r)
-    slot_8 = pygame.draw.rect(okno, cerna, slot_8_r)
-    slot_9 = pygame.draw.rect(okno, cerna, slot_9_r)
+    slot_7 = pygame.draw.rect(okno, random_barva, slot_7_r)
+    slot_8 = pygame.draw.rect(okno, random_barva, slot_8_r)
+    slot_9 = pygame.draw.rect(okno, random_barva, slot_9_r)
 
     if lmb and slot_1_r.collidepoint(mys):
         if not last_frame_key_pressed_1:
