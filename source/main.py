@@ -128,7 +128,12 @@ def reset(global_data):
             "doleva": 97,
             "doprava": 100
         },
-        "inventory": []
+        "inventory": [],
+        "hudba":{
+            "hudba1":[
+                
+                ],
+        },
     }
 
     ulozit(global_data)

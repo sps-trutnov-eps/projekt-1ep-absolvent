@@ -3,15 +3,16 @@ from Martin_hudba_minihra.noty import nota
 def main(global_data):
     pygame.init()
 
-    notove = []
+    notove = [[3, 13], [4, 39], [5, 65], [3, 69], [5, 76], [5, 81], [5, 87], [2, 93], [1, 98], [5, 104], [5, 110], [5, 116]]
 
     # Nastavení velikosti okna
     screen = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("Pohyb obdélníků nad a pod středem")
 
-    # Barvy
-    WHITE = (255, 255, 255)
+    
 
+    # Barvy
+    b=255
     # Načtení obrázků
     modry = pygame.image.load("Martin_hudba_minihra\\bitmapa.png")
     cerveny = pygame.image.load("Martin_hudba_minihra\\bitmapa2.png")
@@ -26,19 +27,30 @@ def main(global_data):
 
     # Rychlost pohybu
     move_speed = 5
-
+    barva_pozadi = (255, 255, 255)
     # Hlavní smyčka hry
     running = True
     clock = pygame.time.Clock()
     while running:
+        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    for n in notove[:]:  
+                        if modry_rect.colliderect(n) or cerveny_rect.colliderect(n):
+                            notove.remove(n)
+                    b=150
+        barva_pozadi = (b,b,b)
+        if b<255:
+            b+=3
         # Získání stavu klávesnice
         keys = pygame.key.get_pressed()
 
         # Pohyb modrého
+        
         if keys[pygame.K_UP]:
             modry_rect.y -= move_speed
         if keys[pygame.K_DOWN]:
@@ -51,17 +63,14 @@ def main(global_data):
             cerveny_rect.y += move_speed
 
         # Kolize se seznamem not (pokud nějaké máš)
-        if keys[pygame.K_SPACE]:
-            for n in notove[:]:  # použij kopii seznamu při mazání
-                if modry_rect.colliderect(n) or cerveny_rect.colliderect(n):
-                    notove.remove(n)
+        
 
         # Omez pohyb na okno
         modry_rect.y = max(0, min(modry_rect.y, screen.get_height() - modry_rect.height))
         cerveny_rect.y = max(0, min(cerveny_rect.y, screen.get_height() - cerveny_rect.height))
 
         # Vyplnění obrazovky
-        screen.fill(WHITE)
+        screen.fill(barva_pozadi)
 
         # Vykreslení obrázků pomocí blit
         screen.blit(modry, modry_rect.topleft)
