@@ -36,7 +36,8 @@ for i in range(16):
     pruhy.append({
         'barva': "black",
         'rect': pygame.Rect(0, (i*silnice_y+50), rozliseni_x, silnice_y),
-        'autaci': []
+        'autaci': [],
+        "autaci2": []
         })
 
 while True:
@@ -71,31 +72,28 @@ while True:
     #vykresleni
     zobrazovacka.fill("white")
     for pruh in pruhy:
-        sisedevjet = random.choice((-1,1))
+        smer = random.choice((-1,1))
         if pruh["autaci"] == []:
-            if sisedevjet == 1:
+            rychlost = random.random() * 10 + 3
+            if smer == 1:
                 pruh["autaci"].append({
                     "rect": pygame.Rect(-auticko_x, pruh["rect"].y+10, auticko_x, auticko_y),
                     "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
-                    "rychlost": random.random() * 10 + 3
+                    "rychlost": rychlost
                 })
                 aktualni_rychlost = pruh["autaci"][-1]["rychlost"]
-                print(f"Auto {pruh['autaci'][-1]} na pozici {pruh['autaci'][-1]['rect'].x}")
-                if pruh["autaci"][-1]["rect"].x >= rozliseni_x - auticko_x - 20:
-                    print("neco")
-                    sance = random.choice((-1,1))
-                    print(sance)
-                    if sance == 1:
-                        pruh["autaci"].append({
-                            "rect": pygame.Rect(-auticko_x, pruh["rect"].y+10, auticko_x, auticko_y),
-                            "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
-                            "rychlost": aktualni_rychlost
-                        })
-                    else:
-                        print("nic")
-                        
+                print(f"Auto {pruh['autaci'][-1]} na pozici X: {pruh['autaci'][-1]['rect'].x}, Y: {pruh['autaci'][-1]['rect'].y}")
+                sance = random.choice(("další","žádný"))
+                print(sance)
+                if sance == "další":
+                    pruh["autaci"].append({
+                        "rect": pygame.Rect(-auticko_x, pruh["rect"].y+10, auticko_x, auticko_y),
+                        "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
+                        "rychlost": rychlost
+                    })
+                    aktualni_rychlost = pruh["autaci"][-1]["rychlost"]
                             
-            elif sisedevjet == -1:
+            elif smer == -1:
                 pruh["autaci"].append({
                     "rect": pygame.Rect(silnice_x, pruh["rect"].y+10, auticko_x, auticko_y),
                     "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
@@ -111,6 +109,11 @@ while True:
             
             
         pygame.draw.rect(zobrazovacka, pruh["barva"], pruh["rect"])
+        for autako in pruh["autaci"]:
+            autako["rect"].x += autako["rychlost"]
+            pygame.draw.rect(zobrazovacka, autako["barva"], autako["rect"])
+            if autako["rect"].x < -auticko_x or autako["rect"].x > silnice_x:
+                pruh["autaci"].remove(autako)
         for autako in pruh["autaci"]:
             autako["rect"].x += autako["rychlost"]
             pygame.draw.rect(zobrazovacka, autako["barva"], autako["rect"])
