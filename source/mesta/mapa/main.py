@@ -7,8 +7,8 @@ from mesta.mapa.mista_inicializace import *
 import nastaveni.main as Nastaveni
 import inventory.main as Inventory
 
-from main import unfocusWindow
-from main import convertFuncToStr as novyProgram
+from master import unfocusWindow
+from master import convertFuncToStr as novyProgram
 
 def ulozitData(global_data, not_global_data):
     global_data['x'] = not_global_data['x']

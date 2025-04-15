@@ -1,7 +1,7 @@
 import pygame
 from nastaveni.button import Button
 
-from main import focusWindow
+from master import focusWindow
 
 
 def numNaNastaveni(i):
