@@ -4,7 +4,11 @@ from mesta.mapa.hrac import Hrac
 from mesta.mapa.mesto import *
 from mesta.mapa.mista_inicializace import *
 
+import nastaveni.main as Nastaveni
+import inventory.main as Inventory
+
 from main import unfocusWindow
+from main import convertFuncToStr as novyProgram
 
 def ulozitData(global_data, not_global_data):
     global_data['x'] = not_global_data['x']
@@ -64,7 +68,7 @@ def main(global_data):
         else:
             # otevre nastaveni
             if klice[nastaveni['exit']]:
-                global_data['otevrena_okna'].append('settings')
+                global_data['otevrena_okna'].append(novyProgram(Nastaveni.main))
 
         if 'inventory' in global_data['aktualni_okna']:
             if pygame.display.get_active():
@@ -73,7 +77,7 @@ def main(global_data):
 
         else:
             if klice[nastaveni['inventory']]:
-                global_data['otevrena_okna'].append('inventory')
+                global_data['otevrena_okna'].append(novyProgram(Inventory.main))
 
         if global_data['konec']:
             programova_smycka = False

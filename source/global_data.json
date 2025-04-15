@@ -1,7 +1,5 @@
 {
-    "aktualni_okna": [
-        "mesto_1"
-    ],
+    "aktualni_okna": [],
     "otevrena_okna": [],
     "konec": false,
     "reset": false,
