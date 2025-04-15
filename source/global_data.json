@@ -1,0 +1,27 @@
+{
+    "aktualni_okna": [
+        "mesto_1"
+    ],
+    "otevrena_okna": [],
+    "konec": false,
+    "reset": false,
+    "ulozit": false,
+    "focus_nastaveni": false,
+    "focus_inventory": false,
+    "penize": 0,
+    "energie": 0,
+    "hrac": {
+        "x": 960,
+        "y": 540
+    },
+    "nastaveni": {
+        "exit": 27,
+        "inventory": 9,
+        "interakce": 101,
+        "nahoru": 119,
+        "dolu": 115,
+        "doleva": 97,
+        "doprava": 100
+    },
+    "inventory": []
+}
