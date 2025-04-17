@@ -132,7 +132,8 @@ def reset(global_data):
             "doleva": 97,
             "doprava": 100
         },
-        "inventory": []
+        "inventory": [],
+        "nasel_bobek": False
     }
 
     ulozit(global_data)
