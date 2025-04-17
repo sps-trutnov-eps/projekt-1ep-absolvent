@@ -16,8 +16,8 @@ def main(global_data):
     # Barvy
     b=255
     # Načtení obrázků
-    modry = pygame.image.load("D:\\kraken\\projekt-1ep-absolvent\\source\\Martin_hudba_minihra\\bitmapa.png")
-    cerveny = pygame.image.load("D:\\kraken\\projekt-1ep-absolvent\\source\\Martin_hudba_minihra\\bitmapa2.png")
+    modry = pygame.image.load("Martin_hudba_minihra\\bitmapa.png")
+    cerveny = pygame.image.load("Martin_hudba_minihra\\bitmapa2.png")
 
     # Získání rectů
     modry_rect = modry.get_rect()
