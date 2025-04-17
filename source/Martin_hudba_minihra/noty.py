@@ -1,19 +1,13 @@
 import pygame
 
 class nota:
-    def __init__(self):
+    def __init__(self,poloha_x,poloha_y):
         
         self.poloha_x=poloha_x
-        self.poloha_y=600
+        self.poloha_y=poloha_y
         self.ktera_nota = 1
         self.aktivní = 0
         
-    def cas_na_start(self,hudba,kdy):
-        
-        if hudba[self.ktera_nota][1]==kdy:
-            self.aktivní = 1
-            self.poloha_y=hudba[self.ktera_nota][0]*50
-            self.ktera_nota += 1
     def pohyb(self):
         
         if self.aktivní ==1:
