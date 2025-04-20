@@ -60,8 +60,8 @@ clock = pygame.time.Clock()
 
 okno_her_zapnuto = False
 
-icon_x = 350
-icon_y = 130
+icon_x = rozliseni_sirka / 5
+icon_y = rozliseni_vyska / 8
 icon_x1 = rozliseni_sirka / 1.34
 icon_y1 = rozliseni_vyska / 5.8
 
@@ -140,17 +140,39 @@ while True:
         pygame.draw.rect(screen, (127, 127, 127), (rozliseni_sirka / 4.2, rozliseni_vyska / 6, rozliseni_sirka / 1.9, rozliseni_vyska / 2))
         screen.blit(krizek, (icon_x1, icon_y1))
         
-        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 5.2, rozliseni_sirka / 10, rozliseni_vyska / 15))
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
         
-        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.8, rozliseni_vyska / 5.2, rozliseni_sirka / 10, rozliseni_vyska / 15))
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
         
-        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.154, rozliseni_vyska / 5.2, rozliseni_sirka / 10, rozliseni_vyska / 15))
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
         
-        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.7, rozliseni_vyska / 5.2, rozliseni_sirka / 10, rozliseni_vyska / 15))
+       
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15))
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15))
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15))
+
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15))
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15))
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15))
 
 
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
 
 
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15))
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15))
+        
+        pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15))
 
 
 
