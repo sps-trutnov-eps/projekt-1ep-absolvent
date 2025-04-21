@@ -31,10 +31,18 @@ def main(global_data):
     silnice_x = rozliseni_x
     silnice_y = 60
 
-    auticko_x = 700
+    auticko_x = 80
     auticko_y = 40
     #bus = 200
     #vlak = 700
+    obrazky_aut = [
+        pygame.image.load("tyrak.png").convert_alpha(),
+        pygame.image.load("kia.png").convert_alpha(),
+        pygame.image.load("f1.jpg").convert_alpha(),
+        pygame.image.load("911.png").convert_alpha(),
+        pygame.image.load("smart.png").convert_alpha(),
+        pygame.image.load("tyrak-bedna.png").convert_alpha(),
+        ]
 
     prohra = False
 
@@ -47,7 +55,7 @@ def main(global_data):
             'barva': "black",
             'rect': pygame.Rect(0, (i*silnice_y+50), rozliseni_x, silnice_y),
             'autaci': []
-            })
+        })
 
     while True:
         ##########################################
@@ -85,20 +93,26 @@ def main(global_data):
             if pruh["autaci"] == []:
                 rychlost = random.random() * 3 + 3
                 for i in range(random.randint(1,3)):
-                    
+                    obrazek = random.choice(obrazky_aut)
+                    if smer == -1:
+                        obrazek = pygame.transform.flip(obrazek, True, False)
+        
                     if smer == 1:
                         pruh["autaci"].append({
                             "rect": pygame.Rect(-auticko_x - i*random.randint(auticko_x*1.25, auticko_x*1.5)*(-1 if rychlost < 0 else 1), pruh["rect"].y+10, auticko_x, auticko_y),
-                            "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
+                            "obrazek": obrazek,
                             "rychlost": rychlost
                         })
 
                     elif smer == -1:
                         pruh["autaci"].append({
                             "rect": pygame.Rect(auticko_x + silnice_x - i*random.randint(auticko_x*1.25, auticko_x*1.5)*(1 if rychlost < 0 else -1), pruh["rect"].y+10, auticko_x, auticko_y),
-                            "barva": (random.randint(0, 255), random.randint(0, 255) ,random.randint(0, 255)),
+                            "obrazek": obrazek,
                             "rychlost": -rychlost
                         })
+                    obrazek = random.choice(obrazky_aut)
+                    if smer == -1:
+                        obrazek = pygame.transform.flip(obrazek, True, False)
 
             for auto in pruh["autaci"]:
                 if auto["rect"].colliderect(hrac):
@@ -114,7 +128,8 @@ def main(global_data):
             temp_autaci = pruh["autaci"].copy()
             for tacoauto in pruh["autaci"]:
                 tacoauto["rect"].x += tacoauto["rychlost"]
-                pygame.draw.rect(zobrazovacka, tacoauto["barva"], tacoauto["rect"])
+                zobrazovacka.blit(tacoauto["obrazek"], tacoauto["rect"])
+
 
                 if tacoauto["rychlost"] > 0:
                     if tacoauto["rect"].x > rozliseni_x:
