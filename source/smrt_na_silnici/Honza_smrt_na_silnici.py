@@ -38,7 +38,7 @@ def main(global_data):
     obrazky_aut = [
         pygame.image.load("tyrak.png").convert_alpha(),
         pygame.image.load("kia.png").convert_alpha(),
-        pygame.image.load("f1.jpg").convert_alpha(),
+        pygame.image.load("f1.png").convert_alpha(),
         pygame.image.load("911.png").convert_alpha(),
         pygame.image.load("smart.png").convert_alpha(),
         pygame.image.load("tyrak-bedna.png").convert_alpha(),
