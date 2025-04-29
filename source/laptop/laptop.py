@@ -50,7 +50,14 @@ def main(global_data):
 
     controler_icon = pygame.image.load('ChatGPT Image 13. 4. 2025 18_38_36.png').convert()
     controler_icon = pygame.transform.scale(controler_icon, (80, 80))
-
+    
+    calculator_icon = pygame.image.load('calculator.png').convert()
+    calculator_icon = pygame.transform.scale(calculator_icon, (40, 60))
+    
+    kalkulacka = pygame.image.load('kalkulacka.png').convert()
+    kalkulacka = pygame.transform.scale(kalkulacka, (800, 500))
+    
+    
     krizek = pygame.image.load('pixilart-drawing.png').convert()
     krizek = pygame.transform.scale(krizek, (rozliseni_sirka / 80, rozliseni_sirka / 80))
 
@@ -78,14 +85,24 @@ def main(global_data):
     icon_y = rozliseni_vyska / 8
     icon_x1 = rozliseni_sirka / 1.34
     icon_y1 = rozliseni_vyska / 5.8
+    icon_x2 = rozliseni_sirka / 4.75
+    icon_y2 = rozliseni_vyska / 4.4
+    icon_x3 = rozliseni_sirka / 4.75
+    icon_y3 = rozliseni_vyska / 4.4
+    
 
     controler_rect = pygame.Rect(icon_x, icon_y, 80, 80)
+    calculator_rect = pygame.Rect(icon_x2, icon_y2, 50, 80)
+    
     krizek_rect = pygame.Rect(icon_x1, icon_y1, rozliseni_sirka / 80, rozliseni_sirka / 80)
 
     # Hlavní smyčka
     while True:
         screen.blit(background_image, (0, 0))
         screen.blit(controler_icon, (icon_x, icon_y))
+        screen.blit(calculator_icon, (icon_x2, icon_y2))
+        
+        
 
         if jmeno_pole_visible:
             screen.blit(jmeno, (rozliseni_sirka / 5.25, rozliseni_vyska / 4))
@@ -126,7 +143,11 @@ def main(global_data):
 
         if input_text == "" and jmeno_pole_visible:
             placeholder = True
-
+        
+        
+        screen.blit(kalkulacka, (icon_x3, icon_y3))
+        
+        
         if placeholder:
             text_surface_placeholder = font_placeholder.render('Zadej své jméno', True, (200, 200, 200))
             screen.blit(text_surface_placeholder, (rozliseni_sirka // 4.1, rozliseni_vyska // 3.1))
