@@ -1,8 +1,12 @@
-import main as master
-from main import main as masterFunc
-from main import convertFuncToStr as novyProgram
+import sys
+from pathlib import Path
 
-# sem piste importy
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(parent_dir))
+
+from master import main as masterFunc
+from master import convertFuncToStr as novyProgram
+
 import pygame
 import subprocess
 import sys
@@ -14,7 +18,7 @@ def spustit_minihru():
 
 def main(global_data):
     # Inicializace Pygame
-    pygame.init()
+    pygame.font.init()
     screen_width, screen_height = 800, 600
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Bankomat")
@@ -116,4 +120,3 @@ def main(global_data):
 
 if __name__ == "__main__":
     masterFunc(novyProgram(main))
-
