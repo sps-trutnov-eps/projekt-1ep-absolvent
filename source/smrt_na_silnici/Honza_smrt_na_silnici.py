@@ -30,7 +30,9 @@ def main(global_data):
 
     silnice_x = rozliseni_x
     silnice_y = 60
-    silnice = pygame.image.load("silnice.png")
+    silnice = pygame.image.load("silnice3.png")
+    #zacatek silnice = 50
+    #konec silnice = 950
     
     auticko_x = 80
     auticko_y = 40
@@ -122,7 +124,7 @@ def main(global_data):
                     if zivoty == 0:
                         prohra = True
 
-            zobrazovacka.blit(silnice, pruh["rect"])  # ✅ OK, vykreslí, ale `rect` zůstane Rect
+            zobrazovacka.blit(silnice, pruh["rect"])  
 
             temp_autaci = pruh["autaci"].copy()
             for tacoauto in pruh["autaci"]:
@@ -147,7 +149,7 @@ def main(global_data):
         zobrazovacka.blit(zivoty_text, (10, 10))
         
         if prohra == True:
-            zobrazovacka.fill("black")
+            zobrazovacka.fill("blue")
             pygame.display.set_caption("NO ŽIVOT")
         
         pygame.display.update()
