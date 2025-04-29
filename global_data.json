@@ -22,5 +22,9 @@
         "doprava": 100
     },
     "inventory": [],
+    "inventory_xy": [
+        13,
+        7
+    ],
     "nasel_bobek": false
 }

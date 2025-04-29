@@ -1,62 +1,28 @@
 import pygame
-pygame.init()
-class Itemy:
-        def __init__(self, okno):
-                self.okno = okno
 
-                self.textura_bobku = pygame.image.load("source//textury//bobek.png")
-                self.textura_ohryzku = pygame.image.load("source//textury//ohryzek.png")
-                self.textura_kebabu = pygame.image.load("source//textury//kebab.png")
-                self.textura_novin = pygame.image.load("source//textury//noviny.png")
-                self.textura_lahve = pygame.image.load("source//textury//lahev.png")
-                self.textura_krabicaku = pygame.image.load("source//textury//krabicak.png")
-                self.textura_hodinek = pygame.image.load("source//textury//hodinky.png")
-                self.textura_tuzemaku = pygame.image.load("source//textury//tuzemak.png")
-                self.textura_energetaku = pygame.image.load("source//textury//energetak.png")
-                self.textura_derave_cepice = pygame.image.load("source//textury//cepice.png")
-                self.textura_derave_tricko = pygame.image.load("source//textury//tricko.png")
-                self.textura_derave_kalhoty = pygame.image.load("source//textury//kalhoty.png")
-                self.textura_pizza = pygame.image.load("source//textury//pizza.png")
-                self.textura_burger = pygame.image.load("source//textury//burger.png")
-        
-        def bobek(self, x, y):
-                self.okno.blit(self.textura_bobku, (x, y))
+textury = {
+    "bobek": pygame.image.load("source//textury//bobek.png"),
+    "ohryzek": pygame.image.load("source//textury//ohryzek.png"),
+    "kebab": pygame.image.load("source//textury//kebab.png"),
+    "noviny": pygame.image.load("source//textury//noviny.png"),
+    "lahev": pygame.image.load("source//textury//lahev.png"),
+    "krabicak": pygame.image.load("source//textury//krabicak.png"),
+    "hodinky": pygame.image.load("source//textury//hodinky.png"),
+    "tuzemak": pygame.image.load("source//textury//tuzemak.png"),
+    "energetak": pygame.image.load("source//textury//energetak.png"),
+    "derava_cepice": pygame.image.load("source//textury//cepice.png"),
+    "derave_tricko": pygame.image.load("source//textury//tricko.png"),
+    "derave_kalhoty": pygame.image.load("source//textury//kalhoty.png"),
+    "pizza": pygame.image.load("source//textury//pizza.png"),
+    "burger": pygame.image.load("source//textury//burger.png")
+}
 
-        def ohryzek(self, x, y):
-                self.okno.blit(self.textura_ohryzku, (x, y))
+class Item:
+    def __init__(self, textura, pozice, nazev):
+        self.textura = textura
+        self.nazev = nazev
 
-        def kebab(self, x, y):
-                self.okno.blit(self.textura_kebabu, (x, y))
+        self.pozice = pozice
 
-        def noviny(self, x, y):
-                self.okno.blit(self.textura_novin, (x, y))
-
-        def lahev(self, x, y):
-                self.okno.blit(self.textura_lahve, (x, y))
-
-        def krabicak(self, x, y):
-                self.okno.blit(self.textura_krabicaku, (x, y))
-
-        def hodinky(self, x, y):
-                self.okno.blit(self.textura_hodinek, (x, y))
-
-        def tuzemak(self, x, y):
-                self.okno.blit(self.textura_tuzemaku, (x, y))
-
-        def energetak(self, x, y):
-                self.okno.blit(self.textura_energetaku, (x, y))
-
-        def cepice(self, x, y):
-                self.okno.blit(self.textura_derave_cepice, (x, y))
-
-        def tricko(self, x, y):
-                self.okno.blit(self.textura_derave_tricko, (x, y))
-
-        def kalhoty(self, x, y):
-                self.okno.blit(self.textura_derave_kalhoty, (x, y))
-
-        def pizza(self, x, y):
-                self.okno.blit(self.textura_pizza, (x, y))
-
-        def burger(self, x, y):
-                self.okno.blit(self.textura_burger, (x, y))
+    def vykresli(self, okno):
+        okno.blit(self.textura, self.pozice)
