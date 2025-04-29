@@ -9,6 +9,7 @@ class SnakeGame:
         self.snake = [(100, 100), (80, 100), (60, 100)]
         self.direction = (20, 0)
         self.food = self.spawn_food()
+        self.food_type = 'normal'
         self.clock = pygame.time.Clock()
         self.score = 0
         self.font = pygame.font.SysFont(None, 36)
@@ -18,6 +19,7 @@ class SnakeGame:
             x = random.randint(0, 39) * self.cell_size
             y = random.randint(0, 29) * self.cell_size
             if (x, y) not in self.snake:
+                self.food_type = random.choice(['normal', 'gold', 'bad'])
                 return (x, y)
 
     def handle_events(self):
@@ -31,7 +33,7 @@ class SnakeGame:
                     self.direction = (0, -20)
                 elif event.key == pygame.K_DOWN and self.direction != (0, -20):
                     self.direction = (0, 20)
-                elif event.key == pygame.K_LEFT and self.direction != (0, 0):
+                elif event.key == pygame.K_LEFT and self.direction != (20, 0):
                     self.direction = (-20, 0)
                 elif event.key == pygame.K_RIGHT and self.direction != (-20, 0):
                     self.direction = (20, 0)
@@ -45,17 +47,35 @@ class SnakeGame:
         self.snake.insert(0, new_head)
 
         if new_head == self.food:
-            self.score += 1
+            if self.food_type == 'normal':
+                self.score += 1
+            elif self.food_type == 'gold':
+                self.score += 3
+                self.snake.append(self.snake[-1])
+                self.snake.append(self.snake[-1])
+            elif self.food_type == 'bad':
+                self.score = max(0, self.score - 1)
+                self.snake.append(self.snake[-1])
+
             self.food = self.spawn_food()
         else:
             self.snake.pop()
 
     def draw(self):
         self.screen.fill((30, 30, 30))
+
         for segment in self.snake:
             pygame.draw.rect(self.screen, (0, 255, 0), (segment[0], segment[1], self.cell_size, self.cell_size))
-        pygame.draw.rect(self.screen, (255, 0, 0), (self.food[0], self.food[1], self.cell_size, self.cell_size))
-        
+
+        if self.food_type == 'normal':
+            color = (255, 0, 0)      
+        elif self.food_type == 'gold':
+            color = (255, 215, 0)     
+        elif self.food_type == 'bad':
+            color = (160, 32, 240)    
+
+        pygame.draw.rect(self.screen, color, (self.food[0], self.food[1], self.cell_size, self.cell_size))
+
         score_text = self.font.render(f"Skóre: {self.score}", True, (255, 255, 255))
         self.screen.blit(score_text, (10, 10))
 
@@ -68,10 +88,13 @@ class SnakeGame:
             self.draw()
             self.clock.tick(10)
 
-if __name__ == "__main__":
+def run_snake_game():
     pygame.init()
-    screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption("Hadí hra")
+    screen = pygame.display.set_mode((700, 500))
+    pygame.display.set_caption("Hadí hra – více druhů jídla")
     game = SnakeGame(screen)
     game.run()
     pygame.quit()
+
+if __name__ == "__main__":
+    run_snake_game()
