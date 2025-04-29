@@ -30,7 +30,8 @@ def main(global_data):
 
     silnice_x = rozliseni_x
     silnice_y = 60
-
+    silnice = pygame.image.load("silnice.png")
+    
     auticko_x = 80
     auticko_y = 40
     #bus = 200
@@ -120,10 +121,8 @@ def main(global_data):
                     zivoty -= 1
                     if zivoty == 0:
                         prohra = True
-                    
-                
-                
-            pygame.draw.rect(zobrazovacka, pruh["barva"], pruh["rect"])
+
+            zobrazovacka.blit(silnice, pruh["rect"])  # ✅ OK, vykreslí, ale `rect` zůstane Rect
 
             temp_autaci = pruh["autaci"].copy()
             for tacoauto in pruh["autaci"]:
