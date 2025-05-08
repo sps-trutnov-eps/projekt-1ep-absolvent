@@ -13,7 +13,7 @@ def focusWindow():
     ctypes.windll.user32.ShowWindow(hwnd, 5)
     ctypes.windll.user32.BringWindowToTop(hwnd)
     ctypes.windll.user32.SetForegroundWindow(hwnd)
-    ctypes.windll.user32.SetFocus(hwnd)
+    ctypes.windll.user32.SetFocus(hwnd)  
 
 ######################################################################################################
 import Martin_hudba_minihra.main_hra
@@ -172,4 +172,3 @@ if __name__ == "__main__":
 
         for process in processes:
             process.join()
-  
