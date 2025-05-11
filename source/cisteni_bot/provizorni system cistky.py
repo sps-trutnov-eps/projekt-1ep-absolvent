@@ -1,0 +1,91 @@
+import pygame
+import random
+import sys
+
+# Inicializace pygame
+pygame.init()
+
+# Rozlišení okna
+rozliseni_x = 800
+rozliseni_y = 600
+
+# Vytvoření okna
+obrazovka = pygame.display.set_mode((rozliseni_x, rozliseni_y))
+pygame.display.set_caption("Kruhy a kurzor")
+
+# Barvy
+barva_pozadi = (255, 0, 0)  # červená
+barva_kurzoru = (0, 0, 0)   # černá
+barva_kruhu = (139, 69, 19) # hnědá (saddle brown)
+
+# Třída pro kruhy
+class Kruh:
+    def __init__(self):
+        self.radius = random.randint(20, 50)
+
+        # Zajištění, že kruh zůstane uvnitř okna i při malém rozlišení
+        max_x = max(self.radius, rozliseni_x - self.radius)
+        max_y = max(self.radius, rozliseni_y - self.radius)
+
+        self.x = random.randint(self.radius, max_x)
+        self.y = random.randint(self.radius, max_y)
+    
+    def draw(self, screen):
+        pygame.draw.circle(screen, barva_kruhu, (self.x, self.y), self.radius)
+    
+    def is_hovered(self, pos):
+        dx = self.x - pos[0]
+        dy = self.y - pos[1]
+        return (dx**2 + dy**2) <= self.radius**2
+
+# Seznam kruhů
+kruhy = []
+
+# Časovač pro generování nových kruhů
+spawn_timer = 0
+spawn_delay = 1000  # v milisekundách
+
+# Hodiny
+hodiny = pygame.time.Clock()
+
+# Hlavní smyčka
+while True:
+    dt = hodiny.tick(60)  # limit na 60 FPS
+    spawn_timer += dt
+
+    for udalost in pygame.event.get():
+        if udalost.type == pygame.QUIT or (udalost.type == pygame.KEYDOWN and udalost.key == pygame.K_ESCAPE):
+            sys.exit()
+
+    # Generování nového kruhu (max. 5 na obrazovce)
+    if len(kruhy) < 5 and spawn_timer > spawn_delay:
+        kruhy.append(Kruh())
+        spawn_timer = 0
+
+    # Pozice kurzoru
+    pozice_mysi = pygame.mouse.get_pos()
+
+    # Vyplnění pozadí
+    obrazovka.fill(barva_pozadi)
+
+    # Kontrola kolize kurzoru s kruhy
+    novy_seznam = []
+
+    # Pro každý kruh v seznamu kruhů
+    for k in kruhy:
+        # Pokud není kurzor nad tímto kruhem, přidej ho do nového seznamu
+        if not k.is_hovered(pozice_mysi):
+            novy_seznam.append(k)
+
+    # Přiřaď nový seznam zpět do původního seznamu
+    kruhy = novy_seznam
+
+    # Vykreslení kruhů
+    for k in kruhy:
+        k.draw(obrazovka)
+
+    # Kruh sledující kurzor
+    pygame.draw.circle(obrazovka, barva_kurzoru, pozice_mysi, 20)
+
+    # Aktualizace obrazovky
+    pygame.display.update()

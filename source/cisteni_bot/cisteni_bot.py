@@ -18,7 +18,13 @@ while True:
         if udalost.type == pygame.KEYDOWN:
             if udalost.key == pygame.K_ESCAPE:
                 sys.exit()
+    pozice_mysi = pygame.mouse.get_pos()
+    
+    
+    #obrazovka se musi generovat prvni
     obrazovka.fill(barva_pozadi)
+    #generovani posouvatka s mysi
+    pygame.draw.circle(obrazovka, (0, 0, 0), pozice_mysi, 20)
     pygame.display.update()
     
         
