@@ -21,7 +21,15 @@
         "doleva": 97,
         "doprava": 100
     },
-    "inventory": [],
+    "inventory": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ],
     "inventory_xy": [
         13,
         7
