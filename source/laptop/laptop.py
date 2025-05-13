@@ -55,7 +55,7 @@ def main(global_data):
     calculator_icon = pygame.transform.scale(calculator_icon, (40, 60))
     
     kalkulacka = pygame.image.load('kalkulacka.png').convert()
-    kalkulacka = pygame.transform.scale(kalkulacka, (800, 500))
+    kalkulacka = pygame.transform.scale(kalkulacka, (rozliseni_sirka / 6, rozliseni_vyska / 2.5))
     
     
     krizek = pygame.image.load('pixilart-drawing.png').convert()
@@ -89,12 +89,19 @@ def main(global_data):
     icon_y2 = rozliseni_vyska / 4.4
     icon_x3 = rozliseni_sirka / 4.75
     icon_y3 = rozliseni_vyska / 4.4
+    icon_x4 = rozliseni_sirka / 2.4
+    icon_y4 = rozliseni_vyska / 4.2
+    icon_x5 = rozliseni_sirka / 1.7555
+    icon_y5 = rozliseni_vyska / 4.2
     
 
     controler_rect = pygame.Rect(icon_x, icon_y, 80, 80)
     calculator_rect = pygame.Rect(icon_x2, icon_y2, 50, 80)
     
+    kalkulacka_zapnuta = False
+    
     krizek_rect = pygame.Rect(icon_x1, icon_y1, rozliseni_sirka / 80, rozliseni_sirka / 80)
+    krizek_rect2 = pygame.Rect(icon_x5, icon_y5, rozliseni_sirka / 80, rozliseni_sirka / 80)
 
     # Hlavní smyčka
     while True:
@@ -140,12 +147,24 @@ def main(global_data):
 
                 if krizek_rect.collidepoint(udalost.pos):
                     okno_her_zapnuto = False
-
+        
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if calculator_rect.collidepoint(udalost.pos):
+                    kalkulacka_zapnuta = True
+                    
+        
+        
+        if kalkulacka_zapnuta == True:
+            screen.blit(kalkulacka, (icon_x4, icon_y4))
+            screen.blit(krizek, (icon_x5, icon_y5))
+        
+        if udalost.type == pygame.MOUSEBUTTONDOWN:
+            if krizek_rect2.collidepoint(udalost.pos):
+                kalkulacka_zapnuta = False
+        
         if input_text == "" and jmeno_pole_visible:
             placeholder = True
         
-        
-        screen.blit(kalkulacka, (icon_x3, icon_y3))
         
         
         if placeholder:
