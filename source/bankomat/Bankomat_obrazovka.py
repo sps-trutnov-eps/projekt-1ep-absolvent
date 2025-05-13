@@ -24,10 +24,10 @@ def main(global_data):
     pygame.display.set_caption("Bankomat")
 
     # Načtení pozadí a obrázku šroubu
-    background = pygame.image.load("okraj_obrazovky.png")
+    background = pygame.image.load("bankomat/okraj_obrazovky.png")
     background = pygame.transform.scale(background, (screen_width, screen_height))
 
-    sroub_img = pygame.image.load("sroub.png")
+    sroub_img = pygame.image.load("bankomat/sroub.png")
     sroub_img = pygame.transform.scale(sroub_img, (50, 50))
 
     # Barvy a fonty
