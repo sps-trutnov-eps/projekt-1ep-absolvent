@@ -30,7 +30,7 @@ clock = pygame.time.Clock()
 
 # Načtení obrázku pozadí
 try:
-    background_image = pygame.image.load("okraj_obrazovky.png").convert_alpha()
+    background_image = pygame.image.load("bankomat/okraj_obrazovky.png").convert_alpha()
     # Změna velikosti obrázku na rozměry okna
     background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 except pygame.error as e:

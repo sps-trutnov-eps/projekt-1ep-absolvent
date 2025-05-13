@@ -12,7 +12,7 @@ import subprocess
 import sys
 
 def spustit_minihru():
-    subprocess.Popen(["python", "Hack_minihra.py"])
+    subprocess.Popen(["python", "bankomat/Hack_minihra.py"])
     pygame.quit()
     sys.exit()
 
