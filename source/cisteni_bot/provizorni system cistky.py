@@ -3,14 +3,16 @@ import random
 import sys
 
 # Inicializace pygame
-pygame.init()
+
 
 # Rozlišení okna
 rozliseni_x = 800
 rozliseni_y = 600
 
+vlajky = pygame.NOFRAME
+
 # Vytvoření okna
-obrazovka = pygame.display.set_mode((rozliseni_x, rozliseni_y))
+obrazovka = pygame.display.set_mode((rozliseni_x, rozliseni_y), vlajky)
 pygame.display.set_caption("Kruhy a kurzor")
 
 # Barvy
@@ -41,21 +43,31 @@ class Kruh:
 # Seznam kruhů
 kruhy = []
 
+pygame.mouse.set_visible(False)
+
 # Časovač pro generování nových kruhů
 spawn_timer = 0
-spawn_delay = 1000  # v milisekundách
+spawn_delay = 100  # v milisekundách
+
+zbirka = 0
+
+casovac = 0
 
 # Hodiny
 hodiny = pygame.time.Clock()
-
 # Hlavní smyčka
-while True:
+
+
+
+hlavni_smyska = True
+while hlavni_smyska:
     dt = hodiny.tick(60)  # limit na 60 FPS
+    casovac += 1
     spawn_timer += dt
 
     for udalost in pygame.event.get():
         if udalost.type == pygame.QUIT or (udalost.type == pygame.KEYDOWN and udalost.key == pygame.K_ESCAPE):
-            sys.exit()
+            hlavni_smyska = False
 
     # Generování nového kruhu (max. 5 na obrazovce)
     if len(kruhy) < 5 and spawn_timer > spawn_delay:
@@ -77,12 +89,19 @@ while True:
         if not k.is_hovered(pozice_mysi):
             novy_seznam.append(k)
 
+    zbirka += len(kruhy) - len(novy_seznam)
+    print(zbirka)
     # Přiřaď nový seznam zpět do původního seznamu
     kruhy = novy_seznam
 
     # Vykreslení kruhů
     for k in kruhy:
         k.draw(obrazovka)
+
+    
+
+    if casovac == 60 * 30:
+        hlavni_smyska = False
 
     # Kruh sledující kurzor
     pygame.draw.circle(obrazovka, barva_kurzoru, pozice_mysi, 20)
