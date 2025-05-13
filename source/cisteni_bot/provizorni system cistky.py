@@ -13,13 +13,16 @@ vlajky = pygame.NOFRAME
 
 # Vytvoření okna
 obrazovka = pygame.display.set_mode((rozliseni_x, rozliseni_y), vlajky)
-pygame.display.set_caption("Kruhy a kurzor")
+
 
 # Barvy
 barva_pozadi = (255, 0, 0)  # červená
 barva_kurzoru = (0, 0, 0)   # černá
 barva_kruhu = (139, 69, 19) # hnědá (saddle brown)
 
+pygame.font.init()
+font = pygame.font.SysFont("Arial", 30)
+barva_textu = (255, 255, 255)  
 # Třída pro kruhy
 class Kruh:
     def __init__(self):
@@ -51,7 +54,7 @@ spawn_delay = 100  # v milisekundách
 
 zbirka = 0
 
-casovac = 0
+casovac = 1800
 
 # Hodiny
 hodiny = pygame.time.Clock()
@@ -62,8 +65,9 @@ hodiny = pygame.time.Clock()
 hlavni_smyska = True
 while hlavni_smyska:
     dt = hodiny.tick(60)  # limit na 60 FPS
-    casovac += 1
+    casovac -= 1
     spawn_timer += dt
+    odpocet = int(casovac/60)
 
     for udalost in pygame.event.get():
         if udalost.type == pygame.QUIT or (udalost.type == pygame.KEYDOWN and udalost.key == pygame.K_ESCAPE):
@@ -90,7 +94,6 @@ while hlavni_smyska:
             novy_seznam.append(k)
 
     zbirka += len(kruhy) - len(novy_seznam)
-    print(zbirka)
     # Přiřaď nový seznam zpět do původního seznamu
     kruhy = novy_seznam
 
@@ -100,8 +103,10 @@ while hlavni_smyska:
 
     
 
-    if casovac == 60 * 30:
+    if casovac == 0:
         hlavni_smyska = False
+    text = font.render(f"Konto: {zbirka}   Čas: {odpocet}s", True, barva_textu)
+    obrazovka.blit(text, (10, 10))   # levý horní roh
 
     # Kruh sledující kurzor
     pygame.draw.circle(obrazovka, barva_kurzoru, pozice_mysi, 20)
