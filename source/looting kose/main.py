@@ -217,6 +217,12 @@ def main(global_data):
                     if bobek_open_timer <= 0:
                         global_data["nasel_bobek"] = True
                         return 0
+                    
+                    if len(global_data['inventory'][0]) >= global_data['inventory_xy'][0] and len(global_data['inventory'][1]) >= global_data['inventory_xy'][1]:
+                        inv_full = font.render("Plný inventář!", True, (255, 0, 0))
+                        inv_full_rect = inv_full.get_rect(center= ((rozliseni_x / 2), (rozliseni_y / 2)))
+
+                        okno.blit(inv_full, inv_full_rect)
 
         pygame.display.flip()
 
