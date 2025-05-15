@@ -7,7 +7,7 @@ class Kruh:
         # Zajištění, že kruh zůstane uvnitř okna i při malém rozlišení
         max_x = max(self.radius, rozliseni_x - self.radius)
         max_y = max(self.radius, rozliseni_y - self.radius)
-        min_x = max(self.radius, 200)
+        min_x = 200
         
         self.x = random.randint(min_x, max_x)
         self.y = random.randint(self.radius, max_y)
