@@ -11,8 +11,7 @@ from master import convertFuncToStr as novyProgram
 import pygame
 import random
 import sys
-from itemy import Item
-from itemy import textury
+from itemy import Item, textury, newItem
 from slot import Slot
 
 pygame.font.init()
@@ -236,8 +235,9 @@ def main(global_data):
                 
                 # Add item if there's space
                 if len(global_data['inventory'][min_col]) < global_data['inventory_xy'][0]:
+                    item = newItem(item, len(global_data['inventory'][min_col]), min_col)
                     global_data['inventory'][min_col].append(item)
-        
+
         global_data['ulozit'] = True
 
 if __name__ == "__main__":

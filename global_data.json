@@ -22,8 +22,20 @@
         "doprava": 100
     },
     "inventory": [
-        [],
-        [],
+        [
+            {
+                "x": 0,
+                "y": 0,
+                "textura": "source//textury//derava_cepice.png"
+            }
+        ],
+        [
+            {
+                "x": 0,
+                "y": 1,
+                "textura": "source//textury//hodinky.png"
+            }
+        ],
         [],
         [],
         [],

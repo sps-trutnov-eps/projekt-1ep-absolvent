@@ -10,9 +10,9 @@ textury = {
     "hodinky": pygame.image.load("source//textury//hodinky.png"),
     "tuzemak": pygame.image.load("source//textury//tuzemak.png"),
     "energetak": pygame.image.load("source//textury//energetak.png"),
-    "derava_cepice": pygame.image.load("source//textury//cepice.png"),
-    "derave_tricko": pygame.image.load("source//textury//tricko.png"),
-    "derave_kalhoty": pygame.image.load("source//textury//kalhoty.png"),
+    "derava_cepice": pygame.image.load("source//textury//derava_cepice.png"),
+    "derave_tricko": pygame.image.load("source//textury//derave_tricko.png"),
+    "derave_kalhoty": pygame.image.load("source//textury//derave_kalhoty.png"),
     "pizza": pygame.image.load("source//textury//pizza.png"),
     "burger": pygame.image.load("source//textury//burger.png")
 }
@@ -26,3 +26,10 @@ class Item:
 
     def vykresli(self, okno):
         okno.blit(self.textura, self.pozice)
+
+def newItem(item_name, x, y):
+    return {
+        "x": x,
+        "y": y,
+        "textura": f"source//textury//{item_name}.png"
+    }
