@@ -178,4 +178,5 @@ def main(funkce = None):
 
 
 if __name__ == "__main__":
-    main()
+    from inventory.main import main as TheProgram
+    main(convertFuncToStr(TheProgram))
