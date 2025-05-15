@@ -1,9 +1,10 @@
 import pygame
+import os
 
 from inventory.item import newItem
 
-from master import focusWindow
-pygame.quit()
+from master import focusWindow, moveWindow
+
 def main(global_data):
 
     slot_size = (50, 50)
@@ -25,11 +26,18 @@ def main(global_data):
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps
     fps_limit = 60 # maximalni pocet fps
 
+    # Inicializace posouvani oken
+    win_x, win_y = 100, 100
+    os.environ['SDL_VIDEO_WINDOW_POS'] = f"{win_x},{win_y}"
+    dragging = False
+    mouse_offset = (0, 0)
 
     programova_smycka = True
     while programova_smycka:
         # kontrola udalosti
         for udalost in pygame.event.get():
+            dragging, mouse_offset = moveWindow(pygame.K_LALT, udalost, dragging, mouse_offset)
+
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
 

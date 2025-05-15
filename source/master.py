@@ -2,6 +2,7 @@ import json
 import pygame
 import multiprocessing
 import ctypes
+from ctypes import wintypes
 import importlib
 
 def unfocusWindow():
@@ -23,7 +24,56 @@ def createWindow(global_data, okno):
     global_data["aktualni_okna"].remove(okno)   # Ulozi informaci ze okno je zavreny
     ######################################################################################################
 
+def setWindowPos(x, y):
+    hwnd = pygame.display.get_wm_info()['window']
+    width, height = pygame.display.get_surface().get_size()
+    ctypes.windll.user32.MoveWindow(hwnd, x, y, width, height, True)
 
+def moveWindow(keybind, event, dragging, mouse_offset):
+    """
+    pro pouziti se musi pridat tadyto pred main loop
+
+    Inicializace posouvani oken
+
+    win_x, win_y = 100, 100;
+    os.environ['SDL_VIDEO_WINDOW_POS'] = f"{win_x},{win_y}";
+    dragging = False;
+    mouse_offset = (0, 0)
+
+    a take se musi pridat do
+    "for event in pygame.event.get():"
+
+        "dragging, mouse_offset = moveWindow(pygame.K_LALT, udalost, dragging, mouse_offset)"
+    """
+
+
+
+    keys = pygame.key.get_pressed()
+    if keys[keybind]:
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                dragging = True
+                mouse_offset = pygame.mouse.get_pos()
+
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                dragging = False
+
+        elif event.type == pygame.MOUSEMOTION and dragging:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            dx = mouse_x - mouse_offset[0]
+            dy = mouse_y - mouse_offset[1]
+
+            # Get current position using ctypes
+            hwnd = pygame.display.get_wm_info()['window']
+            rect = wintypes.RECT()
+            ctypes.windll.user32.GetWindowRect(hwnd, ctypes.byref(rect))
+            new_x = rect.left + dx
+            new_y = rect.top + dy
+            setWindowPos(new_x, new_y)
+
+    return dragging, mouse_offset
 
 
 
@@ -178,5 +228,5 @@ def main(funkce = None):
 
 
 if __name__ == "__main__":
-    from inventory.main import main as TheProgram
+    from mesta.mapa.main import main as TheProgram
     main(convertFuncToStr(TheProgram))

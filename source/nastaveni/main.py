@@ -1,7 +1,8 @@
 import pygame
+import os
 from nastaveni.button import Button
 
-from master import focusWindow
+from master import focusWindow, moveWindow
 
 
 def numNaNastaveni(i):
@@ -49,8 +50,10 @@ def novyButtony(global_data, velikost_okna, rozmery_buttonu, texty_buttonu: list
 
 def main(global_data):
 
+    vlajky = pygame.NOFRAME
+
     velikost_okna = (800, 800) # velikost okna (x, y)
-    okno = pygame.display.set_mode(velikost_okna) # vytvori okno
+    okno = pygame.display.set_mode(velikost_okna, vlajky) # vytvori okno
 
     pygame.display.set_caption("Nastavení") # nastavy nazev okna
 
@@ -76,10 +79,18 @@ def main(global_data):
 
     exit_button = Button(velikost_okna, velikost_okna[0] // 2 - int(rozmery_buttonu[0] * 0.75), velikost_okna[1] - rozmery_buttonu[1] * 3, rozmery_buttonu[0] * 1.5, rozmery_buttonu[1] * 1.5, "Ukoncit Hru")
 
+    # Inicializace posouvani oken
+    win_x, win_y = 100, 100
+    os.environ['SDL_VIDEO_WINDOW_POS'] = f"{win_x},{win_y}"
+    dragging = False
+    mouse_offset = (0, 0)
+
     programova_smycka = True
     while programova_smycka:
         # kontrola udalosti
         for udalost in pygame.event.get():
+            dragging, mouse_offset = moveWindow(pygame.K_LALT, udalost, dragging, mouse_offset)
+
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
 
