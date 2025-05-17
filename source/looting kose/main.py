@@ -130,6 +130,7 @@ def main(global_data):
 
     # Flag to track if player found a bobek
     bobek_found = False
+    inv_full = True
 
     main_loop = True
     while main_loop:
@@ -186,6 +187,7 @@ def main(global_data):
                     
                     # Only add item if we're opening the slot and it's not a bobek
                     if open_slots[i] and itemy_v_kosi[i].nazev != 'bobek':
+
                         # Find the column with the fewest items
                         column_with_space = 0
                         min_items = len(temp_inventory[0])
@@ -205,11 +207,10 @@ def main(global_data):
                 itemy_v_kosi[i].vykresli(okno)
 
                 if itemy_v_kosi[i].nazev == "bobek":
-                    # Show message that player found a bobek
                     bobek_found_text = font.render("Našel jsi bobek a přišel jsi o své věci!", True, (255, 0, 0))
-                    text_width = bobek_found_text.get_width()
-                    text_x = (rozliseni_x - text_width) / 2
-                    okno.blit(bobek_found_text, (text_x, (rozliseni_y / 2)))
+                    bobek_found_text_rect = bobek_found_text.get_rect(center= ((rozliseni_x / 2), (rozliseni_y / 2)))
+
+                    okno.blit(bobek_found_text, bobek_found_text_rect)
 
                     if bobek_open_timer > 0:
                         bobek_open_timer -= 1
@@ -218,19 +219,31 @@ def main(global_data):
                         global_data["nasel_bobek"] = True
                         return 0
                     
-                    if len(global_data['inventory'][0]) >= global_data['inventory_xy'][0] and len(global_data['inventory'][1]) >= global_data['inventory_xy'][1]:
-                        inv_full = font.render("Plný inventář!", True, (255, 0, 0))
-                        inv_full_rect = inv_full.get_rect(center= ((rozliseni_x / 2), (rozliseni_y / 2)))
 
-                        okno.blit(inv_full, inv_full_rect)
+        for row in global_data['inventory']:
+            if len(row) != global_data['inventory_xy'][0]:
+                inv_full = False
+
+        if inv_full:
+            bobek_open_timer -= 1
+
+            inv_full_text = font.render("Plný inventář!", True, (255, 0, 0))
+            inv_full_rect = inv_full_text.get_rect(center= ((rozliseni_x / 2), (rozliseni_y / 2)))
+
+            okno.blit(inv_full_text, inv_full_rect)
+
+        if bobek_open_timer <= 0:
+            main_loop = False
 
         pygame.display.flip()
 
     # Only save items to inventory if no bobek was found
     if not bobek_found:
+
         # Transfer items from temp inventory to global inventory
         for col_index in range(len(temp_inventory)):
             for item in temp_inventory[col_index]:
+                
                 # Find column with fewest items in global inventory
                 min_col = 0
                 min_items = len(global_data['inventory'][0])
