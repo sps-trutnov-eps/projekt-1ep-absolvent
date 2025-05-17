@@ -27,6 +27,9 @@ def numNaNastaveni(i):
 
     elif i == 6:
         return 'doprava'
+    
+    elif i == 7:
+        return 'pohyb_oken'
 
 
 def novyButtony(global_data, velikost_okna, rozmery_buttonu, texty_buttonu: list):
@@ -34,9 +37,9 @@ def novyButtony(global_data, velikost_okna, rozmery_buttonu, texty_buttonu: list
 
     texty = []
 
-    for i in range(7):
+    for i in range(8):
         texty.append([pygame.key.name(global_data['nastaveni'][numNaNastaveni(i)]) if texty_buttonu[i] == None else texty_buttonu[i]][0])
-        buttony.append(Button(velikost_okna, velikost_okna[0] // 2 + velikost_okna[0] // 8 + rozmery_buttonu[0] // 2, (i + 1) * velikost_okna[1] // 8 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = texty[i]))
+        buttony.append(Button(velikost_okna, velikost_okna[0] // 2 + velikost_okna[0] // 8 + rozmery_buttonu[0] // 2, (i + 1) * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = texty[i]))
 
         #pygame.key.name(global_data['nastaveni']['inventory']) if texty[0] == None else texty[0]
         #pygame.key.name(global_data['nastaveni']['interakce']) if texty[1] == None else texty[1]
@@ -65,13 +68,14 @@ def main(global_data):
 
     nadpisy = []
 
-    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 1 * velikost_okna[1] // 8 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Inventář', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
-    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 2 * velikost_okna[1] // 8 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Interakce', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
-    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 3 * velikost_okna[1] // 8 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Exit', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
-    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 4 * velikost_okna[1] // 8 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Nahoru', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
-    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 5 * velikost_okna[1] // 8 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Dolu', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
-    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 6 * velikost_okna[1] // 8 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Doleva', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
-    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 7 * velikost_okna[1] // 8 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Doprava', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
+    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 1 * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Inventář', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
+    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 2 * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Interakce', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
+    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 3 * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Exit', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
+    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 4 * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Nahoru', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
+    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 5 * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Dolu', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
+    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 6 * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Doleva', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
+    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 7 * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Doprava', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
+    nadpisy.append(Button(velikost_okna, velikost_okna[0] // 8, 8 * velikost_okna[1] // 9 - rozmery_buttonu[1], rozmery_buttonu[0], rozmery_buttonu[1], text = 'Pohyb Oken', barva = (0, 0, 0), barva_textu = (255, 255, 255)))
 
     buttony_text = [None for _ in range(len(nadpisy))]
     buttony = novyButtony(global_data, velikost_okna, rozmery_buttonu, buttony_text)
@@ -92,7 +96,7 @@ def main(global_data):
     while programova_smycka:
         # kontrola udalosti
         for udalost in pygame.event.get():
-            dragging, mouse_offset = moveWindow(pygame.K_LALT, udalost, dragging, mouse_offset)
+            dragging, mouse_offset = moveWindow(global_data['nastaveni']['pohyb_oken'], udalost, dragging, mouse_offset)
 
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False

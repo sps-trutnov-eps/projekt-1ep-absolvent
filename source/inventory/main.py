@@ -1,8 +1,6 @@
 import pygame
 import os
 
-from inventory.item import newItem
-
 from master import focusWindow, moveWindow
 
 def main(global_data):
@@ -38,7 +36,7 @@ def main(global_data):
     while programova_smycka:
         # kontrola udalosti
         for udalost in pygame.event.get():
-            dragging, mouse_offset = moveWindow(pygame.K_LALT, udalost, dragging, mouse_offset)
+            dragging, mouse_offset = moveWindow(global_data['nastaveni']['pohyb_oken'], udalost, dragging, mouse_offset)
 
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False

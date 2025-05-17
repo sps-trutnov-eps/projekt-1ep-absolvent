@@ -17,7 +17,8 @@
         "nahoru": 119,
         "dolu": 115,
         "doleva": 97,
-        "doprava": 100
+        "doprava": 100,
+        "pohyb_oken": 1073742050
     },
     "inventory": [],
     "inventory_xy": [6, 3]
