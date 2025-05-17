@@ -4,8 +4,6 @@
     "konec": false,
     "reset": false,
     "ulozit": false,
-    "focus_nastaveni": false,
-    "focus_inventory": false,
     "penize": 0,
     "energie": 0,
     "hrac": {

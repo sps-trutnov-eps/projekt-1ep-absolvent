@@ -1,5 +1,6 @@
 import pygame
 import os
+
 from nastaveni.button import Button
 
 from master import focusWindow, moveWindow
@@ -85,6 +86,8 @@ def main(global_data):
     dragging = False
     mouse_offset = (0, 0)
 
+    focusWindow()
+
     programova_smycka = True
     while programova_smycka:
         # kontrola udalosti
@@ -104,10 +107,6 @@ def main(global_data):
                     programova_smycka = False
 
                 selektnuty_tlacitko = -1
-
-        if global_data['focus_nastaveni']:
-            global_data['focus_nastaveni'] = False
-            focusWindow()
 
         if global_data['konec']:
             programova_smycka = False

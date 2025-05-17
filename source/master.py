@@ -5,17 +5,17 @@ import ctypes
 from ctypes import wintypes
 import importlib
 
-def unfocusWindow():
-    ctypes.windll.user32.AllowSetForegroundWindow(-1)
-
+# pip install pywin32
+import win32gui
+import win32con
 
 def focusWindow():
+    # Get the HWND (Window Handle) of the most recent Pygame window
     hwnd = pygame.display.get_wm_info()['window']
-    ctypes.windll.user32.ShowWindow(hwnd, 5)
-    ctypes.windll.user32.BringWindowToTop(hwnd)
-    ctypes.windll.user32.SetForegroundWindow(hwnd)
-    ctypes.windll.user32.SetFocus(hwnd)
-
+    
+    # Apply "always on top" flag using HWND
+    win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+    print(f"[+] Window with HWND {hwnd} is now on top.")
 
 def createWindow(global_data, okno):
     ######################################################################################################
@@ -165,8 +165,6 @@ def reset(global_data):
         "konec": False,
         "reset": False,
         "ulozit": False,
-        "focus_nastaveni": False,
-        "focus_inventory": False,
         "penize": 0,
         "energie": 0,
         "hrac": {
@@ -201,8 +199,10 @@ def main(funkce = None):
         global_data['otevrena_okna'] = cloneManagerList(global_data['aktualni_okna'], manager)
         global_data['aktualni_okna'] = manager.list()
 
+
         processes = []
         while True:
+
             if global_data['reset']:
                 reset(global_data)
 
@@ -210,10 +210,16 @@ def main(funkce = None):
                 ulozit(global_data)
 
             if global_data['otevrena_okna'] != []:
-                for okno in global_data['otevrena_okna']:
+
+                nova_okna = list(set(list(global_data["otevrena_okna"])))
+                aktualni_okna = list(set(list(global_data["aktualni_okna"])))
+
+                nova_okna = [item for item in nova_okna if item not in aktualni_okna]
+
+                for okno in nova_okna:
+                    global_data['aktualni_okna'].append(okno)
                     process = multiprocessing.Process(target=createWindow, args=(global_data, okno,))
                     processes.append(process)
-                    global_data['aktualni_okna'].append(okno)
                     process.start()
 
                 global_data['otevrena_okna'] = manager.list()

@@ -32,6 +32,8 @@ def main(global_data):
     dragging = False
     mouse_offset = (0, 0)
 
+    focusWindow()
+
     programova_smycka = True
     while programova_smycka:
         # kontrola udalosti
@@ -40,10 +42,6 @@ def main(global_data):
 
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
-
-        if global_data['focus_inventory']:
-            global_data['focus_inventory'] = False
-            focusWindow()
 
         klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 

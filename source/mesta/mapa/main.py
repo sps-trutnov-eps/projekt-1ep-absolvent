@@ -7,7 +7,6 @@ from mesta.mapa.mista_inicializace import *
 import nastaveni.main as Nastaveni
 import inventory.main as Inventory
 
-from master import unfocusWindow
 from master import convertFuncToStr as novyProgram
 
 def ulozitData(global_data, not_global_data):
@@ -58,24 +57,15 @@ def main(global_data):
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
 
-        if "settings" in global_data['aktualni_okna']:
+        if novyProgram(Nastaveni.main) in global_data['aktualni_okna']:
             nastaveni = dict(global_data['nastaveni'])
-
-            if pygame.display.get_active():
-                unfocusWindow()
-                global_data['focus_nastaveni'] = True
 
         else:
             # otevre nastaveni
             if klice[nastaveni['exit']]:
                 global_data['otevrena_okna'].append(novyProgram(Nastaveni.main))
 
-        if 'inventory' in global_data['aktualni_okna']:
-            if pygame.display.get_active():
-                unfocusWindow()
-                global_data['focus_inventory'] = True
-
-        else:
+        if not ('inventory' in global_data['aktualni_okna']):
             if klice[nastaveni['inventory']]:
                 global_data['otevrena_okna'].append(novyProgram(Inventory.main))
 
