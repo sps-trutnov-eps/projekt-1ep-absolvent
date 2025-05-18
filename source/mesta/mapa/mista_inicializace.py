@@ -11,18 +11,44 @@ def mesto1Init(okno, velikost_okna):
 
     interakcni_zony.append(InterakcniZona(500, 500, 500, 500, print, [2, 2]))
 
-    textura = pygame.image.load("textury\\budovy\\temp.png").convert()
+    textury = ["Frank_hnedy.png",
+               "Martin_bily.png",
+               "Martin_hnedy.png",
+               "Martin_sedy.png",
+               "Martin_zluty.png" ]
+    
+    textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert() for textura in textury]
     # .convert_alpha() kdyz pouziva alpha
-
+    print(textury)
+    textury_rect = [item.get_rect() for item in textury]
     budovy = []
+    #prvni horní řada domů z leva (0,0) - prvni dum v pořadí
+    budovy.append(Budova(okno, 0, 0, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    budovy.append(Budova(okno, textury_rect[1].width, 0, textury_rect[2].width, textury_rect[2].height, textury[2]))
+    budovy.append(Budova(okno, 2*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
+    budovy.append(Budova(okno, 3*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
+    #druha horní řada domů po mezeře (1200, 0) - prvni dum v pořadí
+    budovy.append(Budova(okno, 6*textury_rect[1].width, 0, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    budovy.append(Budova(okno, 7*textury_rect[1].width, 0, textury_rect[2].width, textury_rect[2].height, textury[2]))
+    budovy.append(Budova(okno, 8*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
+    budovy.append(Budova(okno, 9*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
+    #první dolní řada domů z leva (200, 1360) - prvni dum v pořadí
+    budovy.append(Budova(okno, 200, 1360, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    budovy.append(Budova(okno, 200 + textury_rect[1].width, 1360, textury_rect[2].width, textury_rect[2].height, textury[2]))   
+    budovy.append(Budova(okno, 200 + 2*textury_rect[1].width, 1360, textury_rect[3].width, textury_rect[3].height, textury[3]))
+    #druhá dolní řada domů z leva (200, 1360) - prvni dum v pořadí
+    budovy.append(Budova(okno, 200 + 5*textury_rect[1].width, 1360, textury_rect[1].width, textury_rect[1].height, textury[4]))
+    budovy.append(Budova(okno, 200 + 6*textury_rect[1].width, 1360, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    budovy.append(Budova(okno, 200 + 7*textury_rect[1].width, 1360, textury_rect[1].width, textury_rect[1].height, textury[2]))
+    #první sloupec domů vpravo (0, 320) - prvni dum v pořadí
+    budovy.append(Budova(okno, 0, textury_rect[1].height, textury_rect[1].width, textury_rect[1].height, textury[2]))
+    budovy.append(Budova(okno, 0, 400 + 2*textury_rect[1].height, textury_rect[1].width, textury_rect[1].height, textury[3]))
+    budovy.append(Budova(okno, 0, 400 + 3*textury_rect[1].height, textury_rect[1].width, textury_rect[1].height, textury[4]))
+    #druhy sloupec domů vlevo (1800, 320) - prvni dum v pořadí
+    budovy.append(Budova(okno, 1800, textury_rect[1].height, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    budovy.append(Budova(okno, 1800, 400 + 2*textury_rect[1].height, textury_rect[1].width, textury_rect[1].height, textury[2]))
+    budovy.append(Budova(okno, 1800, 400 + 3*textury_rect[1].height, textury_rect[1].width, textury_rect[1].height, textury[3]))
+    
 
-    budovy.append(Budova(okno, velikost_okna[0] * 2, velikost_okna[1], 3 * velikost_okna[0] / 7, velikost_okna[1] / 5, textura))
-
-    budovy.append(Budova(okno, velikost_okna[0] / 96, velikost_okna[1] / 54, 3 * velikost_okna[0] / 7, velikost_okna[1] / 5, textura))
-    budovy.append(Budova(okno, velikost_okna[0] - velikost_okna[0] / 96 - 3 * velikost_okna[0] / 7, velikost_okna[1] / 54, 3 * velikost_okna[0] / 7, velikost_okna[1] / 5, textura))
-    budovy.append(Budova(okno, velikost_okna[0] / 96, 2 * velikost_okna[1] / 54 + velikost_okna[1] / 5, velikost_okna[0] / 7, velikost_okna[1] / 5, textura))
-    budovy.append(Budova(okno, velikost_okna[0] - velikost_okna[0] / 96 - velikost_okna[0] / 7, 2 * velikost_okna[1] / 54 + velikost_okna[1] / 5, velikost_okna[0] / 7, velikost_okna[1] / 5, textura))
-    budovy.append(Budova(okno, velikost_okna[0] - velikost_okna[0] / 96 - velikost_okna[0] / 4.5, velikost_okna[1] - velikost_okna[1] / 54 - velikost_okna[1] / 5, velikost_okna[0] / 4.5, velikost_okna[1] / 5, textura))
-    budovy.append(Budova(okno, velikost_okna[0] / 96, velikost_okna[1] - velikost_okna[1] / 5, 5 * velikost_okna[0] / 7, velikost_okna[1] / 5 - velikost_okna[1] / 54, textura))
-
+    #budovy = [Budova(okno, sum([textury_rect[j].width for j in range(i)]), 0, textury_rect[i].width, textury_rect[i].height, textury[i]) for i in range(len(textury))]
     return budovy, interakcni_zony, velikost_mapy, [0, 0]
