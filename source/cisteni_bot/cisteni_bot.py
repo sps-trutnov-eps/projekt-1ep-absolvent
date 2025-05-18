@@ -85,6 +85,7 @@ def main(global_data):
 
         zbirka += (len(kruhy) - len(novy_seznam)) / 10
         zbirka = round(zbirka, 1)
+        
         # Přiřaď nový seznam zpět do původního seznamu
         kruhy = novy_seznam
 
@@ -97,6 +98,7 @@ def main(global_data):
         if casovac == 0:
             hlavni_smyska = False
             zbirka = round(zbirka)
+            print(zbirka)
             global_data['penize'] += zbirka
 
         text = font.render(f"Konto: {zbirka}   Čas: {odpocet}s", True, barva_textu)
