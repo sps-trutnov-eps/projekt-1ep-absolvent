@@ -10,12 +10,8 @@ import win32gui
 import win32con
 
 def focusWindow():
-    # Get the HWND (Window Handle) of the most recent Pygame window
     hwnd = pygame.display.get_wm_info()['window']
-
-    # Apply "always on top" flag using HWND
     win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
-    print(f"[+] Window with HWND {hwnd} is now on top.")
 
 def createWindow(global_data, okno):
     ######################################################################################################
@@ -43,7 +39,7 @@ def moveWindow(keybind, event, dragging, mouse_offset):
     a take se musi pridat do
     "for event in pygame.event.get():"
 
-        "dragging, mouse_offset = moveWindow(global_data['nastaveni']['pohyb_oken'], udalost, dragging, mouse_offset)"
+        "dragging, mouse_offset = moveWindow(global_data['nastaveni']['pohyb_oken'], event, dragging, mouse_offset)"
     """
 
 
@@ -166,7 +162,8 @@ def reset(global_data):
         "reset": False,
         "ulozit": False,
         "penize": 0,
-        "energie": 0,
+        "energie": 100,
+        "potrava": 100,
         "hrac": {
             "x": 960,
             "y": 540

@@ -5,7 +5,8 @@
     "reset": false,
     "ulozit": false,
     "penize": 0,
-    "energie": 0,
+    "energie": 100,
+    "potrava": 100,
     "hrac": {
         "x": 960,
         "y": 540

@@ -45,6 +45,11 @@ def main(global_data):
 
     ulozit_hru = False
 
+    font = pygame.font.SysFont('Arial', 16)
+
+    energie = global_data['energie']
+    potrava = global_data['potrava']
+
     # main smycka
     programova_smycka = True
     while programova_smycka:
@@ -84,10 +89,15 @@ def main(global_data):
             global_data['reset'] = True                         ####################################### SMAZAT
 
 
-        veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset, nastaveni)
+        energie, potrava = veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset, nastaveni, energie, potrava)
         if ulozit_hru:
             global_data['hrac']['x'] = hrac.x                   # PREMISTIT NA MISTO UKLADANI
             global_data['hrac']['y'] = hrac.y                   # PREMISTIT NA MISTO UKLADANI
+
+        ##### TESTING
+        okno.blit(font.render(f"{fps}", True, (255, 255, 255)), (10, 10))
+        okno.blit(font.render(f"{energie} - energie", True, (255, 255, 255)), (10, 60))
+        okno.blit(font.render(f"{potrava} - potrava", True, (255, 255, 255)), (10, 110))
 
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
 

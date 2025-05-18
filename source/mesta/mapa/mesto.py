@@ -9,7 +9,7 @@ DOLU    = 1
 DOLEVA  = 2
 DOPRAVA = 3
 
-def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, nastaveni: dict):
+def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, nastaveni: dict, energie, potrava):
 
     klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 
@@ -60,6 +60,8 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
     for budova in budovy:
         budova.hitbox(hrac)
 
+    energie -= (abs(hrac.rychlost_x) + abs(hrac.rychlost_y)) / 10000
+
     hrac.x += hrac.rychlost_x
     hrac.y += hrac.rychlost_y
 
@@ -89,3 +91,5 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
         hrac.y = velikost_mapy.bottom - 2 * hrac.vyska
 
     hrac.nakresli(okno, offset) # nakresli hrace
+
+    return energie, potrava

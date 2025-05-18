@@ -7,10 +7,11 @@ sys.path.append(str(parent_dir))
 from master import main as masterFunc
 from master import convertFuncToStr as novyProgram
 
-
 import pygame
 import os
 from master import moveWindow, focusWindow
+
+from slot import Slot
 
 def main(global_data):
 
@@ -19,7 +20,7 @@ def main(global_data):
     velikost_okna = (500, 500) # velikost okna (x, y)
     okno = pygame.display.set_mode(velikost_okna, vlajky) # vytvori okno
 
-    pygame.display.set_caption("Minihra") # nastavy nazev okna
+    pygame.display.set_caption("shop") # nastavy nazev okna
 
     win_x, win_y = 100, 100
     os.environ['SDL_VIDEO_WINDOW_POS'] = f"{win_x},{win_y}"
@@ -28,6 +29,10 @@ def main(global_data):
 
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps
     fps_limit = 60 # maximalni pocet fps
+
+    slots = []
+
+    slots.append(Slot)
 
     focusWindow()
 
@@ -48,7 +53,8 @@ def main(global_data):
         okno.fill((0, 0, 0)) # vybarvy okno aby se resetovalo
 
 
-
+        for slot in slots:
+            slot.nakresli(okno)
 
 
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
