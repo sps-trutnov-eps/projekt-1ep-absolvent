@@ -178,4 +178,5 @@ def main(funkce = None):
 
 
 if __name__ == "__main__":
-    main()
+    from bankomat.Bankomat_obrazovka import main as Game
+    main(convertFuncToStr(Game))

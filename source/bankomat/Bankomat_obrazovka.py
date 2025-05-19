@@ -8,13 +8,10 @@ from master import main as masterFunc
 from master import convertFuncToStr as novyProgram
 
 import pygame
-import subprocess
-import sys
 
-def spustit_minihru():
-    subprocess.Popen(["python", "bankomat/Hack_minihra.py"])
-    pygame.quit()
-    sys.exit()
+def spustit_minihru(global_data):
+    from bankomat.Hack_minihra import main as Hack_minihra
+    Hack_minihra(global_data)
 
 def main(global_data):
     # Inicializace Pygame
@@ -110,6 +107,7 @@ def main(global_data):
                 # Zkontroluj, jestli už jsou všechny šrouby kliknuté
                 if all(clicked_srouby.values()):
                     spustit_minihru(global_data)
+                    running = False
 
         pygame.display.flip()
 
