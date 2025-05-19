@@ -7,6 +7,12 @@ sys.path.append(str(parent_dir))
 from master import main as masterFunc
 from master import convertFuncToStr as novyProgram
 
+from hry.Space_Battle_main.main import main as Space_Battle
+
+
+
+
+
 # sem piste importy
 import pygame
 import sys
@@ -19,7 +25,11 @@ def main(global_data):
     # pro otevreni okna "global_data['otevrena_okna'].append(novyProgram(funkce))"
     # sem piste svuj program
     pygame.init()
-
+            
+            
+            
+            
+    
     # Získání rozlišení obrazovky
     screen_info = pygame.display.Info()
     rozliseni_sirka, rozliseni_vyska = screen_info.current_w, screen_info.current_h
@@ -60,7 +70,16 @@ def main(global_data):
     
     krizek = pygame.image.load('pixilart-drawing.png').convert()
     krizek = pygame.transform.scale(krizek, (rozliseni_sirka / 80, rozliseni_sirka / 80))
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     # Písmo
     pygame.font.init()
     font = pygame.font.Font(None, rozliseni_sirka // 70)
@@ -97,6 +116,10 @@ def main(global_data):
 
     controler_rect = pygame.Rect(icon_x, icon_y, 80, 80)
     calculator_rect = pygame.Rect(icon_x2, icon_y2, 50, 80)
+    
+
+    rect1 = pygame.Rect(rozliseni_sirka / 4, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    
     
     kalkulacka_zapnuta = False
     
@@ -194,8 +217,16 @@ def main(global_data):
             pygame.draw.rect(screen, (127, 127, 127), (rozliseni_sirka / 4.2, rozliseni_vyska / 6, rozliseni_sirka / 1.9, rozliseni_vyska / 2))
             screen.blit(krizek, (icon_x1, icon_y1))
             
+            
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
             
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect1.collidepoint(udalost.pos):
+                    global_data['otevrena_okna'].append(novyProgram(Space_Battle))
+                    pygame.quit()
+                    sys.exit()
+                    
+                    
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
             
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
