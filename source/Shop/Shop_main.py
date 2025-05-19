@@ -7,13 +7,13 @@ def main(global_data):
     pygame.init()
     main_buttony = {
         "option_1":button_planes,
-        "pozice_option_1":pozice_planes,
+        "pozice_option_1":pozice_planes,#nazev_obrazku.get_rect(topleft=(pozice_x, pozice_y))
         
         "option_2": button_rockets,
         "pozice_option_2":pozice_rockets,
         
-        "upgrady":button_upgrades,
-        "pozice_upgrady":pozice_upgrades,
+        "option_3": button_rockets,
+        "pozice_option_3":pozice_rockets,
         
         "preview1/2":myg,
         "preview1/1":fockerfox,
