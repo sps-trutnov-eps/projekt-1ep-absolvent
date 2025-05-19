@@ -1,12 +1,13 @@
+
 import pygame
 class Shop:
     def __init__(self,main_buttony,image):
         
         self.main_buttony = main_buttony
         self.image=image
-        self.option1 = self.main_buttony["f_button"]
-        self.option2 = self.main_buttony["myg_button"]
-        self.option3 = self.main_buttony["fockerfox_button"]
+        self.option1 = self.main_buttony["option1/3button"]
+        self.option2 = self.main_buttony["option1/2button"]
+        self.option3 = self.main_buttony["option1/1button"]
         self.chosen_letadlo=0
         self.chosen_raketa=0
         self.letadlo = 0
@@ -15,8 +16,8 @@ class Shop:
         self.shop = True
         self.lobby = False
         self.rakety = 0
-        self.obrazky_letadel =[self.main_buttony["fockerfox"],self.main_buttony["myg25"],self.main_buttony["F23"]]
-        self.obrazky_raket = [self.main_buttony["raketa1"],self.main_buttony["raketa2"],self.main_buttony["raketa3"]]
+        self.obrazky_letadel =[self.main_buttony["preview1/1"],self.main_buttony["preview1/2"],self.main_buttony["preview1/3"]]
+        self.obrazky_raket = [self.main_buttony["preview2/1"],self.main_buttony["preview2/2"],self.main_buttony["preview2/3"]]
         self.value_zmenena=False
         self.obratnost = 2.5
         self.presnost=6
@@ -32,8 +33,8 @@ class Shop:
     def draw_shop(self,screen):
         
         screen.blit(self.image,(0,0))
-        screen.blit(self.main_buttony["letadla"],self.main_buttony["pozice_letadla"])
-        screen.blit(self.main_buttony["rakety"],self.main_buttony["pozice_rakety"])
+        screen.blit(self.main_buttony["option_1"],self.main_buttony["pozice_option_1"])
+        screen.blit(self.main_buttony["option_2"],self.main_buttony["pozice_option_2"])
         
         
         
@@ -46,10 +47,10 @@ class Shop:
                      
         if event.type == pygame.MOUSEBUTTONDOWN:
             
-            if self.main_buttony["pozice_letadla"].collidepoint(event.pos):
-                self.option1 = self.main_buttony["f_button"]
-                self.option2 = self.main_buttony["myg_button"]
-                self.option3 = self.main_buttony["fockerfox_button"]
+            if self.main_buttony["pozice_option_1"].collidepoint(event.pos):
+                self.option1 = self.main_buttony["option1/3button"]
+                self.option2 = self.main_buttony["option1/2button"]
+                self.option3 = self.main_buttony["option1/1button"]
                 self.moznost = 1
                 
             if self.moznost == 1:
@@ -94,10 +95,10 @@ class Shop:
                
                
                 
-            if self.main_buttony["pozice_rakety"].collidepoint(event.pos):
-                self.option1 = self.main_buttony["r_b_3"]
-                self.option2 = self.main_buttony["r_b_2"]
-                self.option3 = self.main_buttony["r_b_1"]
+            if self.main_buttony["pozice_option_2"].collidepoint(event.pos):
+                self.option1 = self.main_buttony["option2/3button"]
+                self.option2 = self.main_buttony["option2/2button"]
+                self.option3 = self.main_buttony["option2/1button"]
                 self.moznost = 2
             
             if self.moznost == 2:

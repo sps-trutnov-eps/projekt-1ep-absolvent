@@ -6,40 +6,41 @@ import math
 def main(global_data):
     pygame.init()
     main_buttony = {
-        "letadla":button_planes,
-        "pozice_letadla":pozice_planes,
+        "option_1":button_planes,
+        "pozice_option_1":pozice_planes,
         
-        "rakety": button_rockets,
-        "pozice_rakety":pozice_rockets,
+        "option_2": button_rockets,
+        "pozice_option_2":pozice_rockets,
         
         "upgrady":button_upgrades,
         "pozice_upgrady":pozice_upgrades,
         
-        "myg25":myg,
-        "fockerfox":fockerfox,
-        "F23": f,
+        "preview1/2":myg,
+        "preview1/1":fockerfox,
+        "preview1/3": f,
         
-        "raketa1":raketa_shop1,
-        "raketa2":raketa_shop2,
-        "raketa3":raketa_shop3,
+        "preview2/1":raketa_shop1,
+        "preview2/2":raketa_shop2,
+        "preview2/3":raketa_shop3,
 
-        "raketa11":Raketa1,
-        "raketa22":Raketa2,
-        "raketa33":Raketa3,
+        "list2animace2/1":Raketa1,
+        "list2animace2/2":Raketa2,
+        "list2animace2/3":Raketa3,
         
-        "myg_button":myg_button,
-        "f_button":fbutton,
-        "fockerfox_button":fockerfox_button,
+        "option1/2button":myg_button,
+        "option1/3button":fbutton,
+        "option1/1button":fockerfox_button,
         
-        "r_b_1":button_raketa1,
-        "r_b_2":button_raketa2,
-        "r_b_3":button_raketa3,
+        "option2/1button":button_raketa1,
+        "option2/2button":button_raketa2,
+        "option2/3button":button_raketa3,
 
         
         "pozice_buttonu1":pozice1,
         "pozice_buttonu2":pozice2,
         "pozice_buttonu3":pozice3,
         }
+    
     obrazovka = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("Shop")
     Obchod = Shop(main_buttony,shop_image)
