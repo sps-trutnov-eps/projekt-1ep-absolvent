@@ -11,8 +11,9 @@ import os
 
 from itertools import combinations
 
-from okraj import Okraj
-from item  import *
+from fever_dream.okraj import Okraj
+from fever_dream.item  import *
+from fever_dream.shop.shop import main as shop
 
 def main(global_data):
 
@@ -105,8 +106,9 @@ def main(global_data):
     multiplier = 1
     score_cords = (10, 10)
 
-    combo_sound_path = os.path.join("zvuky", "combo.wav")
-    combo_sound = pygame.mixer.Sound(combo_sound_path)
+    combo_sound = pygame.mixer.Sound("fever_dream/zvuky/combo.wav")
+
+    shop_rect = pygame.Rect(440, 10, 50, 50)
 
     programova_smycka = True
     while programova_smycka:
@@ -118,6 +120,9 @@ def main(global_data):
         for udalost in pygame.event.get():
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
+            
+            if pygame.MOUSEBUTTONDOWN and shop_rect.collidepoint(mouse_pos):
+                global_data['otevrena_okna'].append(novyProgram(shop))
 
             dragging, mouse_offset = moveWindow(global_data['nastaveni']['pohyb_oken'], udalost, dragging, mouse_offset)
 
@@ -257,6 +262,8 @@ def main(global_data):
         itemy = temp_itemy.copy()
 
         okno.blit(font.render(f"Combo: {multiplier}x", True, (255, 255, 255)), (10, 35))
+
+        pygame.draw.rect(okno, 0x00A0A0, shop_rect) # shop button
 
         if konec:
             if score_cords[0] < 250 - score_text.get_width() // 2:

@@ -1,17 +1,8 @@
-import sys
-from pathlib import Path
-
-parent_dir = Path(__file__).resolve().parent.parent
-sys.path.append(str(parent_dir))
-
-from master import main as masterFunc
-from master import convertFuncToStr as novyProgram
-
 import pygame
 import os
 from master import moveWindow, focusWindow
 
-from slot import Slot
+from fever_dream.shop.slot import Slot
 
 def main(global_data):
 
@@ -32,7 +23,7 @@ def main(global_data):
 
     slots = []
 
-    slots.append(Slot)
+    slots.append(Slot(10, 10, 50, 50, None))
 
     focusWindow()
 
@@ -60,6 +51,3 @@ def main(global_data):
         pygame.display.update() # nakresli na monitor vsechny vykreslene obrazky
 
         hodiny.tick(fps_limit) # limituje maximalni pocet fps
-
-if __name__ == "__main__":
-    masterFunc(novyProgram(main))

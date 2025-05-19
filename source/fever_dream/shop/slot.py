@@ -11,5 +11,5 @@ class Slot:
         self.textura = textura
 
     def nakresli(self, okno):
-        pygame.draw.rect(okno, self.barva, (self.x, self.y, self.sirka, self.vyska), 1)
-        okno.blit(self.textura, (self.x, self.y))
+        pygame.draw.rect(okno, 0xA0A0A0, (self.x, self.y, self.sirka, self.vyska), 1)
+        #okno.blit(self.textura, (self.x, self.y))
