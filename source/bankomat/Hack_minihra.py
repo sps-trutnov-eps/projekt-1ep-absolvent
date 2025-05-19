@@ -23,22 +23,6 @@ LETTER_PROBABILITY = 0.2
 # Písmena pro jednotlivé sloupce
 LETTERS = ['P', 'A', 'S', 'S']
 
-# Vytvoření obrazovky
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("ATM Hacking Minigame")
-clock = pygame.time.Clock()
-
-# Načtení obrázku pozadí
-try:
-    background_image = pygame.image.load("bankomat/okraj_obrazovky.png").convert_alpha()
-    # Změna velikosti obrázku na rozměry okna
-    background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
-except pygame.error as e:
-    print(f"Nepodařilo se načíst obrázek pozadí: {e}")
-    background_image = None
-
-font = pygame.font.SysFont('consolas', 28)
-big_font = pygame.font.SysFont('consolas', 40)  # Větší font pro zvýraznění aktivního sloupce
 
 class Symbol:
     def __init__(self, letter, is_special=False):
@@ -84,8 +68,8 @@ class Column:
         if not self.stopped:
             for symbol in self.symbols:
                 symbol.update(dt)
-                
-    def draw(self):
+
+    def draw(self, screen, font):
         # Vykreslení cílové zóny 
         target_y = self.visible_positions[self.target_zone_index]
         zone_color = (80, 80, 80) if self.active else (50, 50, 50)  
@@ -131,7 +115,24 @@ class Column:
                 return True
             return False
 
-def main(global_data):
+def main():
+    # Načtení obrázku pozadí
+    try:
+        background_image = pygame.image.load("bankomat\\okraj_obrazovky.png").convert_alpha()
+        # Změna velikosti obrázku na rozměry okna
+        background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
+    except pygame.error as e:
+        print(f"Nepodařilo se načíst obrázek pozadí: {e}")
+        background_image = None
+
+    font = pygame.font.SysFont('consolas', 28)
+    big_font = pygame.font.SysFont('consolas', 40)  # Větší font pro zvýraznění aktivního sloupce
+
+    # Vytvoření obrazovky
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("ATM Hacking Minigame")
+    clock = pygame.time.Clock()
+
     # Vytvoření sloupců
     columns = []
     column_spacing = WIDTH // (COLUMN_COUNT + 1)
@@ -209,7 +210,7 @@ def main(global_data):
         
         for column in columns:
             column.update(dt)
-            column.draw()
+            column.draw(screen, font)
         
         # Kontrola, zda jsou všechny sloupce zastaveny
         all_stopped = all(column.stopped for column in columns)
@@ -218,7 +219,7 @@ def main(global_data):
         if all_stopped:
             if win_count == COLUMN_COUNT:
                 result_text = font.render("HACK ÚSPĚŠNÝ! Získal jsi 500 peněz.", True, GREEN)
-                global_data['penize'] += 500
+                #global_data['penize'] += 500
 
             else:
                 result_text = font.render(f"HACK SELHAL! Správně: {win_count}/{COLUMN_COUNT}", True, (255, 0, 0))

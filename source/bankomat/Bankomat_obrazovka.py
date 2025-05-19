@@ -109,7 +109,7 @@ def main(global_data):
 
                 # Zkontroluj, jestli už jsou všechny šrouby kliknuté
                 if all(clicked_srouby.values()):
-                    spustit_minihru()
+                    spustit_minihru(global_data)
 
         pygame.display.flip()
 
