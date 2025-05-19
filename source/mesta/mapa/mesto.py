@@ -74,7 +74,7 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
         budova.nakresli(okno, offset) # nakresli budovy
 
     for zona in interakcni_zony:
-        zona.nakresli(okno)
+        zona.nakresli(okno, offset)
         zona.interakce(hrac, interaguje)
 
     # zabrani hraci jit mimo mapu

@@ -41,7 +41,7 @@ def main(global_data):
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps
     fps_limit = 60 # maximalni pocet fps
 
-    budovy, interakcni_zony, velikost_mapy, offset = mesto1Init(okno, velikost_okna)
+    budovy, interakcni_zony, velikost_mapy, offset = mesto1Init(okno, velikost_okna, global_data)
 
     ulozit_hru = False
 
