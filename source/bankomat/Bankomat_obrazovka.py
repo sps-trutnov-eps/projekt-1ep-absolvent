@@ -113,9 +113,6 @@ def main(global_data):
 
         pygame.display.flip()
 
-    pygame.quit()
-    sys.exit()
-
     # pro otevreni okna "global_data['otevrena_okna'].append(novyProgram(funkce))"
 
 if __name__ == "__main__":

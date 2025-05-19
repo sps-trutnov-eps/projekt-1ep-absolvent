@@ -131,7 +131,7 @@ class Column:
                 return True
             return False
 
-def main():
+def main(global_data):
     # Vytvoření sloupců
     columns = []
     column_spacing = WIDTH // (COLUMN_COUNT + 1)
@@ -217,7 +217,8 @@ def main():
         
         if all_stopped:
             if win_count == COLUMN_COUNT:
-                result_text = font.render("HACK ÚSPĚŠNÝ! Získal jsi 500 peněz", True, GREEN)
+                result_text = font.render("HACK ÚSPĚŠNÝ! Získal jsi 500 peněz.", True, GREEN)
+                global_data['penize'] += 500
 
             else:
                 result_text = font.render(f"HACK SELHAL! Správně: {win_count}/{COLUMN_COUNT}", True, (255, 0, 0))
@@ -242,8 +243,7 @@ def main():
         pygame.display.flip()
         clock.tick(FPS)
 
-    pygame.quit()
-    sys.exit()
+    
 
 if __name__ == "__main__":
     main()
