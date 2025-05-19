@@ -217,7 +217,8 @@ def main():
         
         if all_stopped:
             if win_count == COLUMN_COUNT:
-                result_text = font.render("HACK ÚSPĚŠNÝ!", True, GREEN)
+                result_text = font.render("HACK ÚSPĚŠNÝ! Získal jsi 500 peněz", True, GREEN)
+
             else:
                 result_text = font.render(f"HACK SELHAL! Správně: {win_count}/{COLUMN_COUNT}", True, (255, 0, 0))
             screen.blit(result_text, (WIDTH//2 - result_text.get_width()//2, HEIGHT - 100))
