@@ -46,86 +46,28 @@ class Shop:
                 self.option2 = self.main_buttony["option1/2button"]
                 self.option3 = self.main_buttony["option1/1button"]
                 self.moznost = 1
-# co se děje v option1 a jaké vlastnosti dostane každá možnost___________________________________________________________________________________________________________                
-            if self.moznost == 1:
-                
-                if self.main_buttony["pozice_buttonu1"].collidepoint(event.pos):
-                    
-                    if  self.letadlo_owned >= 2:
-                        
-                        self.chosen_letadlo = 2
-                        #zde napište co chcete aby se změnilo
-                    elif self.peníze >= 2000:#cena
-                        self.peníze-=2000
-                        self.chosen_letadlo = 2
-#_________________________________________________________________________________________________________________________________________________________________________                    
-                elif self.main_buttony["pozice_buttonu2"].collidepoint(event.pos)  :
-                    
-                    if self.letadlo_owned >= 1:
-                        
-                        self.chosen_letadlo = 1
-                        #zde napište co chcete aby se změnilo
-                    elif self.peníze >= 1000:
-                        self.peníze-=1000
-                        self.chosen_letadlo = 1
-#_________________________________________________________________________________________________________________________________________________________________________                        
-                elif  self.main_buttony["pozice_buttonu3"].collidepoint(event.pos) :
-                    
-                    self.chosen_letadlo = 0
-                    #zde napište co chcete aby se změnilo
-            if self.letadlo_owned < self.chosen_letadlo: # funkce pro vlastnění letadlo čím nižší číslo tím více toho vlastním
-                self.letadlo_owned = self.chosen_letadlo
-               
-               
-#_________________________________________________________________________________________________________________________________________________________________________                    
-            if self.main_buttony["pozice_option_2"].collidepoint(event.pos):
-                self.option1 = self.main_buttony["option2/3button"]
-                self.option2 = self.main_buttony["option2/2button"]
-                self.option3 = self.main_buttony["option2/1button"]
-                self.moznost = 2
-#_________________________________________________________________________________________________________________________________________________________________________                
-            if self.moznost == 2:
-                
-                if self.main_buttony["pozice_buttonu1"].collidepoint(event.pos) :                
-                    if self.raketa_owned >= 2:
-                        self.chosen_raketa = 2
-                        self.presnost=8
-                        
-                    elif self.peníze >= 2000:
-                        self.peníze-=2000
-                        self.chosen_raketa = 2
-                    
-                    
-                    
-#_________________________________________________________________________________________________________________________________________________________________________                        
-                elif self.main_buttony["pozice_buttonu2"].collidepoint(event.pos):
-                    
-                    if self.raketa_owned >= 1:
-                        self.chosen_raketa = 1
-                        self.presnost=6
-                        
-                    elif self.peníze >= 1000:
-                        self.peníze-=1000
-                        self.chosen_raketa = 1
-                    
-#_________________________________________________________________________________________________________________________________________________________________________                        
-                elif  self.main_buttony["pozice_buttonu3"].collidepoint(event.pos) :
-                    self.chosen_raketa = 0
-                    self.presnost=5
-#_________________________________________________________________________________________________________________________________________________________________________                        
-                if self.raketa_owned < self.chosen_raketa: # funkce pro vlastnění letadlo čím nižší číslo tím více toho vlastním
-                    self.raketa_owned = self.chosen_raketa
-                    print(self.raketa_owned)
+        # Zpracování výběru možností
+        if self.moznost == 1:
+            ceny = [0, 1000, 2000]  # cena za letadlo 0, 1, 2
+            for i in range(3):
+                if self.main_buttony[f"pozice_buttonu{i+1}"].collidepoint(event.pos):
+                    if self.letadlo_owned >= 2 - i:
+                        self.chosen_letadlo = 2 - i
+                        # zde napište co chcete aby se změnilo
+                    elif self.peníze >= ceny[2 - i]:
+                        self.peníze -= ceny[2 - i]
+                        self.chosen_letadlo = 2 - i
+                    break  # jakmile jeden button odpovídá, dál nehledáme
+
+        # Kontrola vlastnictví letadla (čím nižší číslo, tím více toho vlastním)
+        if self.letadlo_owned < self.chosen_letadlo:
+            self.letadlo_owned = self.chosen_letadlo
+        #_________________________________________________________________________________________________________________________________________________________________________                
+        
                 
                     
                 
-               
-            
-         
-                
-        screen.blit(self.option1,self.main_buttony["pozice_buttonu1"])
-        screen.blit(self.option2,self.main_buttony["pozice_buttonu2"])
-        screen.blit(self.option3,self.main_buttony["pozice_buttonu3"])
+
                 
     def animace(self,fockerfox,f,myg,wanted):
         
