@@ -16,6 +16,7 @@ font_velky = pygame.font.SysFont("Arial", 32)
 pocet_minci = random.randint(0, 8)
 mince = spawn(pocet_minci) 
 kasna=pygame.image.load("kasna.png").convert_alpha()
+zem=pygame.image.load("zem.png").convert_alpha()
 
 while running:
     for event in pygame.event.get():
@@ -33,11 +34,11 @@ while running:
                     break  
     
 
-    screen.fill("grey")
+    screen.blit(zem,(0,0))
     pygame.draw.ellipse(screen, "blue", (-1, 2.5, 800, 500))
     
     screen.blit(kasna,(0, 0))
-    text = font.render(f"{penize} Kč", True, "black")
+    text = font.render(f"{penize} Kč", True, "white")
     screen.blit(text, (20, 20))
     
     # Vykreslovani minci

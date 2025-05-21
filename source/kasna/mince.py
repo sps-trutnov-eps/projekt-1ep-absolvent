@@ -67,8 +67,8 @@ def spawn(pocet_minci):
     # Hodnoty kruhu s vodou
     ellipse_center_x = 800/2
     ellipse_center_y = 500/2
-    ellipse_sirka = 600
-    ellipse_vyska = 400
+    ellipse_sirka = 650
+    ellipse_vyska = 350
     a = ellipse_sirka / 2
     b = ellipse_vyska / 2
     # Spawnování mincí v kruhu s vodou
