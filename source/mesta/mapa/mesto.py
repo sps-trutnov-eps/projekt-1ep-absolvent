@@ -55,7 +55,7 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
         hrac.rychlost_x *= hrac.chodici_rychlost_x
         hrac.rychlost_y *= hrac.chodici_rychlost_y
 
-    okno.fill((0, 0, 0)) # vybarvy okno aby se resetovalo
+    okno.fill("grey") # vybarvy okno aby se resetovalo
 
     for budova in budovy:
         budova.hitbox(hrac)

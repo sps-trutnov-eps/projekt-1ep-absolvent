@@ -14,8 +14,7 @@ def spusteni(global_data):
     global_data['otevrena_okna'].append(novyProgram(minihra))
 
 def mesto1Init(okno, velikost_okna, global_data):
-    velikost_mapy = pygame.Rect(0, 0, velikost_okna[0] * 4, velikost_okna[1] * 4)
-
+    velikost_mapy = pygame.Rect(0, 0, 3000, 2410)
     # vytvori budovy
     interakcni_zony = []
 
@@ -26,11 +25,17 @@ def mesto1Init(okno, velikost_okna, global_data):
                "Martin_hnedy.png",
                "Martin_sedy.png",
                "Martin_zluty.png",
-               "silnice_mensi.png", ]
+               "silnice_mensi.png",
+               "parkoviste.png" ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert() for textura in textury]
+    #chopped textura parkoviste
+    scaled_textura_parkoviste = pygame.transform.scale(textury[6], (800, 533))
+    parkovisko_rect = textury[6].get_rect()
+    parkovisko_flipped = pygame.transform.rotate(scaled_textura_parkoviste, 180)
     # .convert_alpha() kdyz pouziva alpha
     print(textury)
+    okno.fill((100, 150, 200))
     textury_rect = [item.get_rect() for item in textury]
     budovy = []
     #prvni horní řada domů z leva (0,0) - prvni dum v pořadí
@@ -44,34 +49,35 @@ def mesto1Init(okno, velikost_okna, global_data):
     budovy.append(Budova(okno, 8*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
     budovy.append(Budova(okno, 9*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
     #první dolní řada domů z leva (200, 1360) - prvni dum v pořadí
-    budovy.append(Budova(okno, 200, 1360, textury_rect[1].width, textury_rect[1].height, textury[1]))
-    budovy.append(Budova(okno, 200 + textury_rect[1].width, 1360, textury_rect[2].width, textury_rect[2].height, textury[2]))   
-    budovy.append(Budova(okno, 200 + 2*textury_rect[1].width, 1360, textury_rect[3].width, textury_rect[3].height, textury[3]))
+    budovy.append(Budova(okno, 200, 1320, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    budovy.append(Budova(okno, 200 + textury_rect[1].width, 1320, textury_rect[2].width, textury_rect[2].height, textury[2]))   
+    budovy.append(Budova(okno, 200 + 2*textury_rect[1].width, 1320, textury_rect[3].width, textury_rect[3].height, textury[3]))
     #druhá dolní řada domů z leva (200, 1360) - prvni dum v pořadí
-    budovy.append(Budova(okno, 200 + 5*textury_rect[1].width, 1360, textury_rect[1].width, textury_rect[1].height, textury[4]))
-    budovy.append(Budova(okno, 200 + 6*textury_rect[1].width, 1360, textury_rect[1].width, textury_rect[1].height, textury[1]))
-    budovy.append(Budova(okno, 200 + 7*textury_rect[1].width, 1360, textury_rect[1].width, textury_rect[1].height, textury[2]))
-    #první sloupec domů vpravo (0, 320) - prvni dum v pořadí
+    budovy.append(Budova(okno, 200 + 5*textury_rect[1].width, 1320, textury_rect[1].width, textury_rect[1].height, textury[4]))
+    budovy.append(Budova(okno, 200 + 6*textury_rect[1].width, 1320, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    budovy.append(Budova(okno, 200 + 7*textury_rect[1].width, 1320, textury_rect[1].width, textury_rect[1].height, textury[2]))
+    #první sloupec domů vpravo (0, 100-chopped střechy) - prvni dum v pořadí
     budovy.append(Budova(okno, 0, textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[2]))
     budovy.append(Budova(okno, 0, 100 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[3]))
     budovy.append(Budova(okno, 0, 200 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[4]))
-    #druhá část 
-    budovy.append(Budova(okno, 0, 1020 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[2]))
-    budovy.append(Budova(okno, 0, 1120 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[3]))
-    budovy.append(Budova(okno, 0, 1220 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[4]))
-    budovy.append(Budova(okno, 0, 1320 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[1]))
-    #druhy sloupec domů vlevo (1800, 320) - prvni dum v pořadí
+    #druhá část sloupců vpravo (0,1020)
+    budovy.append(Budova(okno, 0, 920 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[2]))
+    budovy.append(Budova(okno, 0, 1020 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[3]))
+    budovy.append(Budova(okno, 0, 1120 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[4]))
+    budovy.append(Budova(okno, 0, 1220 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    #druhy sloupec domů vlevo (1800, 100-chopped střechy) - prvni dum v pořadí
     budovy.append(Budova(okno, 1800, textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[2]))
     budovy.append(Budova(okno, 1800, 100 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[3]))
     budovy.append(Budova(okno, 1800, 200 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[4]))
-    #druha řada
-    budovy.append(Budova(okno, 1800, 1020 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[1]))
-    budovy.append(Budova(okno, 1800, 1120 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[2]))
-    budovy.append(Budova(okno, 1800, 1220 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[3]))
-    budovy.append(Budova(okno, 1800, 1320 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[4]))
+    #druha cast sloupcu vlevo (1800, 1020)
+    budovy.append(Budova(okno, 1800, 920 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[1]))
+    budovy.append(Budova(okno, 1800, 1020 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[2]))
+    budovy.append(Budova(okno, 1800, 1120 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[3]))
+    budovy.append(Budova(okno, 1800, 1220 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[4]))
     #silnice 
     #interakcni_zony.append(InterakcniZona(220, 340, 0, 0, nic, textura=textury[5]))
-    
+    #parkovisko
+    interakcni_zony.append(InterakcniZona(600, 1800, parkovisko_rect.width, parkovisko_rect.height, nic, textura=parkovisko_flipped))
     #spusteni funkce
     #interakcni_zony.append(InterakcniZona(220, 340, 500, 500, spusteni, argumenty=[global_data], textura=textury[5]))
 
