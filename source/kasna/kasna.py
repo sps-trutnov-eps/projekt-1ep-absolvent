@@ -49,6 +49,9 @@ def main():
     pygame.display.flip()
     clock.tick(60)
 
+    #global_data['penize'] = penize     # tadyto se bude ukladat v json slozce samo
+    #global_data['otevrena_okna'].append('libovolny nazev programu')     # tadyto otevre novy program 'libovolny nazev programu' 
+
 while running:
     main()
 pygame.quit()
