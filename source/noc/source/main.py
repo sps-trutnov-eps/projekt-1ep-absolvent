@@ -52,6 +52,6 @@ while game:
     if faze > 2:
         faze = 0
 
-    okno.blit(ohen_img, (rozliseni_x / 2, rozliseni_y / 2))
+    okno.blit(ohen_img, ((rozliseni_x / 2) - 25, (rozliseni_y / 2) - 25))
 
     pygame.display.flip()
