@@ -14,7 +14,7 @@ pygame.display.set_caption("Bobek")
 ai_difficulty_ohen = random.randint(2, 5)
 ohen_stage = 5
 
-ohen_blit_timer = fps / (15 / 10)
+ohen_blit_timer = fps / (17 / 10)
 faze = 0
 
 cerna = (0, 0, 0)
@@ -47,7 +47,7 @@ while game:
 
     if ohen_blit_timer <= 0:
         faze += 1
-        ohen_blit_timer = fps / (15 / 10)
+        ohen_blit_timer = fps / (17 / 10)
 
     if faze > 2:
         faze = 0
