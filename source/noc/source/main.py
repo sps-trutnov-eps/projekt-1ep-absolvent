@@ -39,8 +39,8 @@ while game:
     ohen_stage = ohen.ai(ai_difficulty_ohen, ohen_stage)
 
     #img load
-    file_name = f"ohen_S{ohen_stage}_F{faze}"
-    ohen_img = pygame.image.load(f"source//noc//textury//ohen_S5//{file_name}.png")
+    file_name = f"ohen_S{ohen_stage}//ohen_S{ohen_stage}_F{faze}"
+    ohen_img = pygame.image.load(f"source//noc//textury//{file_name}.png")
 
     if ohen_blit_timer > 0:
         ohen_blit_timer -= 1
