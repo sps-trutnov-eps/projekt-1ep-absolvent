@@ -25,16 +25,26 @@ def mesto1Init(okno, velikost_okna, global_data):
                "Martin_hnedy.png",
                "Martin_sedy.png",
                "Martin_zluty.png",
-               "silnice_mensi.png",
                "parkoviste.png",
                "banka.png",
-               "interakcni_zona.png",]
+               "silnice.png",
+               "silnice_s_kanálem.png",
+               "zatáčka.png",
+               "křižovatka.png",
+               "quadroformagi.png"
+               ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert() for textura in textury]
     #chopped textura parkoviste
     scaled_textura_parkoviste = pygame.transform.scale(textury[6], (800, 533))
     parkovisko_rect = textury[6].get_rect()
     parkovisko_flipped = pygame.transform.rotate(scaled_textura_parkoviste, 180)
+    #silnice 
+    silnice_rect = textury[7].get_rect()
+    zatacka_rect = textury[9].get_rect()
+    zatacka_flipped = pygame.transform.rotate(textury[9], 180)
+    krizovatka_rect = textury[10].get_rect()
+    guadroformagi_rect = textury[11].get_rect()
     # .convert_alpha() kdyz pouziva alpha
     print(textury)
     okno.fill((100, 150, 200))
@@ -79,6 +89,9 @@ def mesto1Init(okno, velikost_okna, global_data):
     
     #silnice 
     #MODEL
+    interakcni_zony.append(InterakcniZona(0, 620, 0, 0, nic, textura=textury[7]))
+    #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
+    #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
     interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data]))
     interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data]))
     #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
