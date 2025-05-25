@@ -12,7 +12,7 @@ DOPRAVA = 3
 def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, nastaveni: dict):
 
     klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
-
+    
     hrac.rychlost_x = 0 # resetuje rychlost hrace
     hrac.rychlost_y = 0 # resetuje rychlost hrace
 

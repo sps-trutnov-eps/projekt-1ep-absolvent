@@ -14,7 +14,7 @@ def spusteni(global_data):
     global_data['otevrena_okna'].append(novyProgram(minihra))
 
 def mesto1Init(okno, velikost_okna, global_data):
-    velikost_mapy = pygame.Rect(0, 0, 3000, 2410)
+    velikost_mapy = pygame.Rect(0, 0, 2050,1725)
     # vytvori budovy
     interakcni_zony = []
 
@@ -26,7 +26,8 @@ def mesto1Init(okno, velikost_okna, global_data):
                "Martin_sedy.png",
                "Martin_zluty.png",
                "silnice_mensi.png",
-               "parkoviste.png" ]
+               "parkoviste.png",
+               "banka.png",]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert() for textura in textury]
     #chopped textura parkoviste
@@ -74,10 +75,13 @@ def mesto1Init(okno, velikost_okna, global_data):
     budovy.append(Budova(okno, 1800, 1020 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[2]))
     budovy.append(Budova(okno, 1800, 1120 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[3]))
     budovy.append(Budova(okno, 1800, 1220 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[4]))
+    
     #silnice 
-    #interakcni_zony.append(InterakcniZona(220, 340, 0, 0, nic, textura=textury[5]))
+    #MODEL
+    
+    #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
     #parkovisko
-    interakcni_zony.append(InterakcniZona(600, 1800, parkovisko_rect.width, parkovisko_rect.height, nic, textura=parkovisko_flipped))
+    #interakcni_zony.append(InterakcniZona(600, 1900, parkovisko_rect.width, parkovisko_rect.height, nic, textura=scaled_textura_parkoviste))
     #spusteni funkce
     #interakcni_zony.append(InterakcniZona(220, 340, 500, 500, spusteni, argumenty=[global_data], textura=textury[5]))
 
