@@ -31,7 +31,8 @@ def mesto1Init(okno, velikost_okna, global_data):
                "silnice_s_kanálem.png",
                "zatáčka.png",
                "křižovatka.png",
-               "quadroformagi.png"
+               "quadroformagi.png",
+               "temp_namko.png"
                ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert() for textura in textury]
@@ -90,6 +91,7 @@ def mesto1Init(okno, velikost_okna, global_data):
     #silnice 
     #MODEL
     interakcni_zony.append(InterakcniZona(0, 620, 0, 0, nic, textura=textury[7]))
+    interakcni_zony.append(InterakcniZona(400, 570, 1200, 500, nic, textura=textury[12]))
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
     interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data]))
