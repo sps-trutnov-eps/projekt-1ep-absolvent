@@ -68,11 +68,11 @@ def main(global_data):
         for udalost in pygame.event.get():
             # vypnuti krizkem nebo ALT+F4
             if udalost.type == pygame.QUIT:
-                sys.exit()
+                return 0
             # vypnuti klavesou Escape
             if udalost.type == pygame.KEYDOWN:
                 if udalost.key == pygame.K_ESCAPE:
-                    sys.exit()
+                    return 0
         hold = pygame.key.get_pressed()
         if hold[pygame.K_UP]:
             hrac.top -= hrac_rychlost
@@ -100,23 +100,18 @@ def main(global_data):
                     obrazek = random.choice(obrazky_aut)
                     if smer == -1:
                         obrazek = pygame.transform.flip(obrazek, True, False)
-        
-                    if smer == 1:
-                        pruh["autaci"].append({
-                            "rect": pygame.Rect(-auticko_x - i*random.randint(int(auticko_x*1.25), int(auticko_x*1.5))*(-1 if rychlost < 0 else 1), pruh["rect"].y+10, auticko_x, auticko_y),
-                            "obrazek": obrazek,
-                            "rychlost": rychlost
-                        })
-
-                    elif smer == -1:
                         pruh["autaci"].append({
                             "rect": pygame.Rect(auticko_x + silnice_x - i*random.randint(int(auticko_x*1.25), int(auticko_x*1.5))*(1 if rychlost < 0 else -1), pruh["rect"].y+10, auticko_x, auticko_y),
                             "obrazek": obrazek,
                             "rychlost": -rychlost
                         })
+                    else:
+                        pruh["autaci"].append({
+                            "rect": pygame.Rect(-auticko_x - i*random.randint(int(auticko_x*1.25), int(auticko_x*1.5))*(-1 if rychlost < 0 else 1), pruh["rect"].y+10, auticko_x, auticko_y),
+                            "obrazek": obrazek,
+                            "rychlost": rychlost
+                        })
                     obrazek = random.choice(obrazky_aut)
-                    if smer == -1:
-                        obrazek = pygame.transform.flip(obrazek, True, False)
 
             for auto in pruh["autaci"]:
                 if auto["rect"].colliderect(hrac):

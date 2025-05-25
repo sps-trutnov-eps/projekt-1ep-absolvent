@@ -80,7 +80,7 @@ def mesto1Init(okno, velikost_okna, global_data):
     #silnice 
     #MODEL
     interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data]))
-    interakcni_zony.append(InterakcniZona(0,1725, 1920,80, spusteni, argumenty=[global_data]))
+    interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data]))
     #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
     #parkovisko
     #interakcni_zony.append(InterakcniZona(600, 1900, parkovisko_rect.width, parkovisko_rect.height, nic, textura=scaled_textura_parkoviste))
