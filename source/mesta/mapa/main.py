@@ -3,7 +3,6 @@ import pygame
 from mesta.mapa.hrac import Hrac
 from mesta.mapa.mesto import *
 from mesta.mapa.mista_inicializace import *
-from master import convertFromManager
 
 import nastaveni.main as Nastaveni
 import inventory.main as Inventory
@@ -83,7 +82,7 @@ def main(global_data):
 
         if klice[pygame.K_r]:                                   ####################################### SMAZAT
             global_data['reset'] = True                         ####################################### SMAZAT
-        print(convertFromManager(global_data['aktualni_okna']))
+
 
         veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset, nastaveni)
         if ulozit_hru:
