@@ -33,6 +33,7 @@ def main(global_data):
     silnice = pygame.image.load("silnice3.png")
     #zacatek silnice = 50
     #konec silnice = 950
+    chodnik = pygame.image.load("chodnik.png").convert_alpha()
     
     auticko_x = 80
     auticko_y = 40
@@ -125,7 +126,11 @@ def main(global_data):
                         prohra = True
 
             zobrazovacka.blit(silnice, pruh["rect"])  
-
+            zobrazovacka.blit(chodnik, (0, -80))
+            zobrazovacka.blit(chodnik,(1024,-80))
+            zobrazovacka.blit(chodnik,(0,1010))
+            zobrazovacka.blit(chodnik,(1024,1010))
+            
             temp_autaci = pruh["autaci"].copy()
             for tacoauto in pruh["autaci"]:
                 tacoauto["rect"].x += tacoauto["rychlost"]
