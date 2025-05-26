@@ -15,7 +15,7 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
     
     hrac.rychlost_x = 0 # resetuje rychlost hrace
     hrac.rychlost_y = 0 # resetuje rychlost hrace
-
+    print(hrac.x, hrac.y)
     interaguje = False   # jestli hrac chce s necim interaktovat - "e" je zmacknute
 
     # pohyb postavy
