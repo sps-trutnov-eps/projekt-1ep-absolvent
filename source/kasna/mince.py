@@ -12,28 +12,34 @@ class Mince:
         if self.type == "1":
             self.radius = 8
             self.hodnota = 1
+            self.textura=pygame.image.load("1.png").convert_alpha()
         elif self.type == "2":
             self.radius = 10
             self.hodnota = 2
+            self.textura=pygame.image.load("2.png").convert_alpha()
         elif self.type == "5":
             self.radius = 12
             self.hodnota = 5
+            self.textura=pygame.image.load("5.png").convert_alpha()
         elif self.type == "10":
             self.radius = 17
             self.hodnota = 10
+            self.textura=pygame.image.load("10.png").convert_alpha()
         elif self.type == "20":
             self.radius = 20
             self.hodnota = 20
+            self.textura=pygame.image.load("20.png").convert_alpha()
         elif self.type == "50":
             self.radius = 25
             self.hodnota = 50
+            self.textura=pygame.image.load("50.png").convert_alpha()
     
     def _vyber_typ(self):
         typy = ["1", "2", "5", "10", "20", "50"]
         return random.choices(typy, weights=SANCE_MINCI.values(), k=1)[0]
             
     def vykresli_se(self, screen):
-        pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
+        screen.blit(self.textura,(self.x-self.radius/2,self.y-self.radius/2))
 
     def get_info(self):
         return f"Typ: {self.type}, Hodnota: {self.hodnota}"
