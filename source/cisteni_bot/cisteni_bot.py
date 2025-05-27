@@ -25,6 +25,7 @@ def main(global_data):
     sandal = pygame.image.load("cisteni_bot/sandal.png")
     scaled_sandal = pygame.transform.scale(sandal, (800, 600))
     vyber_boty = random.choice([scaled_bota,scaled_kroksa,scaled_sandal])
+    kartac = pygame.image.load("cisteni_bot/kartac.png")
     vlajky = pygame.NOFRAME
 
     # Vytvoření okna
@@ -115,9 +116,10 @@ def main(global_data):
         obrazovka.blit(text, (10, 10))   # levý horní roh
 
         # Kruh sledující kurzor
-        pygame.draw.circle(obrazovka, barva_kurzoru, pozice_mysi, 20)
-
-        # Aktualizace obrazovky
+        
+        kartac_pos = (pozice_mysi[0] - 12,pozice_mysi[1] -12)
+        obrazovka.blit(kartac, kartac_pos)
+        # Aktualizace obrazovky)
         pygame.display.update()
 
     # pro otevreni okna "global_data['otevrena_okna'].append(novyProgram(funkce))"
