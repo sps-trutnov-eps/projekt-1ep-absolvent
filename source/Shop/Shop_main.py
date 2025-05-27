@@ -4,7 +4,8 @@ import sys
 import random
 import math
 
-pygame.init()
+
+shop_image = pygame.image.load("pozadí_shopu.png")
 option_1 = pygame.image.load("batoh1.png")
 preview1_1 = pygame.image.load("batoh2.png")
 preview1_2 = pygame.image.load("batoh3.png")
@@ -23,9 +24,9 @@ pozice_option_2 =option_2.get_rect(topleft=(200, 400))
 
 Button_leave = pygame.image.load("Button_back.png")
 
-pozice1 = preview1_1.get_rect(topleft=(200, 878))
-pozice2 = preview1_1.get_rect(topleft=(200, 744))
-pozice3 = preview1_1.get_rect(topleft=(200, 615))
+pozice1 = preview1_1.get_rect(topleft=(500, 500))
+pozice2 = preview1_2.get_rect(topleft=(500, 400))
+pozice3 = preview1_3.get_rect(topleft=(500, 300))
 
 main_buttony = {
 "option_1":option_1,
@@ -42,9 +43,9 @@ main_buttony = {
 "preview2_2":preview2_2,
 "preview2_3":preview2_3,
 
-"option_1_1_button":preview1_1,
-"option_1_2_button":preview1_2,
-"option_1_3_button":preview1_3,
+"option1_1button":preview1_1,
+"option1_2button":preview1_2,
+"option1_3button":preview1_3,
 
 "option2_1button":preview2_1,
 "option2_2button":preview2_2,
@@ -59,7 +60,7 @@ main_buttony = {
 obrazovka = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Shop")
 Obchod = Shop(main_buttony,shop_image)
-
+shop = True
 while shop:
     
     for udalost in pygame.event.get():
