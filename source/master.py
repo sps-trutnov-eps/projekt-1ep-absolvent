@@ -236,5 +236,5 @@ def main(funkce = None):
 
 
 if __name__ == "__main__":
-    from smrt_na_silnici.Honza_smrt_na_silnici import main as TheProgram
+    from cisteni_bot.cisteni_bot import main as TheProgram
     main(convertFuncToStr(TheProgram))

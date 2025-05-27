@@ -10,13 +10,21 @@ from master import convertFuncToStr as novyProgram
 # sem piste importy
 import pygame
 import random
-from kruhy import Kruh
+from cisteni_bot.kruhy import Kruh
 
 def main(global_data):
     # Rozlišení okna
     rozliseni_x = 800
     rozliseni_y = 600
 
+    textura_pozadi = pygame.image.load("cisteni_bot/podlazi.png")
+    bota = pygame.image.load("cisteni_bot/bota.png")
+    scaled_bota = pygame.transform.scale(bota, (800, 600))
+    kroksa = pygame.image.load("cisteni_bot/kroksa.png")
+    scaled_kroksa = pygame.transform.scale(kroksa, (800, 600))
+    sandal = pygame.image.load("cisteni_bot/sandal.png")
+    scaled_sandal = pygame.transform.scale(sandal, (800, 600))
+    vyber_boty = random.choice([scaled_bota,scaled_kroksa,scaled_sandal])
     vlajky = pygame.NOFRAME
 
     # Vytvoření okna
@@ -72,7 +80,9 @@ def main(global_data):
         pozice_mysi = pygame.mouse.get_pos()
 
         # Vyplnění pozadí
-        obrazovka.fill(barva_pozadi)
+        obrazovka.blit(textura_pozadi, (0, 0))
+        
+        obrazovka.blit(vyber_boty,(0,0))
 
         # Kontrola kolize kurzoru s kruhy
         novy_seznam = []
@@ -112,7 +122,7 @@ def main(global_data):
 
     # pro otevreni okna "global_data['otevrena_okna'].append(novyProgram(funkce))"
     # sem piste svuj program
-
+    global_data["penize"] += zbirka
 if __name__ == "__main__":
     masterFunc(novyProgram(main))
     pygame.quit()
