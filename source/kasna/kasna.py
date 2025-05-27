@@ -1,27 +1,36 @@
+import sys
+from pathlib import Path
+ 
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(parent_dir))
+ 
+from master import main as masterFunc
+from master import convertFuncToStr as novyProgram
+ 
+
+
 import pygame
 import random
 from mince import Mince, spawn, nastav_sance, ziskej_sance
 
 
-pygame.init()
-width, height = 800, 500
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Kasna s mincemi")
-clock = pygame.time.Clock()
-running = True
-font = pygame.font.SysFont("Arial", 25)
-font_velky = pygame.font.SysFont("Arial", 32)
-pocet_minci = random.randint(0, 8)
-mince = spawn(pocet_minci) 
-penize = 0
+
+def main(global_data):
+    pygame.init()
+    width, height = 800, 500
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption("Kasna s mincemi")
+    clock = pygame.time.Clock()
+    running = True
+    font = pygame.font.SysFont("Arial", 25)
+    font_velky = pygame.font.SysFont("Arial", 32)
+    pocet_minci = random.randint(0, 8)
+    mince = spawn(pocet_minci) 
+    penize = 0
 
 
-kasna = pygame.image.load("kasna.png").convert_alpha()
-zem = pygame.image.load("zem.png").convert_alpha()
-
-
-def main():
-    global running, penize  
+    kasna = pygame.image.load("kasna.png").convert_alpha()
+    zem = pygame.image.load("zem.png").convert_alpha()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -49,9 +58,8 @@ def main():
     pygame.display.flip()
     clock.tick(60)
 
-    #global_data['penize'] = penize     # tadyto se bude ukladat v json slozce samo
-    #global_data['otevrena_okna'].append('libovolny nazev programu')     # tadyto otevre novy program 'libovolny nazev programu' 
+    global_data['penize'] = penize     # tadyto se bude ukladat v json slozce samo
+    global_data['otevrena_okna'].append('libovolny nazev programu')     # tadyto otevre novy program 'libovolny nazev programu' 
 
-while running:
-    main()
-pygame.quit()
+if __name__ == "__main__":
+    masterFunc(novyProgram(main))
