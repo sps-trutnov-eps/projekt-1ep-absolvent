@@ -7,7 +7,6 @@ class Mince:
         self.x = x
         self.y = y
         self.type = typ if typ else self._vyber_typ()
-        self.color = "yellow" 
 
         if self.type == "1":
             self.radius = 8
@@ -33,9 +32,13 @@ class Mince:
             self.radius = 25
             self.hodnota = 50
             self.textura=pygame.image.load("50.png").convert_alpha()
+        elif self.type == "sputnik":
+            self.radius = 50
+            self.hodnota = 10000
+            self.textura=pygame.image.load("sputnik.png").convert_alpha()
     
     def _vyber_typ(self):
-        typy = ["1", "2", "5", "10", "20", "50"]
+        typy = ["1", "2", "5", "10", "20", "50","sputnik"]
         return random.choices(typy, weights=SANCE_MINCI.values(), k=1)[0]
             
     def vykresli_se(self, screen):
@@ -55,14 +58,15 @@ SANCE_MINCI = {
     "5": 12,  
     "10": 5,  
     "20": 2.5,  
-    "50": 0.5,  
+    "50": 0.5,
+    "sputnik":0.001  
 }
 
 def nastav_sance(nove_sance):
 
     global SANCE_MINCI
     SANCE_MINCI.update(nove_sance)
-    for typ in ["1", "2", "5", "10", "20", "50"]:
+    for typ in ["1", "2", "5", "10", "20", "50","sputnik"]:
         if typ not in SANCE_MINCI or SANCE_MINCI[typ] < 0:
             SANCE_MINCI[typ] = 0.5 
 def ziskej_sance():
