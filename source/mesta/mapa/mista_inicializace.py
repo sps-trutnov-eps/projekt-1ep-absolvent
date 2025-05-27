@@ -37,7 +37,7 @@ def mesto1Init(okno, velikost_okna, global_data):
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert() for textura in textury]
     #chopped textura parkoviste
-    scaled_textura_parkoviste = pygame.transform.scale(textury[6], (800, 533))
+    scaled_textura_parkoviste = pygame.transform.scale(textury[5], (800, 533))
     parkovisko_rect = textury[6].get_rect()
     parkovisko_flipped = pygame.transform.rotate(scaled_textura_parkoviste, 180)
     #silnice 
@@ -91,6 +91,7 @@ def mesto1Init(okno, velikost_okna, global_data):
     #silnice 
     #MODEL
     interakcni_zony.append(InterakcniZona(0, 620, 0, 0, nic, textura=textury[7]))
+    interakcni_zony.append(InterakcniZona(0, 1750, 0, 0, nic, textura=scaled_textura_parkoviste))
     interakcni_zony.append(InterakcniZona(400, 570, 1200, 500, nic, textura=textury[12]))
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))

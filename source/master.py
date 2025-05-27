@@ -236,5 +236,5 @@ def main(funkce = None):
 
 
 if __name__ == "__main__":
-    from cisteni_bot.cisteni_bot import main as TheProgram
+    from mesta.mapa.main import main as TheProgram
     main(convertFuncToStr(TheProgram))
