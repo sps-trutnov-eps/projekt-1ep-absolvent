@@ -117,9 +117,28 @@ def main(global_data):
     controler_rect = pygame.Rect(icon_x, icon_y, 80, 80)
     calculator_rect = pygame.Rect(icon_x2, icon_y2, 50, 80)
     
+    
+    
+    font1 = pygame.font.SysFont("Arial", 48)
+    font2 = pygame.font.SysFont("Arial", 40)
+    
+    
+    text1 = font1.render("Space Battle", True, (255, 255, 255))
+    text2 = font1.render("Tank Game", True, (255, 255, 255))
+    text3 = font1.render("Plane Game", True, (255, 255, 255))
+    text4 = font2.render("Platformer Game", True, (255, 255, 255))
+    text5 = font1.render("Jump Game", True, (255, 255, 255))
+
+    
+    
+    
 
     rect1 = pygame.Rect(rozliseni_sirka / 4, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15)
-    
+    rect2 = pygame.Rect(rozliseni_sirka / 2.35, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect3 = pygame.Rect(rozliseni_sirka / 1.67, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect4 = pygame.Rect(rozliseni_sirka / 4, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect5 = pygame.Rect(rozliseni_sirka / 2.35, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15)
+            
     
     kalkulacka_zapnuta = False
     
@@ -219,23 +238,37 @@ def main(global_data):
             
             
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
-            
+            screen.blit(text1, (rozliseni_sirka / 3.8, rozliseni_vyska / 4.9))
             if udalost.type == pygame.MOUSEBUTTONDOWN:
                 if rect1.collidepoint(udalost.pos):
-                    global_data['otevrena_okna'].append(novyProgram(Space_Battle))
-                    pygame.quit()
-                    sys.exit()
+                    print("space battle")
                     
                     
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
+            screen.blit(text2, (rozliseni_sirka / 2.25, rozliseni_vyska / 4.9))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect2.collidepoint(udalost.pos):
+                    print("tank game")
+            
             
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
-            
+            screen.blit(text3, (rozliseni_sirka / 1.63, rozliseni_vyska / 4.9))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect3.collidepoint(udalost.pos):
+                    print("plane game")
            
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15))
-            
+            screen.blit(text4, (rozliseni_sirka / 3.9, rozliseni_vyska / 3.4))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect4.collidepoint(udalost.pos):
+                    print("platformer game")
+                    
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15))
-            
+            screen.blit(text5, (rozliseni_sirka / 2.28, rozliseni_vyska / 3.4))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect5.collidepoint(udalost.pos):
+                    print("jump game")
+                    
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15))
 
             

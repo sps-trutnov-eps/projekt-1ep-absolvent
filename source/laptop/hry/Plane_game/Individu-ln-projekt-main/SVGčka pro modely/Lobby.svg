@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="377"
+   height="79"
+   viewBox="0 0 99.747943 20.902079"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="Lobby.svg"
+   inkscape:export-filename="Button_shop.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.99999999"
+     inkscape:cx="300.5"
+     inkscape:cy="351.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient64"
+       inkscape:swatch="gradient">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop64" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop65" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.17059;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;paint-order:stroke markers fill"
+       id="rect185"
+       width="97.523163"
+       height="18.571747"
+       x="1.3498772"
+       y="1.0852944" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.156;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;paint-order:stroke markers fill"
+       id="rect188"
+       width="0.74835467"
+       height="13.844562"
+       x="94.638557"
+       y="3.4488864" />
+    <text
+       xml:space="preserve"
+       style="font-size:16.1733px;line-height:0px;font-family:'Segoe Print';-inkscape-font-specification:'Segoe Print';text-align:center;letter-spacing:0.032094px;word-spacing:0.0463579px;text-anchor:middle;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.02167;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;paint-order:stroke markers fill"
+       x="38.76923"
+       y="19.848539"
+       id="text201"
+       transform="scale(1.4267762,0.70088076)"><tspan
+         sodipodi:role="line"
+         id="tspan201"
+         style="stroke-width:2.02167"
+         x="38.785275"
+         y="19.848539">SHOP</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:23.8508px;line-height:0px;font-family:'Segoe Print';-inkscape-font-specification:'Segoe Print';text-align:center;letter-spacing:0.0473289px;word-spacing:0.0683639px;text-anchor:middle;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.9513;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;paint-order:stroke markers fill"
+       x="10.97998"
+       y="18.760094"
+       id="text10"
+       transform="scale(0.99134041,1.0087352)"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         style="stroke-width:1.9513;stroke-dasharray:none"
+         x="11.003644"
+         y="18.760094">%</tspan></text>
+  </g>
+</svg>
