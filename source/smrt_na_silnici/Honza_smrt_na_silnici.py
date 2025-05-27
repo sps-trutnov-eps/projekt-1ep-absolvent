@@ -16,8 +16,9 @@ def main(global_data):
     rozliseni_x = 1920
     rozliseni_y = 1080
 
-    hrac_x = 30
-    hrac_y = 30
+    hrac_x = 15 #3x zmensen
+    hrac_y = 26 #3x zmensen
+
     hrac = pygame.Rect(rozliseni_x/2 - hrac_x/2,rozliseni_y-1.5*hrac_y, hrac_x, hrac_y)
     hrac_barva = "green"
     hrac_rychlost = 3
@@ -74,17 +75,17 @@ def main(global_data):
                 if udalost.key == pygame.K_ESCAPE:
                     return 0
         hold = pygame.key.get_pressed()
-        if hold[pygame.K_UP]:
+        if hold[pygame.K_w]:
             hrac.top -= hrac_rychlost
-        if hold[pygame.K_LEFT]:
+        if hold[pygame.K_a]:
             hrac.left -= hrac_rychlost
             if hrac.left <= 0:
                 hrac.left = 0
-        if hold[pygame.K_RIGHT]:
+        if hold[pygame.K_d]:
             hrac.right += hrac_rychlost
             if hrac.right >= rozliseni_x:
                 hrac.right = rozliseni_x
-        if hold[pygame.K_DOWN]:
+        if hold[pygame.K_s]:
             hrac.bottom += hrac_rychlost
         ##########################################
         ##########################################

@@ -14,7 +14,7 @@ def spusteni(global_data):
     global_data['otevrena_okna'].append(novyProgram(minihra))
 
 def mesto1Init(okno, velikost_okna, global_data):
-    velikost_mapy = pygame.Rect(0, 0, 2050,1725)
+    velikost_mapy = pygame.Rect(0, 0, 2050,2830)
     # vytvori budovy
     interakcni_zony = []
 
@@ -107,62 +107,3 @@ def mesto1Init(okno, velikost_okna, global_data):
     #budovy = [Budova(okno, sum([textury_rect[j].width for j in range(i)]), 0, textury_rect[i].width, textury_rect[i].height, textury[i]) for i in range(len(textury))]
     return budovy, interakcni_zony, velikost_mapy, [0, 0]
 
-def mesto1Init(okno, velikost_okna, global_data):
-    velikost_mapy = pygame.Rect(0, -1025, 1025,1025)
-    # vytvori budovy
-    interakcni_zony = []
-
-    interakcni_zony.append(InterakcniZona(500, 500, 500, 500, print, [2, 2]))
-
-    textury = ["Frank_hnedy.png",
-               "Martin_bily.png",
-               "Martin_hnedy.png",
-               "Martin_sedy.png",
-               "Martin_zluty.png",
-               "parkoviste.png",
-               "banka.png",
-               "silnice.png",
-               "silnice_s_kanálem.png",
-               "zatáčka.png",
-               "křižovatka.png",
-               "quadroformagi.png",
-               "temp_namko.png"
-               ]
-
-    textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert() for textura in textury]
-    #chopped textura parkoviste
-    scaled_textura_parkoviste = pygame.transform.scale(textury[6], (800, 533))
-    parkovisko_rect = textury[6].get_rect()
-    parkovisko_flipped = pygame.transform.rotate(scaled_textura_parkoviste, 180)
-    #silnice 
-    silnice_rect = textury[7].get_rect()
-    zatacka_rect = textury[9].get_rect()
-    zatacka_flipped = pygame.transform.rotate(textury[9], 180)
-    krizovatka_rect = textury[10].get_rect()
-    guadroformagi_rect = textury[11].get_rect()
-    # .convert_alpha() kdyz pouziva alpha
-    print(textury)
-    okno.fill((100, 150, 200))
-    textury_rect = [item.get_rect() for item in textury]
-    budovy = []
-    
-    
-    
-    #silnice 
-    #MODEL
-    interakcni_zony.append(InterakcniZona(0, 620, 0, 0, nic, textura=textury[7]))
-    interakcni_zony.append(InterakcniZona(400, 570, 1200, 500, nic, textura=textury[12]))
-    #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
-    #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
-    interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data]))
-    interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data]))
-    #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
-    #parkovisko
-    #interakcni_zony.append(InterakcniZona(600, 1900, parkovisko_rect.width, parkovisko_rect.height, nic, textura=scaled_textura_parkoviste))
-    #spusteni funkce
-    #interakcni_zony.append(InterakcniZona(220, 340, 500, 500, spusteni, argumenty=[global_data], textura=textury[5]))
-
-
-
-    #budovy = [Budova(okno, sum([textury_rect[j].width for j in range(i)]), 0, textury_rect[i].width, textury_rect[i].height, textury[i]) for i in range(len(textury))]
-    return budovy, interakcni_zony, velikost_mapy, [0, 0]
