@@ -11,7 +11,7 @@ fps = 60
 okno = pygame.display.set_mode((rozliseni_x, rozliseni_y))
 pygame.display.set_caption("Bobek")
 
-ai_difficulty_ohen = random.randint(2, 5)
+ai_difficulty_ohen = random.randint(2, 6)
 ohen_stage = 5
 
 ohen_blit_timer = fps / (17 / 10)
@@ -39,8 +39,11 @@ while game:
     ohen_stage = ohen.ai(ai_difficulty_ohen, ohen_stage)
 
     #img load
-    file_name = f"ohen_S{ohen_stage}//ohen_S{ohen_stage}_F{faze}"
+    if ohen_stage != 0:
+        file_name = f"ohen_S{ohen_stage}//ohen_S{ohen_stage}_F{faze}"
+
     ohen_img = pygame.image.load(f"source//noc//textury//{file_name}.png")
+    ohen_img_rect = ohen_img.get_rect(center= ((rozliseni_x / 2), (rozliseni_y / 2)))
 
     if ohen_blit_timer > 0:
         ohen_blit_timer -= 1
@@ -52,6 +55,9 @@ while game:
     if faze > 2:
         faze = 0
 
-    okno.blit(ohen_img, ((rozliseni_x / 2) - 25, (rozliseni_y / 2) - 25))
+    if ohen_stage < 1:
+        game = False
+
+    okno.blit(ohen_img, ohen_img_rect)
 
     pygame.display.flip()
