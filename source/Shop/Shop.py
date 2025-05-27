@@ -44,9 +44,9 @@ class Shop:
         if event.type == pygame.MOUSEBUTTONDOWN:
             
             if self.main_buttony["pozice_option_1"].collidepoint(event.pos):
-                self.option1 = self.main_buttony["option1_1button"]
+                self.option1 = self.main_buttony["option1_3button"]
                 self.option2 = self.main_buttony["option1_2button"]
-                self.option3 = self.main_buttony["option1_3button"]
+                self.option3 = self.main_buttony["option1_1button"]
                 self.moznost = 1
             # Zpracování výběru možností
             if self.moznost == 1:
@@ -70,9 +70,9 @@ class Shop:
         #_________________________________________________________________________________________________________________________________________________________________________
             if self.main_buttony["pozice_option_2"].collidepoint(event.pos):
                 
-                self.option1 = self.main_buttony["option2_1button"]
+                self.option1 = self.main_buttony["option2_3button"]
                 self.option2 = self.main_buttony["option2_2button"]
-                self.option3 = self.main_buttony["option2_3button"]
+                self.option3 = self.main_buttony["option2_1button"]
                 self.moznost = 2
             # Zpracování výběru možností
             if self.moznost == 2:
@@ -82,17 +82,15 @@ class Shop:
                     if self.main_buttony[f"pozice_buttonu{i+1}"].collidepoint(event.pos):
                         
                         if self.letadlo_owned >= 2 - i:
-                            self.chosen_letadlo = 2 - i
+                            self.chosen_raketa = 2 - i
                             # zde napište co chcete aby se změnilo
                         elif self.peníze >= ceny[2 - i]:
                             self.peníze -= ceny[2 - i]
-                            self.chosen_letadlo = 2 - i
+                            self.chosen_raketa = 2 - i
                             
-                            break  # jakmile jeden button odpovídá, dál nehledáme
-                print(self.chosen_letadlo)
             # Kontrola vlastnictví letadla (čím nižší číslo, tím více toho vlastním)
-            if self.letadlo_owned < self.chosen_letadlo:
-                self.letadlo_owned = self.chosen_letadlo
+            if self.raketa_owned < self.chosen_raketa:
+                self.raketa_owned = self.chosen_raketa
                 
         screen.blit(self.option1,(500,500))
         screen.blit(self.option2,(500,400))
