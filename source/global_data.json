@@ -21,6 +21,6 @@
         "doprava": 100,
         "pohyb_oken": 1073742050
     },
-    "inventory": [],
+    "inventory": [[0]],
     "inventory_xy": [6, 3]
 }
