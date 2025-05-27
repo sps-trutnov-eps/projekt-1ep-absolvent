@@ -15,7 +15,8 @@ import sys
 def main(global_data):
     rozliseni_x = 1920
     rozliseni_y = 1080
-
+    textura_hrace = pygame.image.load(f"textury\\hrac\\zadni_krok2.png")
+    scaled_textura_hrace = pygame.transform.scale(textura_hrace, (35, 46))
     hrac_x = 15 #3x zmensen
     hrac_y = 26 #3x zmensen
 
@@ -146,8 +147,9 @@ def main(global_data):
             
             pruh['autaci'] = temp_autaci.copy()
                         
-                
-        pygame.draw.rect(zobrazovacka, hrac_barva,hrac)
+        
+        zobrazovacka.blit(scaled_textura_hrace,(hrac.x,hrac.y))
+        
         
         zivoty_text = font.render(f"Životy: {zivoty}", True, (255, 0, 0))
         zobrazovacka.blit(zivoty_text, (10, 10))
