@@ -21,5 +21,6 @@
         "doleva": 97,
         "doprava": 100
     },
-    "inventory": []
+    "inventory": [],
+    "kasna_vybrana": false
 }
