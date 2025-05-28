@@ -45,6 +45,7 @@ def mesto1Init(okno, velikost_okna, global_data):
                "lavicka.png",
                "chata1.png",
                "vodojem.png",
+               "park_cesty.png"
                ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert_alpha() for textura in textury]
@@ -62,8 +63,9 @@ def mesto1Init(okno, velikost_okna, global_data):
     zatacka_flipped = pygame.transform.rotate(textury[9], 180)
     krizovatka_rect = textury[10].get_rect()
     guadroformagi_rect = textury[11].get_rect()
-    #scaled_park 
+#PARK
     scaled_park = pygame.transform.scale(textury[13], (1050, 1090))
+    scaled_cesty = pygame.transform.scale(textury[21], (1660, 740))
     # .convert_alpha() kdyz pouziva alpha
     print(textury)
     okno.fill((100, 150, 200))
@@ -120,6 +122,7 @@ def mesto1Init(okno, velikost_okna, global_data):
     #PARK
     interakcni_zony.append(InterakcniZona(0, 2780, 0, 0, nic, textura=scaled_park))#park pt. 1
     interakcni_zony.append(InterakcniZona(1020, 2780, 0, 0, nic, textura=scaled_park))#park pt. 2
+    interakcni_zony.append(InterakcniZona(160, 2980, 0, 0, nic, textura=scaled_cesty))
     ##stromy
     ###prvni sloupec stromů
     mezera = 10
