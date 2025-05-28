@@ -30,21 +30,32 @@ def mesto1Init(okno, velikost_okna, global_data):
                "Martin_sedy.png",
                "Martin_zluty.png",
                "parkoviste.png",
-               "banka.png",
+               "banka1.png",
                "silnice.png",
                "silnice_s_kanálem.png",
                "zatáčka.png",
                "křižovatka.png",
                "quadroformagi.png",
                "temp_namko.png",
-               "park.png"
+               "park.png",
+               "buk.png",
+               "smrk.png",
+               "ker.png",
+               "kytky.png",
+               "lavicka.png",
+               "chata1.png",
+               "vodojem.png",
                ]
 
-    textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert() for textura in textury]
-    #chopped textura parkoviste
+    textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert_alpha() for textura in textury]
+#NAMESTI
+    scaled_banka = pygame.transform.scale(textury[6], (380, 320))
+    #textury_itemy = [pygame.image.load(f"textury\\itemy\\{textura}").convert() for textura in textury_itemy]
+#PARKOVISTE
     scaled_textura_parkoviste = pygame.transform.scale(textury[5], (2000, 1100))
     parkovisko_rect = textury[6].get_rect()
     parkovisko_flipped = pygame.transform.rotate(scaled_textura_parkoviste, 180)
+    vodojem_scaled = pygame.transform.scale(textury[20], (400, 600))
     #silnice 
     silnice_rect = textury[7].get_rect()
     zatacka_rect = textury[9].get_rect()
@@ -63,8 +74,10 @@ def mesto1Init(okno, velikost_okna, global_data):
     budovy.append(Budova(okno, textury_rect[1].width, 0, textury_rect[2].width, textury_rect[2].height, textury[2]))
     budovy.append(Budova(okno, 2*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
     budovy.append(Budova(okno, 3*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
-    budovy.append(Budova(okno, 4*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[2]))
-    budovy.append(Budova(okno, 5*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[3]))
+    budovy.append(Budova(okno, 4*textury_rect[1].width+10, 0, textury_rect[6].width, textury_rect[6].height, scaled_banka)) #banka
+    
+    #budovy.append(Budova(okno, 4*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[2]))
+    #budovy.append(Budova(okno, 5*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[3]))
     #druha horní řada domů po mezeře (1200, 0) - prvni dum v pořadí
     budovy.append(Budova(okno, 6*textury_rect[1].width, 0, textury_rect[1].width, textury_rect[1].height, textury[1]))
     budovy.append(Budova(okno, 7*textury_rect[1].width, 0, textury_rect[2].width, textury_rect[2].height, textury[2]))
@@ -100,14 +113,46 @@ def mesto1Init(okno, velikost_okna, global_data):
     #silnice 
     #MODEL
     interakcni_zony.append(InterakcniZona(0, 620, 0, 0, nic, textura=textury[7]))#silnice
-    interakcni_zony.append(InterakcniZona(0, 1650, 0, 0, nic, textura=scaled_textura_parkoviste))#parkoviste
     interakcni_zony.append(InterakcniZona(400, 570, 1200, 500, nic, textura=textury[12]))#temp namko
+    #PARKOVISTE
+    interakcni_zony.append(InterakcniZona(0, 1650, 0, 0, nic, textura=scaled_textura_parkoviste))#parkoviste
+    interakcni_zony.append(InterakcniZona(-100, 2150, 0, 0, nic, textura=vodojem_scaled))
+    #PARK
     interakcni_zony.append(InterakcniZona(0, 2780, 0, 0, nic, textura=scaled_park))#park pt. 1
     interakcni_zony.append(InterakcniZona(1020, 2780, 0, 0, nic, textura=scaled_park))#park pt. 2
+    ##stromy
+    ###prvni sloupec stromů
+    mezera = 10
+    for i in range(7):
+        textura = textury[14]
+        y = 2820 + i * (textury_rect[14].height+ mezera)
+        interakcni_zony.append(InterakcniZona(40, y, 0, 0, nic, textura=textura))
+    ###druhy sloupec stromů
+    for i in range(7):
+        textura = textury[15]
+        y = 2820 + i * (textury_rect[15].height+ mezera)
+        interakcni_zony.append(InterakcniZona(1960-100, y, 0, 0, nic, textura=textura))
+    #### dolní řada stromů
+    for i in range(15):
+        textura = textury[14] if i % 2 == 0 else textury[15]
+        x = 40 + i * (textury_rect[15].height+ mezera)
+        interakcni_zony.append(InterakcniZona(x, 3730, 0, 0, nic, textura=textura))
+    #### horní řada stromů - pt. 1
+    for i in range(6):
+        textura = textury[14] if i % 2 == 0 else textury[15]
+        x = 40 + i * (textury_rect[15].height+ mezera)
+        interakcni_zony.append(InterakcniZona(x, 2820, 0, 0, nic, textura=textura))
+    #### horní řada stromů - pt. 2
+    for i in range(5):
+        textura = textury[14] if i % 2 == 0 else textury[15]
+        x = 1166 + i * (textury_rect[15].height+ mezera)
+        interakcni_zony.append(InterakcniZona(x, 2820, 0, 0, nic, textura=textura))
+
+    interakcni_zony.append(InterakcniZona(1690, 3570, 0, 0, nic, textura=textury[19]))#chata
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
-    interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data]))
-    interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data]))
+    interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
+    interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
     #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
     #parkovisko
     #interakcni_zony.append(InterakcniZona(600, 1900, parkovisko_rect.width, parkovisko_rect.height, nic, textura=scaled_textura_parkoviste))
