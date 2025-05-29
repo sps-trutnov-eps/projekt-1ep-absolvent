@@ -70,13 +70,11 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
     if hrac.y - velikost_okna[1] // 2 > velikost_mapy.top and hrac.y + velikost_okna[1] // 2 + hrac.vyska < velikost_mapy.bottom:
         offset[1] = -hrac.y + velikost_okna[1] // 2
 
-    for budova in budovy:
-        budova.nakresli(okno, offset) # nakresli budovy
-
     for zona in interakcni_zony:
         zona.nakresli(okno, offset)
         zona.interakce(hrac, interaguje)
-
+    for budova in budovy:
+        budova.nakresli(okno, offset)
     # zabrani hraci jit mimo mapu
     if hrac.x < velikost_mapy.left:
         hrac.x = velikost_mapy.left
