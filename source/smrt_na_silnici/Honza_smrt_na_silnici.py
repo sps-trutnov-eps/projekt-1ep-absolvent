@@ -1,166 +1,144 @@
-import sys
-from pathlib import Path
-
-parent_dir = Path(__file__).resolve().parent.parent
-sys.path.append(str(parent_dir))
-
-from master import main as masterFunc
-from master import convertFuncToStr as novyProgram
-
-# sem piste importy
 import pygame
 import random
 import sys
 
+# Constants
+SCREEN_WIDTH = 1920
+SCREEN_HEIGHT = 1080
+PLAYER_WIDTH = 15
+PLAYER_HEIGHT = 26
+PLAYER_SPEED = 3
+LANE_HEIGHT = 60
+LANE_START_Y = 50
+NUM_LANES = 16
+CAR_WIDTH = 80
+CAR_HEIGHT = 40
+FPS_LIMIT = 600
+
+# Paths
+TEXTURE_PATH = "textury/hrac/zadni_krok2.png"
+ROAD_PATH = "smrt_na_silnici/silnice3.png"
+SIDEWALK_PATH = "smrt_na_silnici/chodnik.png"
+CAR_IMAGES_PATHS = [
+    "smrt_na_silnici/tyrak.png",
+    "smrt_na_silnici/kia.png",
+    "smrt_na_silnici/f1.png",
+    "smrt_na_silnici/911.png",
+    "smrt_na_silnici/smart.png",
+    "smrt_na_silnici/tyrak-bedna.png",
+]
+
+
+def load_and_scale(path, size=None, flip=False):
+    img = pygame.image.load(path).convert_alpha()
+    if size:
+        img = pygame.transform.scale(img, size)
+    if flip:
+        img = pygame.transform.flip(img, True, False)
+    return img
+
+
+def create_lanes():
+    return [{
+        'rect': pygame.Rect(0, LANE_START_Y + i * LANE_HEIGHT, SCREEN_WIDTH, LANE_HEIGHT),
+        'cars': [],
+    } for i in range(NUM_LANES)]
+
+
+def reset_player():
+    return pygame.Rect(SCREEN_WIDTH // 2 - PLAYER_WIDTH // 2, SCREEN_HEIGHT - int(1.5 * PLAYER_HEIGHT), PLAYER_WIDTH, PLAYER_HEIGHT)
+
+
 def main(global_data):
-    rozliseni_x = 1920
-    rozliseni_y = 1080
-    textura_hrace = pygame.image.load(f"textury\\hrac\\zadni_krok2.png")
-    scaled_textura_hrace = pygame.transform.scale(textura_hrace, (35, 46))
-    hrac_x = 15 #3x zmensen
-    hrac_y = 26 #3x zmensen
-
-    hrac = pygame.Rect(rozliseni_x/2 - hrac_x/2,rozliseni_y-1.5*hrac_y, hrac_x, hrac_y)
-    hrac_barva = "green"
-    hrac_rychlost = 3
-
-
-    zobrazovacka = pygame.display.set_mode((rozliseni_x, rozliseni_y))
-    pygame.display.set_caption("ŽIVOT")#("minihra - Smrt na silnici")
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.HWSURFACE | pygame.DOUBLEBUF)
+    pygame.display.set_caption("ŽIVOT")
     pygame.font.init()
+    clock = pygame.time.Clock()
     font = pygame.font.SysFont("Arial", 30)
 
-    silnice_x = rozliseni_x
-    silnice_y = 60
-    silnice = pygame.image.load("smrt_na_silnici/silnice3.png")
-    #zacatek silnice = 50
-    #konec silnice = 950
-    chodnik = pygame.image.load("smrt_na_silnici/chodnik.png").convert_alpha()
-    
-    auticko_x = 80
-    auticko_y = 40
-    #bus = 200
-    #vlak = 700
-    obrazky_aut = [
-        pygame.image.load("smrt_na_silnici/tyrak.png").convert_alpha(),
-        pygame.image.load("smrt_na_silnici/kia.png").convert_alpha(),
-        pygame.image.load("smrt_na_silnici/f1.png").convert_alpha(),
-        pygame.image.load("smrt_na_silnici/911.png").convert_alpha(),
-        pygame.image.load("smrt_na_silnici/smart.png").convert_alpha(),
-        pygame.image.load("smrt_na_silnici/tyrak-bedna.png").convert_alpha(),
-        ]
+    # Load images
+    player_img = load_and_scale(TEXTURE_PATH, (35, 46))
+    sidewalk = pygame.image.load(SIDEWALK_PATH).convert_alpha()
+    road = pygame.image.load(ROAD_PATH).convert_alpha()
+    car_images = [pygame.image.load(p).convert_alpha() for p in CAR_IMAGES_PATHS]
 
-    prohra = False
-
-    hodiny = pygame.time.Clock()
-    pruhy = []
-    zivoty = 3
-
-    for i in range(16):
-        pruhy.append({
-            'barva': "black",
-            'rect': pygame.Rect(0, (i*silnice_y+50), rozliseni_x, silnice_y),
-            'autaci': []
-        })
+    # Game state
+    player = reset_player()
+    lanes = create_lanes()
+    lives = 3
+    game_over = False
 
     while True:
-        ##########################################
-        #klikanie
-        ##########################################
-        for udalost in pygame.event.get():
-            # vypnuti krizkem nebo ALT+F4
-            if udalost.type == pygame.QUIT:
+        # --- Events ---
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 return 0
-            # vypnuti klavesou Escape
-            if udalost.type == pygame.KEYDOWN:
-                if udalost.key == pygame.K_ESCAPE:
-                    return 0
-        hold = pygame.key.get_pressed()
-        if hold[pygame.K_w]:
-            hrac.top -= hrac_rychlost
-        if hold[pygame.K_a]:
-            hrac.left -= hrac_rychlost
-            if hrac.left <= 0:
-                hrac.left = 0
-        if hold[pygame.K_d]:
-            hrac.right += hrac_rychlost
-            if hrac.right >= rozliseni_x:
-                hrac.right = rozliseni_x
-        if hold[pygame.K_s]:
-            hrac.bottom += hrac_rychlost
-        ##########################################
-        ##########################################
-            
-        
-        #vykresleni
-        zobrazovacka.fill("white")
-        for pruh in pruhy:
-            smer = random.choice((-1,1))
-            if pruh["autaci"] == []:
-                rychlost = random.random() * 3 + 3
-                for i in range(random.randint(1,3)):
-                    obrazek = random.choice(obrazky_aut)
-                    if smer == -1:
-                        obrazek = pygame.transform.flip(obrazek, True, False)
-                        pruh["autaci"].append({
-                            "rect": pygame.Rect(auticko_x + silnice_x - i*random.randint(int(auticko_x*1.25), int(auticko_x*1.5))*(1 if rychlost < 0 else -1), pruh["rect"].y+10, auticko_x, auticko_y),
-                            "obrazek": obrazek,
-                            "rychlost": -rychlost
-                        })
-                    else:
-                        pruh["autaci"].append({
-                            "rect": pygame.Rect(-auticko_x - i*random.randint(int(auticko_x*1.25), int(auticko_x*1.5))*(-1 if rychlost < 0 else 1), pruh["rect"].y+10, auticko_x, auticko_y),
-                            "obrazek": obrazek,
-                            "rychlost": rychlost
-                        })
-                    obrazek = random.choice(obrazky_aut)
 
-            for auto in pruh["autaci"]:
-                if auto["rect"].colliderect(hrac):
-                    hrac = pygame.Rect(rozliseni_x/2 - hrac_x/2,rozliseni_y-1.5*hrac_y, hrac_x, hrac_y)
-                    zivoty -= 1
-                    if zivoty == 0:
-                        prohra = True
+        # --- Movement ---
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_w]:
+            player.top -= PLAYER_SPEED
+        if keys[pygame.K_s]:
+            player.bottom += PLAYER_SPEED
+        if keys[pygame.K_a]:
+            player.left = max(0, player.left - PLAYER_SPEED)
+        if keys[pygame.K_d]:
+            player.right = min(SCREEN_WIDTH, player.right + PLAYER_SPEED)
 
-            zobrazovacka.blit(silnice, pruh["rect"])  
-            zobrazovacka.blit(chodnik, (0, -80))
-            zobrazovacka.blit(chodnik,(1024,-80))
-            zobrazovacka.blit(chodnik,(0,1010))
-            zobrazovacka.blit(chodnik,(1024,1010))
-            fps = hodiny.get_fps()
-            zobrazovacka.blit(font.render(f"{fps}", True, (255, 255, 255)), (10, 10))
-            
-                
-            temp_autaci = pruh["autaci"].copy()
-            for tacoauto in pruh["autaci"]:
-                tacoauto["rect"].x += tacoauto["rychlost"]
-                zobrazovacka.blit(tacoauto["obrazek"], tacoauto["rect"])
+        # --- Drawing ---
+        screen.fill("white")
 
+        # Draw sidewalks
+        for x in (0, 1024):
+            screen.blit(sidewalk, (x, -80))
+            screen.blit(sidewalk, (x, 1010))
 
-                if tacoauto["rychlost"] > 0:
-                    if tacoauto["rect"].x > rozliseni_x:
-                        temp_autaci.remove(tacoauto)
-                        
-                if tacoauto["rychlost"] < 0:
-                    if tacoauto["rect"].x < - auticko_x:
-                        temp_autaci.remove(tacoauto)
-            
-            pruh['autaci'] = temp_autaci.copy()
-                        
-        
-        zobrazovacka.blit(scaled_textura_hrace,(hrac.x,hrac.y))
-        
-        
-        zivoty_text = font.render(f"Životy: {zivoty}", True, (255, 0, 0))
-        zobrazovacka.blit(zivoty_text, (10, 10))
-        
-        if prohra == True:
-            zobrazovacka.fill("blue")
+        # FPS counter (optional debug)
+        screen.blit(font.render(f"{int(clock.get_fps())}", True, (255, 255, 255)), (10, 10))
+
+        # Draw lanes and cars
+        for lane in lanes:
+            screen.blit(road, lane["rect"])
+            if not lane["cars"]:
+                speed = random.uniform(3, 6)
+                direction = random.choice([-1, 1])
+                for i in range(random.randint(1, 3)):
+                    img = random.choice(car_images)
+                    flipped_img = pygame.transform.flip(img, True, False) if direction == -1 else img
+                    x_start = SCREEN_WIDTH + i * random.randint(int(CAR_WIDTH * 1.25), int(CAR_WIDTH * 1.5)) if direction == -1 else \
+                              -CAR_WIDTH - i * random.randint(int(CAR_WIDTH * 1.25), int(CAR_WIDTH * 1.5))
+                    lane["cars"].append({
+                        "rect": pygame.Rect(x_start, lane["rect"].y + 10, CAR_WIDTH, CAR_HEIGHT),
+                        "img": flipped_img,
+                        "speed": direction * speed
+                    })
+
+            for car in lane["cars"][:]:
+                car["rect"].x += car["speed"]
+                screen.blit(car["img"], car["rect"])
+
+                if car["rect"].colliderect(player):
+                    player = reset_player()
+                    lives -= 1
+                    if lives <= 0:
+                        game_over = True
+
+                if car["speed"] > 0 and car["rect"].x > SCREEN_WIDTH:
+                    lane["cars"].remove(car)
+                elif car["speed"] < 0 and car["rect"].x < -CAR_WIDTH:
+                    lane["cars"].remove(car)
+
+        # Draw player
+        screen.blit(player_img, (player.x, player.y))
+
+        # Lives display
+        lives_text = font.render(f"Životy: {lives}", True, (255, 0, 0))
+        screen.blit(lives_text, (10, 10))
+
+        if game_over:
+            screen.fill("blue")
             pygame.display.set_caption("NO ŽIVOT")
-        
-        pygame.display.update()
-        hodiny.tick(60)
-    # pro otevreni okna "global_data['otevrena_okna'].append(novyProgram(funkce))"
 
-if __name__ == "__main__":
-    masterFunc(novyProgram(main))
+        pygame.display.update()
+        clock.tick(FPS_LIMIT)
