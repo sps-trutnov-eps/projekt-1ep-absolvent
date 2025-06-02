@@ -7,6 +7,9 @@ import os
 
 
 def main(global_data):
+    new_dir = "laptop/hry/Space_Battle_main"
+    os.chdir(new_dir)
+
     pg.font.init()
 
     rozliseni_x = 900
@@ -16,7 +19,7 @@ def main(global_data):
     
     cesta = os.path.join("..", "laptop", "laptop.py")
     
-    obrazek_v_okinku = pg.transform.scale(pg.image.load("hry\\Space_Battle_main\\Nature.jpg"),
+    obrazek_v_okinku = pg.transform.scale(pg.image.load("Nature.jpg"),
                                           (rozliseni_x, rozliseni_y))
 
     okinko = pg.display.set_mode((rozliseni_x, rozliseni_y))
@@ -40,7 +43,7 @@ def main(global_data):
     kanon_barva = (255, 255, 255)
 
     # střely hráče
-    textura_strely = pg.image.load("hry\\Space_Battle_main\\strela.png")
+    textura_strely = pg.image.load("strela.png")
     strely = []
     strely_rychlost = 10
 
@@ -177,4 +180,3 @@ def main(global_data):
         
         pg.display.update()
         hodiny.tick(60)
-     
