@@ -134,7 +134,9 @@ def main(global_data):
     text3 = font1.render("Plane Game", True, (255, 255, 255))
     text4 = font2.render("Platformer Game", True, (255, 255, 255))
     text5 = font1.render("Jump Game", True, (255, 255, 255))
-
+    text6 = font2.render("Catze VS mouze", True, (255, 255, 255))
+    text7 = font2.render("The jumping man", True, (255, 255, 255))
+    
     
     
     
@@ -144,7 +146,9 @@ def main(global_data):
     rect3 = pygame.Rect(rozliseni_sirka / 1.67, rozliseni_vyska / 5.1, rozliseni_sirka / 7, rozliseni_vyska / 15)
     rect4 = pygame.Rect(rozliseni_sirka / 4, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15)
     rect5 = pygame.Rect(rozliseni_sirka / 2.35, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15)
-            
+    rect6 = pygame.Rect(rozliseni_sirka / 1.67, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect7 = pygame.Rect(rozliseni_sirka / 4, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    
     
     kalkulacka_zapnuta = False
     
@@ -276,10 +280,17 @@ def main(global_data):
                     print("jump game")
                     
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15))
-
-            
+            screen.blit(text6, (rozliseni_sirka / 1.66, rozliseni_vyska / 3.37))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect6.collidepoint(udalost.pos):
+                    print("Catze_VS_mouze")
+        
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15))
-            
+            screen.blit(text7, (rozliseni_sirka / 3.9, rozliseni_vyska / 2.57))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect7.collidepoint(udalost.pos):
+                    print("the_jumping_man")
+                    
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15))
             
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15))
