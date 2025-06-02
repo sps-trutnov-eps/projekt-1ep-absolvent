@@ -10,7 +10,10 @@ class Button :
         okno.blit(self.textura,(self.rect))
     
     def collide(self,pos):
+        
         return self.rect.collidepoint(pos[0],pos[1])
         
+    
+    
         
     

@@ -32,16 +32,18 @@ textury = [
         "selection_button_2":pygame.image.load("textury/Button_back.png"),
     }
 ]
-s
-textury[0]["button_1_1"]
+
+
 
 backround=pygame.image.load("textury/pozadí_shopu.png")
 
 shop = True 
 x,y = 800,600
-buttony = []
-for j, i in enumerate(textury):
-    buttony.append(Button(100, j*100, textury[i] ))
+moznosti1 = []
+moznosti2 = []
+for i in range(1,5):
+    moznosti1.append(Button(100,100*i, textury[0][f"button_1_{i}"] ))
+    moznosti2.append(Button(100,100*i, textury[1][f"button_2_{i}"] ))
     
 
 
@@ -53,13 +55,21 @@ while shop:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             shop = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            klik = True
+        else:
+            klik= False
 
     screen.blit(backround, (0, 0))
-    for i in buttony:
-        i.draw(screen)
-        if i.collide(mouse_pos):
-            if 
+
+    for j,button in enumerate(moznosti1):
+        button.draw(screen)
+        if button.collide(mouse_pos) and klik:
+            preview = j
+
+    moznosti1[j].draw(screen)
     
+
 
 
 
