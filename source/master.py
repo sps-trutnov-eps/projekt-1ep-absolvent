@@ -132,7 +132,8 @@ def reset(global_data):
             "doleva": 97,
             "doprava": 100
         },
-        "inventory": []
+        "inventory": [],
+        "kasna_vybrana": False
     }
 
     ulozit(global_data)
@@ -178,4 +179,5 @@ def main(funkce = None):
 
 
 if __name__ == "__main__":
-    main()
+    from kasna.kasna import main as Game
+    main(convertFuncToStr(Game))
