@@ -94,10 +94,16 @@ def main(global_data):
     jmeno_pole_visible = input_text == ""
 
     battery = stav.get("battery", rozliseni_vyska / 1.08)
-    battery_minus = rozliseni_sirka / 170
+    battery_minus = rozliseni_sirka / 100
     posledni_akce = pygame.time.get_ticks()
     clock = pygame.time.Clock()
+    
+    
+    
 
+        
+    
+    
     okno_her_zapnuto = False
 
     icon_x = rozliseni_sirka / 5
