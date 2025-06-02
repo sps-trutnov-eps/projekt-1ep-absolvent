@@ -15,14 +15,18 @@ import sys
 def main(global_data):
     rozliseni_x = 1920
     rozliseni_y = 1080
-    textura_hrace = pygame.image.load(f"textury\\hrac\\zadni_krok2.png")
-    scaled_textura_hrace = pygame.transform.scale(textura_hrace, (35, 46))
+    
+    textura_hrace1 = pygame.image.load(f"textury\\hrac\\zadni_krok1.png")
+    scaled_textura_hrace1 = pygame.transform.scale(textura_hrace1, (35, 46))
+    textura_hrace2 = pygame.image.load(f"textury\\hrac\\zadni_krok2.png")
+    scaled_textura_hrace2 = pygame.transform.scale(textura_hrace2, (35, 46))
     hrac_x = 15 #3x zmensen
     hrac_y = 26 #3x zmensen
+    frame_counter = 0  # Počítadlo snímků pro animaci
+    aktualni_textura = 0
 
     hrac = pygame.Rect(rozliseni_x/2 - hrac_x/2,rozliseni_y-1.5*hrac_y, hrac_x, hrac_y)
-    hrac_barva = "green"
-    hrac_rychlost = 3
+    hrac_rychlost = 1
 
 
     zobrazovacka = pygame.display.set_mode((rozliseni_x, rozliseni_y))
@@ -90,7 +94,11 @@ def main(global_data):
             hrac.bottom += hrac_rychlost
         ##########################################
         ##########################################
-            
+        frame_counter += 1
+        if frame_counter >= 15:  #přepinani textry hrace
+            aktualni_textura = 1 - aktualni_textura  
+            frame_counter = 0
+
         
         #vykresleni
         zobrazovacka.fill("white")
@@ -146,9 +154,19 @@ def main(global_data):
                         temp_autaci.remove(tacoauto)
             
             pruh['autaci'] = temp_autaci.copy()
-                        
         
-        zobrazovacka.blit(scaled_textura_hrace,(hrac.x,hrac.y))
+        if hold[pygame.K_w] or hold[pygame.K_a] or hold[pygame.K_s] or hold[pygame.K_d]:
+            if aktualni_textura == 0:
+                zobrazovacka.blit(scaled_textura_hrace1, (hrac.x, hrac.y))
+            else:
+                zobrazovacka.blit(scaled_textura_hrace2, (hrac.x, hrac.y))
+        else:
+            # když se nehýbe, zobraz první texturu (nebo klidovou, pokud máš)
+            zobrazovacka.blit(scaled_textura_hrace1, (hrac.x, hrac.y))
+
+        
+
+            
         
         
         zivoty_text = font.render(f"Životy: {zivoty}", True, (255, 0, 0))

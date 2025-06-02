@@ -236,5 +236,5 @@ def main(funkce = None):
 
 
 if __name__ == "__main__":
-    from mesta.mapa.main import main as TheProgram
+    from mesta.mapa.main import main as TheProgram #mesta.mapa.main
     main(convertFuncToStr(TheProgram))

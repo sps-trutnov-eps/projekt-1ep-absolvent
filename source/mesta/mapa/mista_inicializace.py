@@ -45,12 +45,16 @@ def mesto1Init(okno, velikost_okna, global_data):
                "lavicka.png",#18
                "chata1.png",#19
                "vodojem.png",#20
-               "park_cesty.png"#21
+               "park_cesty.png",#21
+               "radnice.png",#22
+               "stanice.png",#23
+
                ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert_alpha() for textura in textury]
 #NAMESTI
     scaled_banka = pygame.transform.scale(textury[6], (380, 320))
+    scaled_stanice = pygame.transform.scale(textury[23],(200,320))
     #textury_itemy = [pygame.image.load(f"textury\\itemy\\{textura}").convert() for textura in textury_itemy]
     #silnice 
     silnice_rect = textury[7].get_rect()
@@ -66,9 +70,10 @@ def mesto1Init(okno, velikost_okna, global_data):
     budovy = []
     #prvni horní řada domů z leva (0,0) - prvni dum v pořadí
     budovy.append(Budova(okno, 0, 0, 0, 0, textury[1]))
-    budovy.append(Budova(okno, textury_rect[1].width, 0, textury_rect[2].width, textury_rect[2].height, textury[2]))
-    budovy.append(Budova(okno, 2*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
-    budovy.append(Budova(okno, 3*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
+    budovy.append(Budova(okno, 200, 0, 200, 320, scaled_stanice))#stanice
+    budovy.append(Budova(okno, 400, 0, textury_rect[22].width, textury_rect[22].height, textury[22]))#radnice
+    #budovy.append(Budova(okno, 2*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
+    #budovy.append(Budova(okno, 3*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
     budovy.append(Budova(okno, 4*textury_rect[1].width+10, 0, textury_rect[6].width, textury_rect[6].height, scaled_banka)) #banka
     
     #####budovy.append(Budova(okno, 4*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[2]))
@@ -201,7 +206,7 @@ def mesto2Init(okno, velikost_okna, global_data):
 def mesto3Init(okno, velikost_okna, global_data):
 
 
-    velikost_mapy = pygame.Rect(0, 2780, 2050,1180)
+    velikost_mapy = pygame.Rect(0, 2780, 2050,1175)
 
 
     # vytvori budovy
@@ -276,7 +281,8 @@ def mesto3Init(okno, velikost_okna, global_data):
         x = 1166 + i * (textury_rect[15].height+ mezera)
         budovy.append(Budova(okno, x, 2820,textury_rect[15].width,textury_rect[15].height, textura=textura))
 
-    interakcni_zony.append(InterakcniZona(1690, 3555, 0, 0, nic, textura=textury[19]))#chata
+    budovy.append(Budova(okno, 1700, 3560,0,0, textura=textury[19]))
+    #interakcni_zony.append(InterakcniZona(1690, 3555, 0, 0, nic, textura=textury[19]))#chata
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
     #interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
