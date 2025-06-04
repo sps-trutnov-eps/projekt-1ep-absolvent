@@ -169,21 +169,26 @@ def mesto2Init(okno, velikost_okna, global_data):
 #PARKOVISTE
     scaled_textura_parkoviste = pygame.transform.scale(textury[5], (2000, 1100))
     vodojem_scaled = pygame.transform.scale(textury[20], (400, 600))
+    scaled_odpadak = pygame.transform.scale(textury[22], (50, 55))
+    odpadak_rect = scaled_odpadak.get_rect()
 
     # .convert_alpha() kdyz pouziva alpha
     print(textury)
     okno.fill((100, 150, 200))
     textury_rect = [item.get_rect() for item in textury]
     budovy = []
-    #šablona: budovy.append(Budova(okno, 1800, 1220 + textury_rect[1].height-220, textury_rect[1].width, textury_rect[1].height, textury[4]))
-    #silnice 
-    #MODEL
     
     
-    #interakcni_zony.append(InterakcniZona(400, 570, 1200, 500, nic, textura=textury[12]))#temp namko
+    budovy.append(Budova(okno, 1780, 2980, odpadak_rect.width, odpadak_rect.height, scaled_odpadak))#kos
+    
+    
     #PARKOVISTE
     interakcni_zony.append(InterakcniZona(0, 1650, 0, 0, nic, textura=scaled_textura_parkoviste))#parkoviste
     interakcni_zony.append(InterakcniZona(-100, 2150, 0, 0, nic, textura=vodojem_scaled))
+    #odpadaky
+    budovy.append(Budova(okno, 370, 2050, odpadak_rect.width, odpadak_rect.height, scaled_odpadak))
+    budovy.append(Budova(okno, 1340, 2050, odpadak_rect.width, odpadak_rect.height, scaled_odpadak))
+    budovy.append(Budova(okno, 1950, 2615, odpadak_rect.width, odpadak_rect.height, scaled_odpadak))
 
     
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
@@ -235,7 +240,9 @@ def mesto3Init(okno, velikost_okna, global_data):
                "vodojem.png",#20
                "park_cesty.png",#21
                "najezd.png",#22
-               "odpadak.png"#23,
+               "odpadak.png",#23,
+               "info_cedule.png" #24
+
                ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert_alpha() for textura in textury]
@@ -252,6 +259,8 @@ def mesto3Init(okno, velikost_okna, global_data):
     scaled_kytky = pygame.transform.scale(textury[17], (40, 40))
     scaled_odpadak = pygame.transform.scale(textury[23], (40, 45))
     odpadak_rect = scaled_odpadak.get_rect()
+    scaled_info_cedule = pygame.transform.scale(textury[24], (80, 80))
+    info_cedule_rect = scaled_info_cedule.get_rect()
 #PARK
     interakcni_zony.append(InterakcniZona(0, 2780, 0, 0, nic, textura=scaled_park))#park pt. 1
     interakcni_zony.append(InterakcniZona(1020, 2780, 0, 0, nic, textura=scaled_park))#park pt. 2
@@ -282,8 +291,10 @@ def mesto3Init(okno, velikost_okna, global_data):
     #### horní řada stromů - pt. 2
     for i in range(5):
         textura = textury[14] if i % 2 == 0 else textury[15]
-        x = 1166 + i * (textury_rect[15].height+ mezera)
+        x = 1240 + i * (textury_rect[15].height+ mezera)
         budovy.append(Budova(okno, x, 2820,textury_rect[15].width,textury_rect[15].height, textura=textura))
+    #info cedule
+    budovy.append(Budova(okno, 1150, 2850, info_cedule_rect.width, info_cedule_rect.height, scaled_info_cedule))
     #kytky - pravy/horni sektor
     interakcni_zony.append(InterakcniZona(495, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
     interakcni_zony.append(InterakcniZona(520, 3190, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
