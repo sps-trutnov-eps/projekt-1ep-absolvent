@@ -26,7 +26,7 @@ def main(global_data):
     aktualni_textura = 0
 
     hrac = pygame.Rect(rozliseni_x/2 - hrac_x/2,rozliseni_y-1.5*hrac_y, hrac_x, hrac_y)
-    hrac_rychlost = 1
+    hrac_rychlost = 2
 
 
     zobrazovacka = pygame.display.set_mode((rozliseni_x, rozliseni_y))

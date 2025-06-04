@@ -71,7 +71,7 @@ def mesto1Init(okno, velikost_okna, global_data):
     #prvni horní řada domů z leva (0,0) - prvni dum v pořadí
     budovy.append(Budova(okno, 0, 0, 0, 0, textury[1]))
     budovy.append(Budova(okno, 200, 0, 200, 320, scaled_stanice))#stanice
-    budovy.append(Budova(okno, 400, 0, textury_rect[22].width, textury_rect[22].height, textury[22]))#radnice
+    budovy.append(Budova(okno, 405, 0, textury_rect[22].width, textury_rect[22].height, textury[22]))#radnice
     #budovy.append(Budova(okno, 2*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
     #budovy.append(Budova(okno, 3*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
     budovy.append(Budova(okno, 4*textury_rect[1].width+10, 0, textury_rect[6].width, textury_rect[6].height, scaled_banka)) #banka
@@ -112,11 +112,8 @@ def mesto1Init(okno, velikost_okna, global_data):
     
     #silnice 
     #MODEL
-    interakcni_zony.append(InterakcniZona(0, 620, 0, 0, nic, textura=textury[7]))#silnice
-    interakcni_zony.append(InterakcniZona(200, 620, 0, 0, nic, textura=textury[8]))#kanalova silnica
-    interakcni_zony.append(InterakcniZona(0, 620, 0, 0, nic, textura=textury[9]))#zatacka
     
-    #interakcni_zony.append(InterakcniZona(400, 570, 1200, 500, nic, textura=textury[12]))#temp namko
+    
     
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
@@ -243,6 +240,7 @@ def mesto3Init(okno, velikost_okna, global_data):
 #PARK
     scaled_park = pygame.transform.scale(textury[13], (1050, 1090))
     scaled_cesty = pygame.transform.scale(textury[21], (1660, 740))
+    scaled_kytky = pygame.transform.scale(textury[17], (40, 40))
     # .convert_alpha() kdyz pouziva alpha
     print(textury)
     okno.fill((100, 150, 200))
@@ -280,8 +278,74 @@ def mesto3Init(okno, velikost_okna, global_data):
         textura = textury[14] if i % 2 == 0 else textury[15]
         x = 1166 + i * (textury_rect[15].height+ mezera)
         budovy.append(Budova(okno, x, 2820,textury_rect[15].width,textury_rect[15].height, textura=textura))
+    #kytky - pravy/horni sektor
+    interakcni_zony.append(InterakcniZona(495, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(520, 3190, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(545, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(570, 3190, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(600, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(625, 3190, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(650, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    #kytky - pravy/dolni sektor
+    interakcni_zony.append(InterakcniZona(495, 3470, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(520, 3520, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(545, 3470, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(570, 3520, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(600, 3470, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(625, 3520, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(650, 3470, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    #kytky - levi/horni sektor
+    interakcni_zony.append(InterakcniZona(1280, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1305, 3190, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1330, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1355, 3190, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1380, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1405, 3190, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1430, 3140, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    #kytky - levi/dolni sektor
+    interakcni_zony.append(InterakcniZona(1280, 3470, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1305, 3520, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1330, 3470, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1355, 3520, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1380, 3470, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1405, 3520, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    interakcni_zony.append(InterakcniZona(1430, 3470, textury_rect[17].width,textury_rect[17].height , nic, textura=scaled_kytky))
+    #kere - 1 rada
+    budovy.append(Budova(okno, 335, 3140, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 335, 3190, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 335, 3470, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 335, 3520, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    #kere - 2 rada
+    budovy.append(Budova(okno, 795, 3140, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 795, 3190, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 795, 3470, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 795, 3520, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    #kere - 3 rada
+    budovy.append(Budova(okno, 1120, 3140, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 1120, 3190, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 1120, 3470, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 1120, 3520, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    #kere - 4 rada
+    budovy.append(Budova(okno, 1585, 3140, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 1585, 3190, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 1585, 3470, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    budovy.append(Budova(okno, 1585, 3520, textury_rect[16].width, textury_rect[16].height, textury[16]))
+    #lavicky - 1 rada
+    budovy.append(Budova(okno, 395, 3130, textury_rect[18].width, textury_rect[18].height, textury[18]))
+    budovy.append(Budova(okno, 395, 3460, textury_rect[18].width, textury_rect[18].height, textury[18]))
+    #lavicky - 2 rada
+    budovy.append(Budova(okno, 690, 3130, textury_rect[18].width, textury_rect[18].height, textury[18]))
+    budovy.append(Budova(okno, 690, 3460, textury_rect[18].width, textury_rect[18].height, textury[18]))
+    #lavicky - 3 rada
+    budovy.append(Budova(okno, 1180, 3130, textury_rect[18].width, textury_rect[18].height, textury[18]))
+    budovy.append(Budova(okno, 1180, 3460, textury_rect[18].width, textury_rect[18].height, textury[18]))
+    #lavicky - 4 rada
+    budovy.append(Budova(okno, 1480, 3130, textury_rect[18].width, textury_rect[18].height, textury[18]))
+    budovy.append(Budova(okno, 1480, 3460, textury_rect[18].width, textury_rect[18].height, textury[18]))
 
-    budovy.append(Budova(okno, 1700, 3560,0,0, textura=textury[19]))
+
+
+    budovy.append(Budova(okno, 1700, 3565,0,0, textura=textury[19]))
     #interakcni_zony.append(InterakcniZona(1690, 3555, 0, 0, nic, textura=textury[19]))#chata
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
