@@ -161,7 +161,8 @@ def mesto2Init(okno, velikost_okna, global_data):
                "lavicka.png",#18
                "chata1.png",#19
                "vodojem.png",#20
-               "park_cesty.png"#21
+               "park_cesty.png",#21
+               "odpadak.png"#22
                ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert_alpha() for textura in textury]
@@ -234,18 +235,23 @@ def mesto3Init(okno, velikost_okna, global_data):
                "vodojem.png",#20
                "park_cesty.png",#21
                "najezd.png",#22
+               "odpadak.png"#23,
                ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert_alpha() for textura in textury]
-#PARK
-    scaled_park = pygame.transform.scale(textury[13], (1050, 1090))
-    scaled_cesty = pygame.transform.scale(textury[21], (1660, 740))
-    scaled_kytky = pygame.transform.scale(textury[17], (40, 40))
+
     # .convert_alpha() kdyz pouziva alpha
     print(textury)
     okno.fill((100, 150, 200))
     textury_rect = [item.get_rect() for item in textury]
     budovy = []
+
+#PARK
+    scaled_park = pygame.transform.scale(textury[13], (1050, 1090))
+    scaled_cesty = pygame.transform.scale(textury[21], (1660, 740))
+    scaled_kytky = pygame.transform.scale(textury[17], (40, 40))
+    scaled_odpadak = pygame.transform.scale(textury[23], (40, 45))
+    odpadak_rect = scaled_odpadak.get_rect()
 #PARK
     interakcni_zony.append(InterakcniZona(0, 2780, 0, 0, nic, textura=scaled_park))#park pt. 1
     interakcni_zony.append(InterakcniZona(1020, 2780, 0, 0, nic, textura=scaled_park))#park pt. 2
@@ -342,6 +348,12 @@ def mesto3Init(okno, velikost_okna, global_data):
     #lavicky - 4 rada
     budovy.append(Budova(okno, 1480, 3130, textury_rect[18].width, textury_rect[18].height, textury[18]))
     budovy.append(Budova(okno, 1480, 3460, textury_rect[18].width, textury_rect[18].height, textury[18]))
+    #kose - 1 rada
+    budovy.append(Budova(okno, 160, 2980, odpadak_rect.width-10, odpadak_rect.height-10, scaled_odpadak))
+    budovy.append(Budova(okno, 160, 3665, odpadak_rect.width-10, odpadak_rect.height-10, scaled_odpadak))
+    #kose - 2 rada
+    budovy.append(Budova(okno, 1780, 2980, odpadak_rect.width, odpadak_rect.height, scaled_odpadak))
+    #budovy.append(Budova(okno, 1480, 3460, textury_rect[18].width, textury_rect[18].height, textury[18]))
 
 
 
