@@ -14,7 +14,9 @@ class Button :
         okno.blit(self.textura,(self.rect))
     
     def collide(self,pos):
+        
         return self.rect.collidepoint(pos[0],pos[1])
+<<<<<<< HEAD
     
     def ktery_button(self,jaka_funkce):
         if jaka_funkce == 1:
@@ -22,3 +24,10 @@ class Button :
         if jaka_funkce == 2:
 
         if jaka_funkce == 3:
+=======
+        
+    
+    
+        
+    
+>>>>>>> origin/jirous
