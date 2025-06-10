@@ -11,31 +11,31 @@ class Mince:
         if self.type == "1":
             self.radius = 8
             self.hodnota = 1
-            self.textura=pygame.image.load("1.png").convert_alpha()
+            self.textura=pygame.image.load("kasna\\1.png").convert_alpha()
         elif self.type == "2":
             self.radius = 10
             self.hodnota = 2
-            self.textura=pygame.image.load("2.png").convert_alpha()
+            self.textura=pygame.image.load("kasna\\2.png").convert_alpha()
         elif self.type == "5":
             self.radius = 12
             self.hodnota = 5
-            self.textura=pygame.image.load("5.png").convert_alpha()
+            self.textura=pygame.image.load("kasna\\5.png").convert_alpha()
         elif self.type == "10":
             self.radius = 17
             self.hodnota = 10
-            self.textura=pygame.image.load("10.png").convert_alpha()
+            self.textura=pygame.image.load("kasna\\10.png").convert_alpha()
         elif self.type == "20":
             self.radius = 20
             self.hodnota = 20
-            self.textura=pygame.image.load("20.png").convert_alpha()
+            self.textura=pygame.image.load("kasna\\20.png").convert_alpha()
         elif self.type == "50":
             self.radius = 25
             self.hodnota = 50
-            self.textura=pygame.image.load("50.png").convert_alpha()
+            self.textura=pygame.image.load("kasna\\50.png").convert_alpha()
         elif self.type == "sputnik":
             self.radius = 50
             self.hodnota = 10000
-            self.textura=pygame.image.load("sputnik.png").convert_alpha()
+            self.textura=pygame.image.load("kasna\\sputnik.png").convert_alpha()
     
     def _vyber_typ(self):
         typy = ["1", "2", "5", "10", "20", "50","sputnik"]

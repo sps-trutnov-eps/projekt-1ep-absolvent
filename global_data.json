@@ -22,5 +22,9 @@
         "doprava": 100
     },
     "inventory": [],
+    "inventory_xy": [
+        6,
+        3
+    ],
     "kasna_vybrana": false
 }
