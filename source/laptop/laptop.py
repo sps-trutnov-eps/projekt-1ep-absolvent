@@ -22,6 +22,36 @@ import datetime
 import json
 import os
 
+import win32gui
+import win32con
+
+import time
+
+
+def open_file(address):
+    os.startfile(address)
+    time.sleep(1)
+
+    file_title = os.path.basename(address)  # <-- fix here: just the file name
+
+    def find_notepad_window(title_part):
+        def callback(hwnd, result):
+            window_text = win32gui.GetWindowText(hwnd)
+            if title_part.lower() in window_text.lower():
+                result.append(hwnd)
+            return True
+
+        hwnds = []
+        win32gui.EnumWindows(callback, hwnds)
+        return hwnds[0] if hwnds else None
+
+    hwnd = find_notepad_window(file_title)
+    if hwnd:
+        win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)  # Restore if minimized
+        win32gui.MoveWindow(hwnd, 500, 300, 1300, 500, True)  # x, y, width, height, repaint
+    else:
+        print("Window not found.")
+
 def main(global_data):
     new_dir = "laptop"
     os.chdir(new_dir)
@@ -157,8 +187,7 @@ def main(global_data):
     for i, lore in enumerate(global_data["lory"]):
         if lore:
             cesta = f"lore\\lore{i+1}.txt"
-            os.startfile(cesta)
-            lore = False
+            open_file(cesta)
 
     # Hlavní smyčka
     while True:
