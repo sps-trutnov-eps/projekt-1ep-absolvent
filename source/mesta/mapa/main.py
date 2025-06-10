@@ -61,7 +61,6 @@ def main(global_data):
 
             if udalost.type == pygame.KEYDOWN:
                 if udalost.key == nastaveni['interakce']:
-                    print(True)
                     interaguje = True 
 
         if novyProgram(Nastaveni.main) in global_data['aktualni_okna']:

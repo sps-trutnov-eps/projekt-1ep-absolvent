@@ -21,5 +21,16 @@
         "pohyb_oken": 1073742050
     },
     "inventory": [],
-    "inventory_xy": [6, 3]
+    "inventory_xy": [
+        6,
+        3
+    ],
+    "lory": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ]
 }

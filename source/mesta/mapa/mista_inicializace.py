@@ -7,17 +7,16 @@ from master import convertFuncToStr as novyProgram
 
 from smrt_na_silnici.Honza_smrt_na_silnici import main as minihra
 
-
-
+import laptop.laptop
+from laptop.laptop import main as laptop27
 
 def nic():
     pass
 
-def lore1():
-    cesta = "lore\\absolvent1.txt"
-    os.startfile(cesta)
+def lore1(global_data):
+    global_data["lory"][0] = True
+    global_data['otevrena_okna'].append(novyProgram(laptop27))
 
-    
 
 def spusteni(global_data):
     global_data['otevrena_okna'].append(novyProgram(minihra))
@@ -43,7 +42,7 @@ def mesto1Init(okno, velikost_okna, global_data):
 
     budovy = []
     
-    interakcni_zony.append(InterakcniZona(100, 100, 100, 100, lore1, textura=flashka_rescaled))
+    interakcni_zony.append(InterakcniZona(100, 100, 100, 100, lore1, argumenty=[global_data], textura=flashka_rescaled))
 
 
     #budovy = [Budova(okno, sum([textury_rect[j].width for j in range(i)]), 0, textury_rect[i].width, textury_rect[i].height, textury[i]) for i in range(len(textury))]
