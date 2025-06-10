@@ -9,14 +9,12 @@ DOLU    = 1
 DOLEVA  = 2
 DOPRAVA = 3
 
-def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, nastaveni: dict):
+def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, nastaveni: dict, interaguje):
 
     klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
     
     hrac.rychlost_x = 0 # resetuje rychlost hrace
     hrac.rychlost_y = 0 # resetuje rychlost hrace
-    print(hrac.x, hrac.y)
-    interaguje = False   # jestli hrac chce s necim interaktovat - "e" je zmacknute
 
     # pohyb postavy
     if klice[nastaveni['nahoru']]:
@@ -40,9 +38,6 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
 
     if klice[nastaveni['doleva']] and klice[nastaveni['doprava']]:
         hrac.rychlost_x = 0
-
-    if klice[nastaveni['interakce']]:
-        interaguje = True
 
     # zabrani hraci aby nechodil rychleji sikmo
     if hrac.rychlost_x != 0 and hrac.rychlost_y != 0:

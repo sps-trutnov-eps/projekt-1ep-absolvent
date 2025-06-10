@@ -52,10 +52,17 @@ def main(global_data):
 
         klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
 
+        interaguje = False
+
         # kontrola udalosti
         for udalost in pygame.event.get():
             if udalost.type == pygame.QUIT: # kontroluje kdyz nekdo vykrizkuje z okna
                 programova_smycka = False
+
+            if udalost.type == pygame.KEYDOWN:
+                if udalost.key == nastaveni['interakce']:
+                    print(True)
+                    interaguje = True 
 
         if novyProgram(Nastaveni.main) in global_data['aktualni_okna']:
             nastaveni = dict(global_data['nastaveni'])
@@ -84,7 +91,7 @@ def main(global_data):
             global_data['reset'] = True                         ####################################### SMAZAT
 
 
-        veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset, nastaveni)
+        veMeste(okno, velikost_okna, hrac, budovy, interakcni_zony, velikost_mapy, offset, nastaveni, interaguje)
         if ulozit_hru:
             global_data['hrac']['x'] = hrac.x                   # PREMISTIT NA MISTO UKLADANI
             global_data['hrac']['y'] = hrac.y                   # PREMISTIT NA MISTO UKLADANI
