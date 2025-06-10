@@ -1,26 +1,52 @@
 import pygame
 import random
 
+CELL_SIZE = 20
+MAZE = [
+    "11111111111111111111",
+    "10000000000000000001",
+    "10111111111111111001",
+    "10100000000000101001",
+    "10101111111010101001",
+    "10101000001010101001",
+    "10101011101010101001",
+    "10101010001010101001",
+    "10101110111010101001",
+    "10000000000000000001",
+    "11111111111111111111"
+]
+
 class SnakeGame:
     def __init__(self, screen):
         self.screen = screen
         self.running = True
-        self.cell_size = 20
-        self.snake = [(100, 100), (80, 100), (60, 100)]
-        self.direction = (20, 0)
+        self.snake = [(100, 100), (80, 100), (60, 100)]  # Bezpečná start pozice
+        self.direction = (20, 0)  # Směr doprava
         self.food = self.spawn_food()
-        self.food_type = 'normal'
         self.clock = pygame.time.Clock()
         self.score = 0
         self.font = pygame.font.SysFont(None, 36)
+        self.maze_walls = self.create_walls()
+
+    def create_walls(self):
+        walls = []
+        for row_index, row in enumerate(MAZE):
+            for col_index, cell in enumerate(row):
+                if cell == '1':
+                    x = col_index * CELL_SIZE
+                    y = row_index * CELL_SIZE
+                    walls.append((x, y))
+        return walls
 
     def spawn_food(self):
-        while True:
-            x = random.randint(0, 39) * self.cell_size
-            y = random.randint(0, 29) * self.cell_size
-            if (x, y) not in self.snake:
-                self.food_type = random.choice(['normal', 'gold', 'bad'])
-                return (x, y)
+        free_spaces = []
+        for row in range(len(MAZE)):
+            for col in range(len(MAZE[0])):
+                x = col * CELL_SIZE
+                y = row * CELL_SIZE
+                if MAZE[row][col] == '0' and (x, y) not in self.snake:
+                    free_spaces.append((x, y))
+        return random.choice(free_spaces)
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -41,40 +67,28 @@ class SnakeGame:
     def update(self):
         new_head = (self.snake[0][0] + self.direction[0], self.snake[0][1] + self.direction[1])
 
-        if new_head in self.snake or new_head[0] < 0 or new_head[0] >= 800 or new_head[1] < 0 or new_head[1] >= 600:
+        # Kontrola kolize s hadem nebo zdmi
+        if new_head in self.snake or new_head in self.maze_walls:
             self.running = False
 
         self.snake.insert(0, new_head)
 
         if new_head == self.food:
-            if self.food_type == 'normal':
-                self.score += 1
-            elif self.food_type == 'gold':
-                self.score += 3
-                self.snake.append(self.snake[-1])
-                self.snake.append(self.snake[-1])
-            elif self.food_type == 'bad':
-                self.score = max(0, self.score - 1)
-                self.snake.append(self.snake[-1])
-
+            self.score += 1
             self.food = self.spawn_food()
         else:
             self.snake.pop()
 
     def draw(self):
-        self.screen.fill((30, 30, 30))
+        self.screen.fill((0, 0, 0))
+
+        for wall in self.maze_walls:
+            pygame.draw.rect(self.screen, (100, 100, 100), (*wall, CELL_SIZE, CELL_SIZE))
 
         for segment in self.snake:
-            pygame.draw.rect(self.screen, (0, 255, 0), (segment[0], segment[1], self.cell_size, self.cell_size))
+            pygame.draw.rect(self.screen, (0, 255, 0), (*segment, CELL_SIZE, CELL_SIZE))
 
-        if self.food_type == 'normal':
-            color = (255, 0, 0)      
-        elif self.food_type == 'gold':
-            color = (255, 215, 0)     
-        elif self.food_type == 'bad':
-            color = (160, 32, 240)    
-
-        pygame.draw.rect(self.screen, color, (self.food[0], self.food[1], self.cell_size, self.cell_size))
+        pygame.draw.rect(self.screen, (255, 0, 0), (*self.food, CELL_SIZE, CELL_SIZE))
 
         score_text = self.font.render(f"Skóre: {self.score}", True, (255, 255, 255))
         self.screen.blit(score_text, (10, 10))
@@ -90,8 +104,10 @@ class SnakeGame:
 
 def run_snake_game():
     pygame.init()
-    screen = pygame.display.set_mode((700, 500))
-    pygame.display.set_caption("Hadí hra – více druhů jídla")
+    width = len(MAZE[0]) * CELL_SIZE
+    height = len(MAZE) * CELL_SIZE
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption("Had v bludišti")
     game = SnakeGame(screen)
     game.run()
     pygame.quit()
