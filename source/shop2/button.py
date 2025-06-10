@@ -21,6 +21,6 @@ class Button :
     def ktery_button(self,jaka_funkce):
         if jaka_funkce == 1:
             
-        if jaka_funkce == 2:
+        elif jaka_funkce == 2:
 
-        if jaka_funkce == 3:
+        elif jaka_funkce == 3:
