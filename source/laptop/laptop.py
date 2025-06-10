@@ -127,6 +127,7 @@ def main(global_data):
     
     font1 = pygame.font.SysFont("Arial", 48)
     font2 = pygame.font.SysFont("Arial", 40)
+    font3 = pygame.font.SysFont("Arial", 35)
     
     
     text1 = font1.render("Space Battle", True, (255, 255, 255))
@@ -136,6 +137,14 @@ def main(global_data):
     text5 = font1.render("Jump Game", True, (255, 255, 255))
     text6 = font2.render("Catze VS mouze", True, (255, 255, 255))
     text7 = font2.render("The jumping man", True, (255, 255, 255))
+    text8 = font2.render("Ryzovani zlata", True, (255, 255, 255))
+    text9 = font2.render("Zombie killer", True, (255, 255, 255))
+    text10 = font2.render("Space battle", True, (255, 255, 255))
+    text11 = font2.render("Vesmirna strilecka", True, (255, 255, 255))
+    text12 = font2.render("Zombie shooter", True, (255, 255, 255))
+    text13 = font2.render("Labyrint", True, (255, 255, 255))
+    text14 = font2.render("Skakacka", True, (255, 255, 255))
+    text15 = font3.render("Catch falling objects", True, (255, 255, 255))
     
     
     
@@ -148,6 +157,14 @@ def main(global_data):
     rect5 = pygame.Rect(rozliseni_sirka / 2.35, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15)
     rect6 = pygame.Rect(rozliseni_sirka / 1.67, rozliseni_vyska / 3.5, rozliseni_sirka / 7, rozliseni_vyska / 15)
     rect7 = pygame.Rect(rozliseni_sirka / 4, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect8 = pygame.Rect(rozliseni_sirka / 2.35, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect9 = pygame.Rect(rozliseni_sirka / 1.67, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect10 = pygame.Rect(rozliseni_sirka / 4, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect11 = pygame.Rect(rozliseni_sirka / 2.35, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect12 = pygame.Rect(rozliseni_sirka / 1.67, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect13 = pygame.Rect(rozliseni_sirka / 4, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect14 = pygame.Rect(rozliseni_sirka / 2.35, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15)
+    rect15 = pygame.Rect(rozliseni_sirka / 1.67, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15)
     
     
     kalkulacka_zapnuta = False
@@ -292,23 +309,53 @@ def main(global_data):
                     print("the_jumping_man")
                     
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15))
+            screen.blit(text8, (rozliseni_sirka / 2.25, rozliseni_vyska / 2.57))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect8.collidepoint(udalost.pos):
+                    print("Ryzovani_zlata")
             
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 2.65, rozliseni_sirka / 7, rozliseni_vyska / 15))
-
+            screen.blit(text9, (rozliseni_sirka / 1.61, rozliseni_vyska / 2.57))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect9.collidepoint(udalost.pos):
+                    print("Zombie_killer")
 
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
-            
+            screen.blit(text10, (rozliseni_sirka / 3.7, rozliseni_vyska / 2.05))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect10.collidepoint(udalost.pos):
+                    print("Space_battle")
+                    
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
+            screen.blit(text11, (rozliseni_sirka / 2.33, rozliseni_vyska / 2.05))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect11.collidepoint(udalost.pos):
+                    print("Vesmirna_strilecka")
             
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 2.1, rozliseni_sirka / 7, rozliseni_vyska / 15))
-
+            screen.blit(text12, (rozliseni_sirka / 1.63, rozliseni_vyska / 2.05))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect12.collidepoint(udalost.pos):
+                    print("Zombie_shooter")
 
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 4, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15))
+            screen.blit(text13, (rozliseni_sirka / 3.45, rozliseni_vyska / 1.72))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect13.collidepoint(udalost.pos):
+                    print("Labyrint")
             
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 2.35, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15))
+            screen.blit(text14, (rozliseni_sirka / 2.16, rozliseni_vyska / 1.72))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect14.collidepoint(udalost.pos):
+                    print("Skakacka")
             
             pygame.draw.rect(screen, (170, 170, 170), (rozliseni_sirka / 1.67, rozliseni_vyska / 1.75, rozliseni_sirka / 7, rozliseni_vyska / 15))
-
+            screen.blit(text15, (rozliseni_sirka / 1.65, rozliseni_vyska / 1.71))
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
+                if rect15.collidepoint(udalost.pos):
+                    print("Catch falling objects")
+            
         # Baterie
         pygame.draw.rect(screen, (0, 0, 255), (rozliseni_sirka / 1.12, rozliseni_vyska / 19, rozliseni_sirka / 12, rozliseni_vyska / 1.08), 2)
         pygame.draw.rect(screen, (0, 0, 255), (rozliseni_sirka / 1.12, rozliseni_vyska / 19 + (rozliseni_vyska / 1.08 - battery), rozliseni_sirka / 12, battery))
