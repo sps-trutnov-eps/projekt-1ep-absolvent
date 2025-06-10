@@ -179,5 +179,5 @@ def main(funkce = None):
 
 
 if __name__ == "__main__":
-    from kasna.kasna import main as Game
+    from mesta.mapa.main import main as Game
     main(convertFuncToStr(Game))
