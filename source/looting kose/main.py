@@ -41,7 +41,7 @@ def main(global_data):
 
     okno = pygame.display.set_mode((rozliseni_x, rozliseni_y), pygame.SRCALPHA)
     pygame.display.set_caption("Looting koše")
-    bg = pygame.image.load("source//textury//Minigame_bg.png")
+    bg = pygame.image.load("textury\\Minigame_bg.png")
 
 
     pocet_itemu = 9
