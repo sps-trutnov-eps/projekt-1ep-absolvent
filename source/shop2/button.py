@@ -18,9 +18,4 @@ class Button :
         return self.rect.collidepoint(pos[0],pos[1])
 
     
-    def ktery_button(self,jaka_funkce):
-        if jaka_funkce == 1:
-            
-        elif jaka_funkce == 2:
-
-        elif jaka_funkce == 3:
+  
