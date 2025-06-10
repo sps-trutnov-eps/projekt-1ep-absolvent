@@ -48,6 +48,7 @@ def mesto1Init(okno, velikost_okna, global_data):
                "park_cesty.png",#21
                "radnice.png",#22
                "stanice.png",#23
+               "namko.png"#24
 
                ]
 
@@ -112,9 +113,9 @@ def mesto1Init(okno, velikost_okna, global_data):
     
     #silnice 
     #MODEL
+    budovy.append(Budova(okno, 0, 0, textury_rect[24].width, textury_rect[24].height, textury[24]))
     
-    
-    
+    interakcni_zony.append(InterakcniZona(0,0,textury_rect[24].width, textury_rect[24].height, textury[24]))
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
     #interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici

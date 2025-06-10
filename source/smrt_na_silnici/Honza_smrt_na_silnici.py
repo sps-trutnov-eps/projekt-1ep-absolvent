@@ -20,6 +20,8 @@ def main(global_data):
     scaled_textura_hrace1 = pygame.transform.scale(textura_hrace1, (35, 46))
     textura_hrace2 = pygame.image.load(f"textury\\hrac\\zadni_krok2.png")
     scaled_textura_hrace2 = pygame.transform.scale(textura_hrace2, (35, 46))
+    textura_hrace3 = pygame.image.load(f"textury\\hrac\\krok_dozadu_2.png")
+    scaled_textura_hrace3 = pygame.transform.scale(textura_hrace3, (35, 46))
     hrac_x = 15 #3x zmensen
     hrac_y = 26 #3x zmensen
     frame_counter = 0  # Počítadlo snímků pro animaci
@@ -157,9 +159,9 @@ def main(global_data):
         
         if hold[pygame.K_w] or hold[pygame.K_a] or hold[pygame.K_s] or hold[pygame.K_d]:
             if aktualni_textura == 0:
-                zobrazovacka.blit(scaled_textura_hrace1, (hrac.x, hrac.y))
-            else:
                 zobrazovacka.blit(scaled_textura_hrace2, (hrac.x, hrac.y))
+            else:
+                zobrazovacka.blit(scaled_textura_hrace3, (hrac.x, hrac.y))
         else:
             # když se nehýbe, zobraz první texturu (nebo klidovou, pokud máš)
             zobrazovacka.blit(scaled_textura_hrace1, (hrac.x, hrac.y))
