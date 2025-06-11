@@ -59,10 +59,10 @@ def main(global_data):
     jmeno = pygame.transform.scale(jmeno, (rozliseni_sirka / 1.6, rozliseni_vyska / 3))
 
     controler_icon = pygame.image.load('ChatGPT Image 13. 4. 2025 18_38_36.png').convert()
-    controler_icon = pygame.transform.scale(controler_icon, (80, 80))
+    controler_icon = pygame.transform.scale(controler_icon, (rozliseni_sirka / 24, rozliseni_vyska / 13.5))
     
     calculator_icon = pygame.image.load('calculator.png').convert()
-    calculator_icon = pygame.transform.scale(calculator_icon, (40, 60))
+    calculator_icon = pygame.transform.scale(calculator_icon, (rozliseni_sirka / 48, rozliseni_sirka / 30))
     
     kalkulacka = pygame.image.load('kalkulacka.png').convert()
     kalkulacka = pygame.transform.scale(kalkulacka, (rozliseni_sirka / 6, rozliseni_vyska / 2.5))
@@ -120,14 +120,14 @@ def main(global_data):
     icon_y5 = rozliseni_vyska / 4.2
     
 
-    controler_rect = pygame.Rect(icon_x, icon_y, 80, 80)
-    calculator_rect = pygame.Rect(icon_x2, icon_y2, 50, 80)
+    controler_rect = pygame.Rect(icon_x, icon_y, rozliseni_sirka / 24, rozliseni_vyska / 13.5)
+    calculator_rect = pygame.Rect(icon_x2, icon_y2, rozliseni_sirka / 48, rozliseni_sirka / 30)
     
     
     
-    font1 = pygame.font.SysFont("Arial", 48)
-    font2 = pygame.font.SysFont("Arial", 40)
-    font3 = pygame.font.SysFont("Arial", 35)
+    font1 = pygame.font.SysFont("Arial", int(rozliseni_vyska / 22.5))
+    font2 = pygame.font.SysFont("Arial", int(rozliseni_vyska / 27))
+    font3 = pygame.font.SysFont("Arial", int(rozliseni_vyska / 30.86))
     
     
     text1 = font1.render("Space Battle", True, (255, 255, 255))
@@ -357,7 +357,7 @@ def main(global_data):
                     print("Catch falling objects")
             
         # Baterie
-        pygame.draw.rect(screen, (0, 0, 255), (rozliseni_sirka / 1.12, rozliseni_vyska / 19, rozliseni_sirka / 12, rozliseni_vyska / 1.08), 2)
+        pygame.draw.rect(screen, (0, 0, 255), (rozliseni_sirka / 1.12, rozliseni_vyska / 19, rozliseni_sirka / 12, rozliseni_vyska / 1.08), int(rozliseni_vyska / 540))
         pygame.draw.rect(screen, (0, 0, 255), (rozliseni_sirka / 1.12, rozliseni_vyska / 19 + (rozliseni_vyska / 1.08 - battery), rozliseni_sirka / 12, battery))
 
         # Aktuální datum
