@@ -28,10 +28,10 @@ def main(global_data):
 
     # .convert_alpha() kdyz pouziva alpha
     textury_hrac = [
-        pygame.image.load("textury\\hrac\\temp.png").convert(),   # textura otocenej nahoru
-        pygame.image.load("textury\\hrac\\temp.png").convert(),   # textura otocenej dolu
-        pygame.image.load("textury\\hrac\\temp.png").convert(),   # textura otocenej doleva
-        pygame.image.load("textury\\hrac\\temp.png").convert()    # textura otocenej doprava
+        pygame.image.load("textury//hrac//temp.png").convert(),   # textura otocenej nahoru
+        pygame.image.load("textury//hrac//temp.png").convert(),   # textura otocenej dolu
+        pygame.image.load("textury//hrac//temp.png").convert(),   # textura otocenej doleva
+        pygame.image.load("textury//hrac//temp.png").convert()    # textura otocenej doprava
     ]
 
     hrac = Hrac(0 if global_data['hrac']['x'] == 0 else velikost_okna[0] // (1920 / global_data['hrac']['x']),

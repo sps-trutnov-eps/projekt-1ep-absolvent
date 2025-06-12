@@ -1,7 +1,7 @@
 import random
 import pygame
 pygame.font.init()
-from ohen import Ohen
+from source.ohen import Ohen
 
 rozliseni_x = 800
 rozliseni_y = 600

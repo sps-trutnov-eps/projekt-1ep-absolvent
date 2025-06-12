@@ -33,8 +33,8 @@ def main(global_data):
     mince = spawn(pocet_minci) 
     penize = 0
 
-    kasna = pygame.image.load("kasna/kasna.png").convert_alpha()
-    zem = pygame.image.load("kasna/zem.png").convert_alpha()
+    kasna = pygame.image.load("source//kasna//kasna.png").convert_alpha()
+    zem = pygame.image.load("source//kasna//zem.png").convert_alpha()
 
     while running:
         for event in pygame.event.get():
