@@ -48,7 +48,7 @@ def open_file(address):
     hwnd = find_notepad_window(file_title)
     if hwnd:
         win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)  # Restore if minimized
-        win32gui.MoveWindow(hwnd, 500, 300, 1300, 500, True)  # x, y, width, height, repaint
+        win32gui.MoveWindow(hwnd, 400, 300, 1200, 500, True)  # x, y, width, height, repaint
     else:
         print("Window not found.")
 
