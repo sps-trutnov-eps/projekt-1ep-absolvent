@@ -48,7 +48,8 @@ def mesto1Init(okno, velikost_okna, global_data):
                "park_cesty.png",#21
                "radnice.png",#22
                "stanice.png",#23
-               "namko.png"#24
+               "namko.png",#24
+               "bankomat.png",#25
 
                ]
 
@@ -57,12 +58,6 @@ def mesto1Init(okno, velikost_okna, global_data):
     scaled_banka = pygame.transform.scale(textury[6], (380, 320))
     scaled_stanice = pygame.transform.scale(textury[23],(200,320))
     #textury_itemy = [pygame.image.load(f"textury\\itemy\\{textura}").convert() for textura in textury_itemy]
-    #silnice 
-    silnice_rect = textury[7].get_rect()
-    zatacka_rect = textury[9].get_rect()
-    zatacka_flipped = pygame.transform.rotate(textury[9], 180)
-    krizovatka_rect = textury[10].get_rect()
-    guadroformagi_rect = textury[11].get_rect()
 
     # .convert_alpha() kdyz pouziva alpha
     print(textury)
@@ -114,6 +109,8 @@ def mesto1Init(okno, velikost_okna, global_data):
     #silnice 
     #MODEL
     budovy.append(Budova(okno, 0, 0, textury_rect[24].width, textury_rect[24].height, textury[24]))
+
+    budovy.append(Budova(okno, 1730,237 , textury_rect[25].width, textury_rect[25].height, textury[25]))#bankomat
     
     interakcni_zony.append(InterakcniZona(0,0,textury_rect[24].width, textury_rect[24].height, textury[24]))
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
@@ -121,6 +118,7 @@ def mesto1Init(okno, velikost_okna, global_data):
     #interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
     interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
     #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
+
     
     #spusteni funkce
     #interakcni_zony.append(InterakcniZona(220, 340, 500, 500, spusteni, argumenty=[global_data], textura=textury[5]))
@@ -165,6 +163,8 @@ def mesto2Init(okno, velikost_okna, global_data):
                "park_cesty.png",#21
                "odpadak.png",#22
                "obchod.png",#23
+               "bankomat.png",#24
+               "sipka.png",#25
 
                ]
 
@@ -174,6 +174,7 @@ def mesto2Init(okno, velikost_okna, global_data):
     vodojem_scaled = pygame.transform.scale(textury[20], (400, 600))
     scaled_odpadak = pygame.transform.scale(textury[22], (50, 55))
     odpadak_rect = scaled_odpadak.get_rect()
+    flipped_sipka = pygame.transform.flip(textury[25], 180, True) #sipka 
 
     # .convert_alpha() kdyz pouziva alpha
     print(textury)
@@ -196,9 +197,16 @@ def mesto2Init(okno, velikost_okna, global_data):
 
     #obchod
     budovy.append(Budova(okno, 1770, 1740, textury_rect[23].width, textury_rect[23].height, textury[23])) #obchod
-
+    #bankomat
+    budovy.append(Budova(okno, 1775, 2560, textury_rect[24].width, textury_rect[24].height, textury[24]))
     
-    #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
+    #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))
+    #sipky-dolu
+    interakcni_zony.append(InterakcniZona(902, 2665, textury_rect[25].width,textury_rect[25].height,nic, textura= textury[25]))  
+    interakcni_zony.append(InterakcniZona(1102, 2665, textury_rect[25].width,textury_rect[25].height,nic, textura= textury[25]))
+    #sipky-nahoru 
+    interakcni_zony.append(InterakcniZona(952, 1645, textury_rect[25].width,textury_rect[25].height,nic, textura= flipped_sipka))  
+    interakcni_zony.append(InterakcniZona(1152, 1645, textury_rect[25].width,textury_rect[25].height,nic, textura= flipped_sipka)) 
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
     #interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
     interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
