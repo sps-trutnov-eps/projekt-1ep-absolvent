@@ -163,7 +163,9 @@ def mesto2Init(okno, velikost_okna, global_data):
                "chata1.png",#19
                "vodojem.png",#20
                "park_cesty.png",#21
-               "odpadak.png"#22
+               "odpadak.png",#22
+               "obchod.png",#23
+
                ]
 
     textury = [pygame.image.load(f"textury\\budovy\\{textura}").convert_alpha() for textura in textury]
@@ -186,10 +188,14 @@ def mesto2Init(okno, velikost_okna, global_data):
     #PARKOVISTE
     interakcni_zony.append(InterakcniZona(0, 1650, 0, 0, nic, textura=scaled_textura_parkoviste))#parkoviste
     interakcni_zony.append(InterakcniZona(-100, 2150, 0, 0, nic, textura=vodojem_scaled))
+    
     #odpadaky
     budovy.append(Budova(okno, 370, 2050, odpadak_rect.width, odpadak_rect.height, scaled_odpadak))
     budovy.append(Budova(okno, 1340, 2050, odpadak_rect.width, odpadak_rect.height, scaled_odpadak))
     budovy.append(Budova(okno, 1950, 2615, odpadak_rect.width, odpadak_rect.height, scaled_odpadak))
+
+    #obchod
+    budovy.append(Budova(okno, 1770, 1740, textury_rect[23].width, textury_rect[23].height, textury[23])) #obchod
 
     
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
