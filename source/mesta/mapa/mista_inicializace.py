@@ -111,12 +111,10 @@ def mesto1Init(okno, velikost_okna, global_data):
     budovy.append(Budova(okno, 0, 0, textury_rect[24].width, textury_rect[24].height, textury[24]))
 
     budovy.append(Budova(okno, 1730,237 , textury_rect[25].width, textury_rect[25].height, textury[25]))#bankomat
-    
+#NAMESTI    
     interakcni_zony.append(InterakcniZona(0,0,textury_rect[24].width, textury_rect[24].height, textury[24]))
-    #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
-    #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
-    #interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
-    interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
+
+    interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data])) # #1. lokace - prechod z mesta na parkoviste	
     #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
 
     
@@ -164,7 +162,7 @@ def mesto2Init(okno, velikost_okna, global_data):
                "odpadak.png",#22
                "obchod.png",#23
                "bankomat.png",#24
-               "sipka.png",#25
+               "sipka_fixed.png",#25
 
                ]
 
@@ -200,6 +198,7 @@ def mesto2Init(okno, velikost_okna, global_data):
     #bankomat
     budovy.append(Budova(okno, 1775, 2560, textury_rect[24].width, textury_rect[24].height, textury[24]))
     
+    #KHOVNU VECI
     #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))
     #sipky-dolu
     interakcni_zony.append(InterakcniZona(902, 2665, textury_rect[25].width,textury_rect[25].height,nic, textura= textury[25]))  
@@ -209,7 +208,10 @@ def mesto2Init(okno, velikost_okna, global_data):
     interakcni_zony.append(InterakcniZona(1152, 1645, textury_rect[25].width,textury_rect[25].height,nic, textura= flipped_sipka)) 
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
     #interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
-    interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
+
+#SMRT NA SILNICI
+    interakcni_zony.append(InterakcniZona(0,1640, 1645,10, spusteni, argumenty=[global_data])) #2. lokace - prechod z parkoviste do mesta
+    interakcni_zony.append(InterakcniZona(0,2675, 1645,80, spusteni, argumenty=[global_data])) #2. lokace - prechod do parku
     #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
     #parkovisko
     #interakcni_zony.append(InterakcniZona(600, 1900, parkovisko_rect.width, parkovisko_rect.height, nic, textura=scaled_textura_parkoviste))
@@ -384,11 +386,8 @@ def mesto3Init(okno, velikost_okna, global_data):
 
 
     budovy.append(Budova(okno, 1700, 3565,0,0, textura=textury[19]))
-    #interakcni_zony.append(InterakcniZona(1690, 3555, 0, 0, nic, textura=textury[19]))#chata
-    #interakcni_zony.append(InterakcniZona(0, 420, 0, 0, nic, textura=zatacka_flipped))   
-    #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
-    #interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
-    interakcni_zony.append(InterakcniZona(0,1640, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
+#Prechod na parkoviste
+    interakcni_zony.append(InterakcniZona(0,2780, 1645,80, spusteni, argumenty=[global_data])) #3. lokace - prechod z parku
     #interakcni_zony.append(InterakcniZona(250, 370, 0, 0, nic, textura=textury[5]))
     #parkovisko
     #interakcni_zony.append(InterakcniZona(600, 1900, parkovisko_rect.width, parkovisko_rect.height, nic, textura=scaled_textura_parkoviste))
