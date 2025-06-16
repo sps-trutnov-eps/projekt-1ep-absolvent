@@ -24,5 +24,8 @@
     "inventory_xy": [
         6,
         3
-    ]
+    ],
+    "prechozeno": true,
+    "neprechozeno": false,
+    "novy_areal": 2
 }

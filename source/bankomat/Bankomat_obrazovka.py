@@ -101,6 +101,3 @@ while running:
                 spustit_minihru()
 
     pygame.display.flip()
-
-pygame.quit()
-sys.exit()

@@ -109,7 +109,6 @@ def main(global_data):
         if casovac == 0:
             hlavni_smyska = False
             zbirka = round(zbirka)
-            print(zbirka)
             global_data['penize'] += zbirka
 
         text = font.render(f"Konto: {zbirka}   Čas: {odpocet}s", True, barva_textu)

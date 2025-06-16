@@ -182,7 +182,10 @@ def reset(global_data):
             "pohyb_oken": 1073742050
         },
         "inventory": [],
-        "inventory_xy": [6, 3]
+        "inventory_xy": [6, 3],
+        "prechozeno": True,
+        "neprechozeno": False,
+        "novy_areal": 1
     }
 
     ulozit(global_data)

@@ -177,7 +177,12 @@ def main(global_data):
         if prohra == True:
             zobrazovacka.fill("blue")
             pygame.display.set_caption("NO ŽIVOT")
-        
+            global_data["neprechozeno"] = True
+
+        if hrac.y <= 0:
+            global_data["prechozeno"] = True
+            break
+
         pygame.display.update()
         hodiny.tick(60)
     # pro otevreni okna "global_data['otevrena_okna'].append(novyProgram(funkce))"
