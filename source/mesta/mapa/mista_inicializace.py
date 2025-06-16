@@ -6,7 +6,7 @@ from mesta.mapa.interakcni_zona import InterakcniZona
 from master import convertFuncToStr as novyProgram
 
 from smrt_na_silnici.Honza_smrt_na_silnici import main as minihra
-#from bankomat.Bankomat_obrazovka import main as ddos
+from bankomat.Bankomat_obrazovka import main as ddos
 
 def nic():
     pass
