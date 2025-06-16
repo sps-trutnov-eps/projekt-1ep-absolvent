@@ -181,7 +181,7 @@ def reset(global_data):
             "doprava": 100,
             "pohyb_oken": 1073742050
         },
-        "kasna_vybrana": False
+        "kasna_vybrana": False,
         "inventory": [],
         "inventory_xy": [6, 3],
         "prechozeno": True,
