@@ -12,10 +12,9 @@ DOPRAVA = 3
 def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_mapy: pygame.Rect, offset, nastaveni: dict):
 
     klice = pygame.key.get_pressed() # kontrola zmacknuti tlacitek drzenim tlacitka se opaku udalost
-
+    
     hrac.rychlost_x = 0 # resetuje rychlost hrace
     hrac.rychlost_y = 0 # resetuje rychlost hrace
-
     interaguje = False   # jestli hrac chce s necim interaktovat - "e" je zmacknute
 
     # pohyb postavy
@@ -55,7 +54,7 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
         hrac.rychlost_x *= hrac.chodici_rychlost_x
         hrac.rychlost_y *= hrac.chodici_rychlost_y
 
-    okno.fill((0, 0, 0)) # vybarvy okno aby se resetovalo
+    okno.fill("grey") # vybarvy okno aby se resetovalo
 
     for budova in budovy:
         budova.hitbox(hrac)
@@ -70,13 +69,11 @@ def veMeste(okno, velikost_okna, hrac: Hrac, budovy, interakcni_zony, velikost_m
     if hrac.y - velikost_okna[1] // 2 > velikost_mapy.top and hrac.y + velikost_okna[1] // 2 + hrac.vyska < velikost_mapy.bottom:
         offset[1] = -hrac.y + velikost_okna[1] // 2
 
-    for budova in budovy:
-        budova.nakresli(okno, offset) # nakresli budovy
-
     for zona in interakcni_zony:
-        zona.nakresli(okno)
+        zona.nakresli(okno, offset)
         zona.interakce(hrac, interaguje)
-
+    for budova in budovy:
+        budova.nakresli(okno, offset)
     # zabrani hraci jit mimo mapu
     if hrac.x < velikost_mapy.left:
         hrac.x = velikost_mapy.left

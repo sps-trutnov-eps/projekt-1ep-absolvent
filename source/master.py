@@ -2,19 +2,20 @@ import json
 import pygame
 import multiprocessing
 import ctypes
+from ctypes import wintypes
 import importlib
 
-def unfocusWindow():
-    ctypes.windll.user32.AllowSetForegroundWindow(-1)
-
+# pip install pywin32
+import win32gui
+import win32con
 
 def focusWindow():
+    # Get the HWND (Window Handle) of the most recent Pygame window
     hwnd = pygame.display.get_wm_info()['window']
-    ctypes.windll.user32.ShowWindow(hwnd, 5)
-    ctypes.windll.user32.BringWindowToTop(hwnd)
-    ctypes.windll.user32.SetForegroundWindow(hwnd)
-    ctypes.windll.user32.SetFocus(hwnd)
 
+    # Apply "always on top" flag using HWND
+    win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+    print(f"[+] Window with HWND {hwnd} is now on top.")
 
 def createWindow(global_data, okno):
     ######################################################################################################
@@ -23,7 +24,56 @@ def createWindow(global_data, okno):
     global_data["aktualni_okna"].remove(okno)   # Ulozi informaci ze okno je zavreny
     ######################################################################################################
 
+def setWindowPos(x, y):
+    hwnd = pygame.display.get_wm_info()['window']
+    width, height = pygame.display.get_surface().get_size()
+    ctypes.windll.user32.MoveWindow(hwnd, x, y, width, height, True)
 
+def moveWindow(keybind, event, dragging, mouse_offset):
+    """
+    pro pouziti se musi pridat tadyto pred main loop
+
+    Inicializace posouvani oken
+
+    win_x, win_y = 100, 100;
+    os.environ['SDL_VIDEO_WINDOW_POS'] = f"{win_x},{win_y}";
+    dragging = False;
+    mouse_offset = (0, 0)
+
+    a take se musi pridat do
+    "for event in pygame.event.get():"
+
+        "dragging, mouse_offset = moveWindow(global_data['nastaveni']['pohyb_oken'], udalost, dragging, mouse_offset)"
+    """
+
+
+
+    keys = pygame.key.get_pressed()
+    if keys[keybind]:
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                dragging = True
+                mouse_offset = pygame.mouse.get_pos()
+
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                dragging = False
+
+        elif event.type == pygame.MOUSEMOTION and dragging:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            dx = mouse_x - mouse_offset[0]
+            dy = mouse_y - mouse_offset[1]
+
+            # Get current position using ctypes
+            hwnd = pygame.display.get_wm_info()['window']
+            rect = wintypes.RECT()
+            ctypes.windll.user32.GetWindowRect(hwnd, ctypes.byref(rect))
+            new_x = rect.left + dx
+            new_y = rect.top + dy
+            setWindowPos(new_x, new_y)
+
+    return dragging, mouse_offset
 
 
 
@@ -115,8 +165,6 @@ def reset(global_data):
         "konec": False,
         "reset": False,
         "ulozit": False,
-        "focus_nastaveni": False,
-        "focus_inventory": False,
         "penize": 0,
         "energie": 0,
         "hrac": {
@@ -130,10 +178,15 @@ def reset(global_data):
             "nahoru": 119,
             "dolu": 115,
             "doleva": 97,
-            "doprava": 100
+            "doprava": 100,
+            "pohyb_oken": 1073742050
         },
-        "inventory": [],
         "kasna_vybrana": False
+        "inventory": [],
+        "inventory_xy": [6, 3],
+        "prechozeno": True,
+        "neprechozeno": False,
+        "novy_areal": 1
     }
 
     ulozit(global_data)
@@ -152,8 +205,10 @@ def main(funkce = None):
         global_data['otevrena_okna'] = cloneManagerList(global_data['aktualni_okna'], manager)
         global_data['aktualni_okna'] = manager.list()
 
+
         processes = []
         while True:
+
             if global_data['reset']:
                 reset(global_data)
 
@@ -161,10 +216,16 @@ def main(funkce = None):
                 ulozit(global_data)
 
             if global_data['otevrena_okna'] != []:
-                for okno in global_data['otevrena_okna']:
+
+                nova_okna = list(set(list(global_data["otevrena_okna"])))
+                aktualni_okna = list(set(list(global_data["aktualni_okna"])))
+
+                nova_okna = [item for item in nova_okna if item not in aktualni_okna]
+
+                for okno in nova_okna:
+                    global_data['aktualni_okna'].append(okno)
                     process = multiprocessing.Process(target=createWindow, args=(global_data, okno,))
                     processes.append(process)
-                    global_data['aktualni_okna'].append(okno)
                     process.start()
 
                 global_data['otevrena_okna'] = manager.list()

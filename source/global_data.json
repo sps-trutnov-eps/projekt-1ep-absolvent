@@ -4,8 +4,6 @@
     "konec": false,
     "reset": false,
     "ulozit": false,
-    "focus_nastaveni": false,
-    "focus_inventory": false,
     "penize": 0,
     "energie": 0,
     "hrac": {
@@ -19,8 +17,16 @@
         "nahoru": 119,
         "dolu": 115,
         "doleva": 97,
-        "doprava": 100
+        "doprava": 100,
+        "pohyb_oken": 1073742050
     },
-    "inventory": [],
     "kasna_vybrana": false
+    "inventory": [],
+    "inventory_xy": [
+        6,
+        3
+    ],
+    "prechozeno": true,
+    "neprechozeno": false,
+    "novy_areal": 2
 }
