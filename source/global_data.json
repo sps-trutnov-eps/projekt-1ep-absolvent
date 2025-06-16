@@ -20,7 +20,7 @@
         "doprava": 100,
         "pohyb_oken": 1073742050
     },
-    "kasna_vybrana": false
+    "kasna_vybrana": false,
     "inventory": [],
     "inventory_xy": [
         6,
@@ -28,5 +28,5 @@
     ],
     "prechozeno": true,
     "neprechozeno": false,
-    "novy_areal": 2
+    "novy_areal": 1
 }

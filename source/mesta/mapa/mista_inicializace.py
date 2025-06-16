@@ -53,7 +53,7 @@ def mesto1Init(okno, velikost_okna, global_data):
                "park_cesty.png",#21
                "radnice.png",#22
                "stanice.png",#23
-               "namko.png",#24
+               "namesti.png",#24
                "bankomat.png",#25
 
                ]
@@ -63,7 +63,9 @@ def mesto1Init(okno, velikost_okna, global_data):
     scaled_banka = pygame.transform.scale(textury[6], (380, 320))
     scaled_stanice = pygame.transform.scale(textury[23],(200,320))
     #textury_itemy = [pygame.image.load(f"textury\\itemy\\{textura}").convert() for textura in textury_itemy]
-
+    scaled_namesti = pygame.transform.scale(textury[24],(2005,1725))
+    sirka_namesti = scaled_namesti.get_width()
+    vyska_namesti = scaled_namesti.get_height()
     # .convert_alpha() kdyz pouziva alpha
     okno.fill((100, 150, 200))
     textury_rect = [item.get_rect() for item in textury]
@@ -112,11 +114,11 @@ def mesto1Init(okno, velikost_okna, global_data):
 
     #silnice 
     #MODEL
-    budovy.append(Budova(okno, 0, 0, textury_rect[24].width, textury_rect[24].height, textury[24]))
+    #budovy.append(Budova(okno, 0, 0, textury_rect[24].width, textury_rect[24].height, textury[24]))
 
     budovy.append(Budova(okno, 1730,237 , textury_rect[25].width, textury_rect[25].height, textury[25]))#bankomat
 #NAMESTI    
-    interakcni_zony.append(InterakcniZona(0,0,textury_rect[24].width, textury_rect[24].height, nic, textury[24]))
+    interakcni_zony.append(InterakcniZona(0,0,sirka_namesti, vyska_namesti, nic, textura = scaled_namesti))
 
     interakcni_zony.append(InterakcniZona(0,1640, 1920,80, novy_areal, argumenty=[global_data, 2,(1055, 0)])) # #1. lokace - prechod z mesta na parkoviste	
 
@@ -169,6 +171,7 @@ def mesto2Init(okno, velikost_okna, global_data):
     scaled_odpadak = pygame.transform.scale(textury[22], (50, 55))
     odpadak_rect = scaled_odpadak.get_rect()
     flipped_sipka = pygame.transform.flip(textury[25], 180, True) #sipka 
+    
 
     # .convert_alpha() kdyz pouziva alpha
     okno.fill((100, 150, 200))
