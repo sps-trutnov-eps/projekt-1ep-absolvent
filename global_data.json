@@ -1,0 +1,32 @@
+{
+    "aktualni_okna": [],
+    "otevrena_okna": [],
+    "konec": false,
+    "reset": false,
+    "ulozit": false,
+    "penize": 0,
+    "energie": 0,
+    "hrac": {
+        "x": 960,
+        "y": 540
+    },
+    "nastaveni": {
+        "exit": 27,
+        "inventory": 9,
+        "interakce": 101,
+        "nahoru": 119,
+        "dolu": 115,
+        "doleva": 97,
+        "doprava": 100,
+        "pohyb_oken": 1073742050
+    },
+    "kasna_vybrana": false,
+    "inventory": [],
+    "inventory_xy": [
+        6,
+        3
+    ],
+    "prechozeno": true,
+    "neprechozeno": false,
+    "novy_areal": 1
+}

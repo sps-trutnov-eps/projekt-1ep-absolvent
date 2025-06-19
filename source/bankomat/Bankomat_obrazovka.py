@@ -1,12 +1,3 @@
-import sys
-from pathlib import Path
-
-parent_dir = Path(__file__).resolve().parent.parent
-sys.path.append(str(parent_dir))
-
-from master import main as masterFunc
-from master import convertFuncToStr as novyProgram
-
 import pygame
 
 def spustit_minihru(global_data):
@@ -113,5 +104,3 @@ def main(global_data):
 
     # pro otevreni okna "global_data['otevrena_okna'].append(novyProgram(funkce))"
 
-if __name__ == "__main__":
-    masterFunc(novyProgram(main))

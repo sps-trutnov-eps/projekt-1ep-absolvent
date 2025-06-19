@@ -55,6 +55,9 @@ def mesto1Init(okno, velikost_okna, global_data):
                "stanice.png",#23
                "namesti.png",#24
                "bankomat.png",#25
+               "Skola_Simon.png",#26
+               "Skola_Kubik.png",#27
+               "kasna.png",#28
 
                ]
 
@@ -62,6 +65,8 @@ def mesto1Init(okno, velikost_okna, global_data):
 #NAMESTI
     scaled_banka = pygame.transform.scale(textury[6], (380, 320))
     scaled_stanice = pygame.transform.scale(textury[23],(200,320))
+    scaled_kasna = pygame.transform.scale(textury[28],(330,206))
+    kasna_rect = scaled_kasna.get_rect()
     #textury_itemy = [pygame.image.load(f"textury\\itemy\\{textura}").convert() for textura in textury_itemy]
     scaled_namesti = pygame.transform.scale(textury[24],(2005,1725))
     sirka_namesti = scaled_namesti.get_width()
@@ -72,7 +77,7 @@ def mesto1Init(okno, velikost_okna, global_data):
     budovy = []
     #prvni horní řada domů z leva (0,0) - prvni dum v pořadí
     budovy.append(Budova(okno, 0, 0, 0, 0, textury[1]))
-    budovy.append(Budova(okno, 200, 0, 200, 320, scaled_stanice))#stanice
+    budovy.append(Budova(okno, 200, 0, 200, 320, scaled_stanice))#policejní stanice
     budovy.append(Budova(okno, 405, 0, textury_rect[22].width, textury_rect[22].height, textury[22]))#radnice
     #budovy.append(Budova(okno, 2*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
     #budovy.append(Budova(okno, 3*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
@@ -81,8 +86,8 @@ def mesto1Init(okno, velikost_okna, global_data):
     #####budovy.append(Budova(okno, 4*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[2]))
     #####budovy.append(Budova(okno, 5*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[3]))
     #druha horní řada domů po mezeře (1200, 0) - prvni dum v pořadí
-    budovy.append(Budova(okno, 6*textury_rect[1].width, 0, textury_rect[1].width, textury_rect[1].height, textury[1]))
-    budovy.append(Budova(okno, 7*textury_rect[1].width, 0, textury_rect[2].width, textury_rect[2].height, textury[2]))
+    budovy.append(Budova(okno, 6*textury_rect[1].width, 0, textury_rect[26].width, textury_rect[26].height, textury[26]))
+    #budovy.append(Budova(okno, 7*textury_rect[1].width, 0, textury_rect[2].width, textury_rect[2].height, textury[2]))
     budovy.append(Budova(okno, 8*textury_rect[1].width, 0, textury_rect[3].width, textury_rect[3].height, textury[3]))
     budovy.append(Budova(okno, 9*textury_rect[1].width, 0, textury_rect[4].width, textury_rect[4].height, textury[4]))
     #první dolní řada domů z leva (200, 1360) - prvni dum v pořadí
@@ -115,14 +120,16 @@ def mesto1Init(okno, velikost_okna, global_data):
     #silnice 
     #MODEL
     #budovy.append(Budova(okno, 0, 0, textury_rect[24].width, textury_rect[24].height, textury[24]))
-
+#BANKOMAT
     budovy.append(Budova(okno, 1730,237 , textury_rect[25].width, textury_rect[25].height, textury[25]))#bankomat
+    interakcni_zony.append(InterakcniZona(1730,237 + textury_rect[25].height,textury_rect[25].width, textury_rect[25].height,ddos, argumenty = [global_data]))
 #NAMESTI    
-    interakcni_zony.append(InterakcniZona(0,0,sirka_namesti, vyska_namesti, nic, textura = scaled_namesti))
+    interakcni_zony.append(InterakcniZona(0,-40,sirka_namesti, vyska_namesti, nic, textura = scaled_namesti))
 
     interakcni_zony.append(InterakcniZona(0,1640, 1920,80, novy_areal, argumenty=[global_data, 2,(1055, 0)])) # #1. lokace - prechod z mesta na parkoviste	
 
-
+#KAšNA
+    budovy.append(Budova(okno, 850,655,kasna_rect.width, kasna_rect.height, scaled_kasna))
 
     #budovy = [Budova(okno, sum([textury_rect[j].width for j in range(i)]), 0, textury_rect[i].width, textury_rect[i].height, textury[i]) for i in range(len(textury))]
     return budovy, interakcni_zony, velikost_mapy, [0, 0]
@@ -207,7 +214,7 @@ def mesto2Init(okno, velikost_okna, global_data):
     #interakcni_zony.append(InterakcniZona(200, 320, 0,0,nic, textura= textury[9]))
     #interakcni_zony.append(InterakcniZona(0,0, 1920,80, spusteni, argumenty=[global_data])) #smrt na silnici
 #BANKOMAT
-    interakcni_zony.append(InterakcniZona(1775,916,textury_rect[24].width, textury_rect[25].height,hacking, argumenty = [global_data]))
+    interakcni_zony.append(InterakcniZona(1775,2560 - 1645 + textury_rect[24].height,textury_rect[24].width, textury_rect[24].height,ddos, argumenty = [global_data]))
 #SMRT NA SILNICI
     interakcni_zony.append(InterakcniZona(0,0, 1645,10, novy_areal, argumenty=[global_data, 1, (970, 1565)])) #2. lokace - prechod z parkoviste do mesta
     interakcni_zony.append(InterakcniZona(0,1030, 1645,80, novy_areal, argumenty=[global_data, 3, (950, 0)])) #2. lokace - prechod do parku
@@ -280,13 +287,13 @@ def mesto3Init(okno, velikost_okna, global_data):
     interakcni_zony.append(InterakcniZona(160, 2980 - 2780, 0, 0, nic, textura=scaled_cesty))
     interakcni_zony.append(InterakcniZona(810, 2765 - 2780, 0, 0, nic, textura=textury[22]))#najezd
     ##stromy
-    ###prvni sloupec stromů
+    ###levy sloupec stromů
     mezera = 10
     for i in range(7):
         textura = textury[14]
         y = 2820 - 2780 + i * (textury_rect[14].height+ mezera)
         budovy.append(Budova(okno, 40, y,textury_rect[15].width,textury_rect[15].height, textura=textura))
-    ###druhy sloupec stromů
+    ###pravy sloupec stromů
     for i in range(7):
         textura = textury[15]
         y = 2820 - 2780 + i * (textury_rect[15].height+ mezera)
@@ -295,7 +302,7 @@ def mesto3Init(okno, velikost_okna, global_data):
     for i in range(15):
         textura = textury[14] if i % 2 == 0 else textury[15]
         x = 40 + i * (textury_rect[15].height+ mezera)
-        budovy.append(Budova(okno, x, 3730,textury_rect[15].width,textury_rect[15].height, textura=textura))
+        budovy.append(Budova(okno, x, 3730 - 2780,textury_rect[15].width,textury_rect[15].height, textura=textura))
     #### horní řada stromů - pt. 1
     for i in range(6):
         textura = textury[14] if i % 2 == 0 else textury[15]

@@ -35,7 +35,7 @@ def main(global_data):
 
     hrac = Hrac(0 if global_data['hrac']['x'] == 0 else velikost_okna[0] // (1920 / global_data['hrac']['x']),
                 0 if global_data['hrac']['x'] == 0 else velikost_okna[1] // (1080 / global_data['hrac']['y']),
-                rozmery_hrace[0], rozmery_hrace[1], velikost_okna[0] // 192, velikost_okna[1] // 108, textury = textury_hrac) # vytvori postavu ve stredu obrazovky
+                rozmery_hrace[0], rozmery_hrace[1], 3, 3, textury = textury_hrac) # vytvori postavu ve stredu obrazovky
     # pozice hrace je levej horni roh obrazku
 
     hodiny = pygame.time.Clock() # vyrobi promenou pro casovani a pro limitovani fps
